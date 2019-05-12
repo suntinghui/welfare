@@ -1,0 +1,210 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+<link rel="stylesheet" href="css/weui.min.css"/>
+<link rel="stylesheet" href="css/weuix.min.css"/>
+<script src="js/zepto.min.js"></script>
+<script src="js/zepto.weui.min.js"></script>
+<script src="js/toast.js"></script>
+
+<title>系统实施</title>
+
+<script>
+	var totalScoreStr = "5";
+	var mannerScoreStr = "5";
+	var timeScoreStr = "5";
+	var delayScoreStr = "5";
+
+	$(function() {
+		$("#totalScore a").click(function() {
+			var index = $(this).index(); //当前点击
+
+			for (var i = 0; i <= index; i++) {
+				$("#totalScore a").eq(i).addClass('on');
+			}
+			for (var j = index; j <= 5; j++) {
+				$("#totalScore a").eq(j).removeClass('on');
+			}
+			$(this).addClass('on');
+			totalScoreStr = $(this).data('num');
+
+		})
+		
+		$("#mannerScore a").click(function() {
+			var index = $(this).index(); //当前点击
+
+			for (var i = 0; i <= index; i++) {
+				$("#mannerScore a").eq(i).addClass('on');
+			}
+			for (var j = index; j <= 5; j++) {
+				$("#mannerScore a").eq(j).removeClass('on');
+			}
+			$(this).addClass('on');
+			mannerScoreStr = $(this).data('num');
+
+		})
+		
+		$("#timeScore a").click(function() {
+			var index = $(this).index(); //当前点击
+
+			for (var i = 0; i <= index; i++) {
+				$("#timeScore a").eq(i).addClass('on');
+			}
+			for (var j = index; j <= 5; j++) {
+				$("#timeScore a").eq(j).removeClass('on');
+			}
+			$(this).addClass('on');
+			timeScoreStr = $(this).data('num');
+
+		})
+		
+		$("#delayScore a").click(function() {
+			var index = $(this).index(); //当前点击
+
+			for (var i = 0; i <= index; i++) {
+				$("#delayScore a").eq(i).addClass('on');
+			}
+			for (var j = index; j <= 5; j++) {
+				$("#delayScore a").eq(j).removeClass('on');
+			}
+			$(this).addClass('on');
+			delayScoreStr = $(this).data('num');
+
+		})
+		
+	});
+	
+	// 提交数据
+	function commitInfo() {
+		
+		// 验证意见与建议是否为空
+		if ($("#opinionText").val() == '') {
+			iqwerty.toast.Toast('请输入意见或建议');
+			return;
+		}
+		
+		$.showLoading();
+		
+		$.ajax({
+            url:"actualizeCommit", 
+            data:{
+            	"totalScore":totalScoreStr,
+            	"mannerScore":mannerScoreStr,
+            	"timeScore":timeScoreStr,
+            	"delayScore":delayScoreStr,
+            	"opinion":$("#opinionText").val()
+            },
+            type:"POST", 
+            error:function(xmlHttpRequest, error) { 
+            	$.hideLoading();
+            	window.location.href='failure.html';
+            },
+            success:function(resData) {
+            	$.hideLoading();
+            	
+                if (resData == 1) {
+                	window.location.href='html/success.html';
+                } else {
+                	window.location.href='html/failure.html';
+                }
+                
+            }
+        });
+		
+		
+		
+	}
+</script>
+
+</head>
+
+<body ontouchstart>
+	<div class="page-hd">
+		<h1 class="page-hd-title" style="font-size: 16px;">实施过程综合评分</h1>
+	</div>
+	
+	<div id="totalScore" class="page-bd-15">
+		<div class="weui-rater">
+			<a data-num="1" class="on"> <span>★</span></a> 
+			<a data-num="2" class="on"> <span>★</span></a> 
+			<a data-num="3" class="on"> <span>★</span></a> 
+			<a data-num="4" class="on"> <span>★</span></a> 
+			<a data-num="5" class="on"> <span>★</span></a>
+		</div>
+
+	</div>
+	
+	<div class="page-hd">
+		<h1 class="page-hd-title" style="font-size: 16px;">实施人员态度评分</h1>
+	</div>
+	
+	<div id="mannerScore" class="page-bd-15">
+		<div class="weui-rater">
+			<a data-num="1" class="on"> <span>★</span></a> 
+			<a data-num="2" class="on"> <span>★</span></a> 
+			<a data-num="3" class="on"> <span>★</span></a> 
+			<a data-num="4" class="on"> <span>★</span></a> 
+			<a data-num="5" class="on"> <span>★</span></a>
+		</div>
+
+	</div>
+	
+	<div class="page-hd">
+		<h1 class="page-hd-title" style="font-size: 16px;">用时满意度评分</h1>
+	</div>
+	
+	<div id="timeScore" class="page-bd-15">
+		<div class="weui-rater">
+			<a data-num="1" class="on"> <span>★</span></a> 
+			<a data-num="2" class="on"> <span>★</span></a> 
+			<a data-num="3" class="on"> <span>★</span></a> 
+			<a data-num="4" class="on"> <span>★</span></a> 
+			<a data-num="5" class="on"> <span>★</span></a>
+		</div>
+
+	</div>
+	
+	<div class="page-hd">
+		<h1 class="page-hd-title" style="font-size: 16px;">问题处理及时度评分</h1>
+	</div>
+	
+	<div id="delayScore" class="page-bd-15">
+		<div class="weui-rater">
+			<a data-num="1" class="on"> <span>★</span></a> 
+			<a data-num="2" class="on"> <span>★</span></a> 
+			<a data-num="3" class="on"> <span>★</span></a> 
+			<a data-num="4" class="on"> <span>★</span></a> 
+			<a data-num="5" class="on"> <span>★</span></a>
+		</div>
+
+	</div>
+	
+	<div class="page-hd">
+		<h1 class="page-hd-title" style="font-size: 16px;">意见与建议</h1>
+	</div>
+
+	<div class="weui-form">
+        <div class="weui-form-li">
+            <textarea id="opinionText" class="weui-form-area"  name="f6" rows="5" cols="60"></textarea>
+        </div>
+    </div>
+	
+
+	<div class="weui-btn-area" style="margin-top: 30px;">
+		<a class="weui-btn weui-btn_primary" href="javascript:void(0);" onclick="commitInfo();">提交</a>
+	</div>
+
+
+
+
+
+
+	<br>
+	<br>
+	<div class="weui-footer weui-footer_fixed-bottom">
+		<p class="weui-footer__text">Copyright &copy; 反洗钱系统</p>
+	</div>
+</body>
+</html>

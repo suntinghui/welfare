@@ -1,0 +1,80 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+<link rel="stylesheet" href="css/weui.min.css"/>
+<link rel="stylesheet" href="css/weuix.min.css"/>
+<script src="js/zepto.min.js"></script>
+<script src="js/zepto.weui.min.js"></script>
+<script src="js/toast.js"></script>
+
+<title>问题需求</title>
+
+<script>
+
+	// 提交数据
+	function commitInfo() {
+		if ($("#contentText").val() == '') {
+			iqwerty.toast.Toast('请输入问题或需求');
+			return;
+		}
+		
+		
+		$.showLoading();
+
+		
+		$.ajax({
+            url:"reqCommit", 
+            data:{
+            	"content":$("#contentText").val()
+            },
+            type:"POST", 
+            error:function(xmlHttpRequest, error) { 
+            	$.hideLoading();
+            	window.location.href='failure.html';
+            },
+            success:function(resData) {
+            	$.hideLoading();
+            	
+                if (resData == 1) {
+                	window.location.href='html/success.html';
+                } else {
+                	window.location.href='html/failure.html';
+                }
+                
+            }
+        });
+		
+		
+		
+	}
+</script>
+
+</head>
+
+<body ontouchstart>
+	
+	<div class="page-hd">
+		<h1 class="page-hd-title" style="font-size: 16px;">问题/需求</h1>
+	</div>
+
+	<div class="weui-form">
+        <div class="weui-form-li">
+            <textarea id="contentText" class="weui-form-area"  name="f6" rows="5" cols="60"></textarea>
+        </div>
+    </div>
+	
+
+	<div class="weui-btn-area" style="margin-top: 30px;">
+		<a class="weui-btn weui-btn_primary" href="javascript:void(0);" onclick="commitInfo();">提交</a>
+	</div>
+
+
+	<br>
+	<br>
+	<div class="weui-footer weui-footer_fixed-bottom">
+		<p class="weui-footer__text">Copyright &copy; 反洗钱系统</p>
+	</div>
+</body>
+</html>

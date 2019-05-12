@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/task
+        http://www.springframework.org/schema/task/spring-task-4.1.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd" default-autowire="byName">
+    <!-- 注解扫描 -->
+    <context:component-scan base-package="com.superway.am"></context:component-scan>
+    <!-- 加载属性文件 -->
+    <context:property-placeholder location="classpath:db.properties"/>
+    <!-- 数据源 -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    	<property name="driverClassName" value="${jdbc.driver}"></property>
+    	<property name="url" value="${jdbc.url}"></property>
+    	<property name="username" value="${jdbc.username}"></property>
+    	<property name="password" value="${jdbc.password}"></property>
+    </bean>
+    <!-- SqlSessionFactory -->
+    <bean id="factory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    	<property name="dataSource" ref="dataSource"></property>
+    	<property name="typeAliasesPackage" value="com.superway.am.pojo"></property>
+    </bean>
+    <!-- 扫描器 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    	<property name="basePackage" value="com.superway.am.mapper"></property>
+    	<property name="sqlSessionFactoryBeanName" value="factory"></property>
+    </bean>
+    <!-- 事务管理器 -->
+    <bean id="txManage" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    	<property name="dataSource" ref="dataSource"></property>
+    </bean>
+    
+    <!-- 声明式事务 -->
+    <tx:advice id="txAdvice" transaction-manager="txManage">
+    	<tx:attributes>
+    		<tx:method name="ins*"/>
+    		<tx:method name="del*"/>
+    		<tx:method name="upd*"/>
+    		<tx:method name="*" read-only="true"/>
+    	</tx:attributes>
+    </tx:advice>
+    <!-- 配置aop -->
+    <aop:config>
+    	<aop:pointcut expression="execution(* com.superway.am.service.impl.*.*(..))" id="mypoint"/>
+    	<aop:advisor advice-ref="txAdvice" pointcut-ref="mypoint"/>
+    </aop:config>
+    
+    <task:scheduled-tasks>
+    	<!-- 微信规定每个access_token的有效期是120分钟，本系统每隔100分钟自动获取一次access_token。 -->
+    	<!-- 微信规定每天最多可以获取access_token2000次，如果临时不够用可以进行申请 -->
+    	<!-- fixed_rate会在系统启动时立即获取一次access_token，以保证系统的正常运行。 -->
+    	<task:scheduled ref="getAccessTokenTask" method="getToken" fixed-rate="6000000" />
+    	
+    	<!-- 系统启动后立即执行，然后1万分钟刷新一次菜单 -->
+    	<task:scheduled ref="createMenuTask" method="createMenu" fixed-rate="600000000"/>
+    	
+    </task:scheduled-tasks>
+</beans>

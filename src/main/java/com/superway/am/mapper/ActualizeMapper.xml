@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.superway.am.mapper.ActualizeMapper" >
+	<select id="queryAll" resultType="actualize">
+		select * from actualize
+	</select>
+	
+	<insert id="insertActualize" parameterType="actualize"  >
+         insert into actualize(company_name,customer_name,customer_phone,total_score,manner_score,time_score, delay_score,opinion,create_date)  
+         values 
+         (#{company_name},#{customer_name},#{customer_phone},#{total_score},#{manner_score},#{time_score},#{delay_score},#{opinion},#{create_date})
+      </insert>
+      
+      
+</mapper>
