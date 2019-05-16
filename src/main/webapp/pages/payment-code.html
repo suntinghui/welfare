@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>付款码</title>
+  <meta charset="utf-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport">
+
+
+  <link href="../dist/lib/weui.min.css" rel="stylesheet">
+  <link href="../dist/css/jquery-weui.css" rel="stylesheet">
+  <link rel="stylesheet" href="icons/font-awesome/css/font-awesome.css">
+  <link href="css/style.css" rel="stylesheet">
+
+
+</head>
+
+<body ontouchstart>
+<!--=================================
+ preloader -->
+<div id="pre-loader">
+  <img src="images/pre-loader/loader-08.svg" alt="">
+</div>
+<!--=================================
+ preloader -->
+
+<div class="weui-panel weui-panel_access m-t-0">
+  <div class="weui-panel__bd">
+    <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+      <div class="weui-media-box__hd">
+        <img class="weui-media-box__thumb" src="images/img-logo-card.png" alt="">
+      </div>
+      <div class="weui-media-box__bd">
+        <h4 class="weui-media-box__title">余额：<span class="text-danger">1.0</span></h4>
+        <p class="weui-media-box__desc">2349823952933123</p>
+      </div>
+    </a>
+  </div>
+</div>
+<div class="p-15">
+  <div class="weui-cells__title">有效期倒计时(45)秒</div>
+  <div class="weui-progress">
+    <div class="weui-progress__bar">
+      <div class="weui-progress__inner-bar js_progress" style="width: 50%;"></div>
+    </div>
+  </div>
+  <div class="text-center m-t-30">
+    <img src="images/demo-barcode.png" style="width: 70%; max-width: 200px; margin-top: 30px;"/>
+    <img src="images/demo-qrcode.png" style="width: 70%; max-width: 200px; margin-top: 30px;"/>
+  </div>
+
+</div>
+
+<script src="../dist/lib/jquery-2.1.4.js"></script>
+<script src="../dist/lib/fastclick.js"></script>
+<script src="../dist/js/jquery-weui.js"></script>
+
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+
+
+        //LOADING
+        $("#pre-loader").fadeOut();
+        $('#pre-loader').delay(0).fadeOut('slow');
+    });
+
+</script>
+
+</body>
+
+</html>

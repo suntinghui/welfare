@@ -24,6 +24,9 @@
 		<fastjson-version>1.2.56</fastjson-version>
 		<xstream-version>1.4.11.1</xstream-version>
 		<dom4j-version>1.6.1</dom4j-version>
+		<slf4j-version>1.7.26</slf4j-version>
+		<commons-io-version>2.4</commons-io-version>
+		<json-lib-version>2.4</json-lib-version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -125,7 +128,27 @@
 			<artifactId>dom4j</artifactId>
 			<version>${dom4j-version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons-io-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>${json-lib-version}</version>
+			<classifier>jdk15</classifier>  
+		</dependency>
 
 	</dependencies>
 

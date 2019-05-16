@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>交易纪录</title>
+  <meta charset="utf-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport">
+
+
+  <link href="../dist/lib/weui.min.css" rel="stylesheet">
+  <link href="../dist/css/jquery-weui.css" rel="stylesheet">
+  <link rel="stylesheet" href="icons/font-awesome/css/font-awesome.css">
+  <link href="css/style.css" rel="stylesheet">
+
+
+</head>
+
+<body ontouchstart>
+<!--=================================
+ preloader -->
+<div id="pre-loader">
+  <img src="images/pre-loader/loader-08.svg" alt="">
+</div>
+<!--=================================
+ preloader -->
+
+<div class="p-15">
+  <div class="card-list-item m-b-10">
+    <img src="images/img-logo-card.png" class="img-logo-card"/>
+    <img src="images/demo-card-01.png" width="100%" class="img-card-item"/>
+    <a href="javascript:;" class="text-white">
+      <div class="card-list-city">全国</div>
+      <div class="card-list-number">5409627029043820357</div>
+      <div class="card-list-value"><small>￥</small>100</div>
+      <div class="card-list-mask"></div>
+    </a>
+  </div>
+  <div class="card-list-item m-b-10">
+    <img src="images/img-logo-card.png" class="img-logo-card"/>
+    <img src="images/demo-card-02.png" width="100%" class="img-card-item"/>
+    <a href="javascript:;" class="text-white">
+      <div class="card-list-city">全国</div>
+      <div class="card-list-number">5409627029043820357</div>
+      <div class="card-list-value"><small>￥</small>100</div>
+      <div class="card-list-mask"></div>
+    </a>
+  </div>
+</div>
+
+<script src="../dist/lib/jquery-2.1.4.js"></script>
+<script src="../dist/lib/fastclick.js"></script>
+<script src="../dist/js/jquery-weui.js"></script>
+
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+
+
+        //LOADING
+        $("#pre-loader").fadeOut();
+        $('#pre-loader').delay(0).fadeOut('slow');
+    });
+
+
+</script>
+
+</body>
+
+</html>
