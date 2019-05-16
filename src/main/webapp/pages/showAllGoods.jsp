@@ -13,14 +13,13 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
 <title>卡包列表</title>
 <meta charset="utf-8">
 <meta content="IE=edge" http-equiv="X-UA-Compatible">
-<meta content="width=device-width, initial-scale=1, user-scalable=no"
-	name="viewport">
+<meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport">
 
 
-<link href="<%=basePath %>dist/lib/weui.min.css" rel="stylesheet">
-<link href="<%=basePath %>dist/css/jquery-weui.css" rel="stylesheet">
-<link rel="stylesheet" href="<%=basePath %>pages/icons/font-awesome/css/font-awesome.css">
-<link href="<%=basePath %>pages/css/style.css" rel="stylesheet">
+<link href="<%=basePath %>/dist/lib/weui.min.css" rel="stylesheet">
+<link href="<%=basePath %>/dist/css/jquery-weui.css" rel="stylesheet">
+<link rel="stylesheet" href="<%=basePath %>/pages/icons/font-awesome/css/font-awesome.css">
+<link href="<%=basePath %>/pages/css/style.css" rel="stylesheet">
 
 
 </head>
@@ -29,53 +28,23 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
 	<!--=================================
  preloader -->
 	<div id="pre-loader">
-		<img src="<%=basePath %>pages/images/pre-loader/loader-08.svg" alt="">
+		<img src="<%=basePath %>/pages/images/pre-loader/loader-08.svg" alt="">
 	</div>
 	<!--=================================
  preloader -->
 
 	<div class="p-15">
-		<div class="card-list-item m-b-10">
-			<a href="card-gift.html" class="text-white"> <img
-				src="<%=basePath %>pages/images/img-logo-card.png" class="img-logo-card" /> <img
-				src="<%=basePath %>pages/images/demo-card-01.png" width="100%" class="img-card-item" />
-
-				<div class="card-list-city">${list.size() }</div>
-				<div class="card-list-number">5409627029043820357</div>
-				<div class="card-list-value">
-					<small>￥</small>100
-				</div>
-				<div class="card-list-mask"></div>
-			</a>
-
-		</div>
-		<div class="card-list-item m-b-10">
-			<a href="card-gift.html" class="text-white"> <img
-				src="images/img-logo-card.png" class="img-logo-card" /> <img
-				src="images/demo-card-02.png" width="100%" class="img-card-item" />
-
-				<div class="card-list-city">全国</div>
-				<div class="card-list-number">5409627029043820357</div>
-				<div class="card-list-value">
-					<small>￥</small>100
-				</div>
+	
+		<c:forEach var="goods"  items="${list }">
+			<div class="card-list-item m-b-10">
+			<a href="querySKU?idGoods=${goods.id }" class="text-white"> 
+			<img src="${goods.urlPic }" width="100%" class="img-card-item" />
+				<div class="card-list-city">${goods.name }</div>
 				<div class="card-list-mask"></div>
 			</a>
 		</div>
-		<div class="card-list-item m-b-10">
-			<a href="card-gift.html" class="text-white"> <img
-				src="images/img-logo-card.png" class="img-logo-card" /> <img
-				src="images/demo-card-04.png" width="100%" class="img-card-item" />
-
-				<div class="card-list-city">全国</div>
-				<div class="card-list-number">5409627029043820357</div>
-				<div class="card-list-value">
-					<small>￥</small>100
-				</div>
-				<div class="card-list-mask"></div>
-			</a>
-
-		</div>
+		</c:forEach>
+	
 	</div>
 
 	<script src="<%=basePath %>/dist/lib/jquery-2.1.4.js"></script>

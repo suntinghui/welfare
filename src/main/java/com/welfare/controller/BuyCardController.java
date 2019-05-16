@@ -3,14 +3,16 @@ package com.welfare.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.welfare.model.City;
 import com.welfare.model.Goods;
+import com.welfare.model.GoodsSKU;
+import com.welfare.service.CityService;
 import com.welfare.service.GoodsService;
 
 @Controller
@@ -18,6 +20,8 @@ public class BuyCardController {
 	
 	@Resource
 	private GoodsService goodsServiceImpl;
+	@Resource
+	private CityService cityServiceImpl;
 	
 	@RequestMapping(value = "queryAllGoods")
 	public String queryAllGoods(Model model) {
@@ -27,12 +31,14 @@ public class BuyCardController {
 	}
 	
 	@RequestMapping(value = "querySKU")
-	public void querySKU(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
+	public String querySKU(@RequestParam("idGoods") String idGoods, Model model) throws Exception {
+		List<GoodsSKU> skuList = goodsServiceImpl.selectSKUById(Integer.parseInt(idGoods));
+		model.addAttribute("skuList", skuList);
 		
+		List<City> cityList = cityServiceImpl.queryAll();
+		model.addAttribute("cityList", cityList);
 		
-		
+		return "buyCard";
 	}
 
 }
