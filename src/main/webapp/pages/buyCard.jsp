@@ -32,11 +32,11 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
 </div>
 <!--=================================
  preloader -->
-<div class="weui-flex p-t-15 p-b-15">
+<div class="weui-flex p-t-15 p-b-15 weui-payselect">
 
   <c:forEach var="sku" items="${skuList }">
-  	<div class="weui-flex__item p-10 weui-payselect-li">
-    	<a href="javascript:;" class="weui-btn weui-btn_default weui-payselect-on">${sku.fv }元</a>
+  	<div class="weui-flex__item weui-payselect-li">
+    	<a href="javascript:;" class="weui-btn weui-btn_default">${sku.fv }元</a>
   	</div>
   </c:forEach>
 
@@ -48,13 +48,13 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
       <input class="weui-input" id="moneySelf" pattern="[0-9]*" placeholder="请输入整数金额" type="text">
     </div>
   </div>
-  <div class="weui-cell">
+  <div class="weui-cell" style="display: none;">
     <div class="weui-cell__hd"><label class="weui-label">自定义卡号</label></div>
     <div class="weui-cell__bd">
       <input class="weui-input" placeholder="请输入8位卡号(非必填)" type="number">
     </div>
   </div>
-  <a class="weui-cell weui-cell_access open-popup" href="javascript:;" data-target="#fullpage">
+  <a class="weui-cell weui-cell_access open-popup" href="javascript:;" data-target="#fullpage" style="display: none;">
     <div class="weui-cell__bd">
       <p>选择卡面</p>
     </div>
@@ -78,6 +78,7 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
     </div>
     <div class="weui-cell__bd">
       <input class="weui-input" id="select-city" type="text" value="请选择城市">
+      <input class="weui-input" id="select-city-value" value="" type="hidden">
     </div>
   </div>
 
@@ -255,10 +256,9 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
     });
     //选择金额
     $(".weui-payselect-li").on('click', function () {
-        $(this).children().addClass("weui-payselect-on");
-        $(this).siblings().children().removeClass("weui-payselect-on");
-        return false;
-    })
+        $(".weui-payselect-li").find('a').removeClass("weui-payselect-on");
+        $(this).find('a').addClass("weui-payselect-on");
+    });
     
     var cityDisplayValue = new Array();
     var cityValue= new Array();
@@ -274,12 +274,12 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
         cols: [
             {
                 textAlign: 'center',
-                values: cityValue,
-                displayValues:cityDisplayValue
+                values: cityDisplayValue,
             }
         ],
         onChange: function(p, v, dv) {
-        	$("#select-city").picker("setValue", [dv]);
+        	var index = $.inArray(""+v, cityDisplayValue);
+        	$("#select-city-value").val(cityValue[index]);
            
         },
         onClose: function(p, v, d) {

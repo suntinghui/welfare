@@ -6,10 +6,13 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.welfare.common.Constants;
+import com.welfare.client.Constants;
+import com.welfare.service.impl.CityServiceImpl;
 import com.welfare.util.EncryptUtil;
 import com.welfare.util.MessageUtil;
 
@@ -21,6 +24,8 @@ import com.welfare.util.MessageUtil;
 @Controller
 public class WechatServerConfigController {
 
+	private static final Logger logger = LoggerFactory.getLogger(WechatServerConfigController.class);
+
 	@RequestMapping(value = "wx")
 	public void wechat(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("UTF-8");
@@ -28,10 +33,12 @@ public class WechatServerConfigController {
 
 		PrintWriter out = response.getWriter();
 
+		logger.info("========================================");
+
 		try {
 			// get方式请求的默认为是验证配置服务器地址
 			if (request.getMethod().equalsIgnoreCase("GET")) {
-				System.out.println("进行服务器地址配置操作。。。");
+				logger.info("进行服务器地址配置操作。。。");
 				out.print(checkServiceUrl(request));
 
 			} else {
@@ -51,7 +58,7 @@ public class WechatServerConfigController {
 		String echoStr = request.getParameter("echostr"); // 随机字符串
 
 		String tempSignature = EncryptUtil.getSHA1(Constants.TOKEN, timestamp, nonce);
-		System.out.println("check: " + tempSignature);
+		logger.info("check: {}", tempSignature);
 
 		if (tempSignature.equals(signature)) {
 			return echoStr;
@@ -62,21 +69,44 @@ public class WechatServerConfigController {
 	private String processMessage(HttpServletRequest request) {
 		try {
 			Map<String, String> map = MessageUtil.xmlToMap(request);
+			logger.info(map.toString());
+
 			String fromUserName = map.get("FromUserName");
 			String toUserName = map.get("ToUserName");
 			String msgType = map.get("MsgType");
 			String content = map.get("Content");
 
+			// 保存用户的OPENID
+			Constants.OPENID = fromUserName;
+
 			String message = null;
 			if (MessageUtil.MESSAGE_TEXT.equals(msgType)) {
 				message = MessageUtil.defaultText(toUserName, fromUserName);
-				
+				if (content.equalsIgnoreCase("1")) { // 卡片使用
+					message = MessageUtil.initText(toUserName, fromUserName, MessageUtil.customerServiceReplyText_1());
+				} else if (content.equalsIgnoreCase("2")) { // 卡片转赠说明
+					message = MessageUtil.initText(toUserName, fromUserName, MessageUtil.customerServiceReplyText_2());
+				} else if (content.equalsIgnoreCase("3")) { // 退卡规则
+					message = MessageUtil.initText(toUserName, fromUserName, MessageUtil.customerServiceReplyText_3());
+				} else if (content.equalsIgnoreCase("4")) { // 电子发票
+					message = MessageUtil.initText(toUserName, fromUserName, MessageUtil.customerServiceReplyText_4());
+				} else if (content.equalsIgnoreCase("5")) { // 退货
+					message = MessageUtil.initText(toUserName, fromUserName, MessageUtil.customerServiceReplyText_5());
+				} else if (content.equalsIgnoreCase("6")) { // 激活类
+					message = MessageUtil.initText(toUserName, fromUserName, MessageUtil.customerServiceReplyText_6());
+				}  else { // 输入其他内容时统一回复subscribeText
+					message = MessageUtil.initText(toUserName, fromUserName, MessageUtil.customerServiceText());
+				} 
+
 			} else if (MessageUtil.MESSAGE_EVNET.equals(msgType)) {
 				String eventType = map.get("Event");
 				if (MessageUtil.MESSAGE_SUBSCRIBE.equals(eventType)) {
-					message = MessageUtil.initText(toUserName, fromUserName, MessageUtil.menuText());
+					message = MessageUtil.initText(toUserName, fromUserName, MessageUtil.subscribeText());
 				} else if (MessageUtil.MESSAGE_CLICK.equals(eventType)) {
-					message = MessageUtil.initText(toUserName, fromUserName, MessageUtil.menuText());
+					if (map.get("EventKey").equals(Constants.MENU_SERVICE)) {
+						message = MessageUtil.initText(toUserName, fromUserName, MessageUtil.customerServiceText());
+					}
+
 				} else if (MessageUtil.MESSAGE_VIEW.equals(eventType)) {
 					String url = map.get("EventKey");
 					message = MessageUtil.initText(toUserName, fromUserName, url);

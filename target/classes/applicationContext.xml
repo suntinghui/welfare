@@ -25,7 +25,7 @@
     	<task:scheduled ref="getAccessTokenTask" method="getToken" fixed-rate="6000000" />
     	
     	<!-- 系统启动后立即执行，然后1万分钟刷新一次菜单 -->
-    	<!-- task:scheduled ref="createMenuTask" method="createMenu" fixed-rate="600000000"/>  -->
+    	<task:scheduled ref="createMenuTask" method="genMenuAction" fixed-rate="600000000"/>
     	
     	<!-- task:scheduled ref="testTask" method="test" fixed-rate="1000000"/>  -->
     	

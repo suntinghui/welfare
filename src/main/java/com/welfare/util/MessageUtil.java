@@ -107,44 +107,121 @@ public class MessageUtil {
 		text.setToUserName(fromUserName);
 		text.setMsgType(MessageUtil.MESSAGE_TEXT);
 		text.setCreateTime(new Date().getTime());
-		text.setContent(menuText());
+		text.setContent("默认提示");
 		return textMessageToXml(text);
 	}
 	
 	/**
-	 * 主菜单
+	 * 关注事件 SUBSCRIBE
 	 * @return
 	 */
-	public static String menuText(){
+	public static String subscribeText(){
 		StringBuffer sb = new StringBuffer();
-		sb.append("欢迎您关注企业360公众号。\n\n");
-		sb.append("企业360将基于反洗钱系统提供相关的配套服务，为客户提供急需的产品与解决方案。");
+		sb.append("终于等到你。。。\n\n");
+		sb.append("欢迎您关注预付卡福利社。");
 		return sb.toString();
 	}
 	
-	public static String firstMenu(){
+	// 点击客服服务菜单后的回复
+	public static String customerServiceText() {
 		StringBuffer sb = new StringBuffer();
-		sb.append("本套课程介绍微信公众号开发，主要涉及公众号介绍、编辑模式介绍、开发模式介绍等");
+		sb.append("请输入以下数字序号，选择您需要的客服服务的业务类型：\n");
+		sb.append("[1]卡片使用\n");
+		sb.append("[2]卡片转赠说明\n");
+		sb.append("[3]退卡规则\n");
+		sb.append("[4]电子发票\n");
+		sb.append("[5]退货\n");
+		sb.append("[6]激活类\n");
 		return sb.toString();
 	}
 	
-	public static String secondMenu(){
+	/**
+	 * 卡片使用
+	 * @return
+	 */
+	public static String customerServiceReplyText_1() {
 		StringBuffer sb = new StringBuffer();
-		sb.append("慕课网是垂直的互联网IT技能免费学习网站。以独家视频教程、在线编程工具、学习计划、问答社区为核心特色。在这里，你可以找到最好的互联网技术牛人，也可以通过免费的在线公开视频课程学习国内领先的互联网IT技术。");
-		sb.append("慕课网课程涵盖前端开发、PHP、Html5、Android、iOS、Swift等IT前沿技术语言，包括基础课程、实用案例、高级分享三大类型，适合不同阶段的学习人群。以纯干货、短视频的形式为平台特点，为在校学生、职场白领提供了一个迅速提升技能、共同分享进步的学习平台。");
+		sb.append("（1） 关注“Carrefour福利社”—家乐福卡—卡包中使用；或在微信卡包中使用；\n");
+		sb.append("（2） 卡片有效期为三年；\n");
+		sb.append("（3） 2018年12月28日之后购买的卡片，没有红包和充值功能；\n");
+		sb.append("（4） 个人购卡量：每单限额 / 活动期间限额；\n");
+		sb.append("（5） 如发现卡片添加不了微信卡包，可能是您微信卡包里卡片过多， 请在福利社的卡包里使用；\n");
+		sb.append("（6） 如卡片已添加到微信卡包，但卡片没有显示卡号，请尝试先删除微信卡包里的卡片，重新添加一次 ，或致电客服为您查看；\n");
+		sb.append("（7） 如您还有其他问题，请拨打客服电话：400-8086-217。\n");
 		return sb.toString();
 	}
 	
-	public static String threeMenu(){
+	/**
+	 * 卡片转赠说明
+	 * @return
+	 */
+	public static String customerServiceReplyText_2() {
 		StringBuffer sb = new StringBuffer();
-		sb.append("词组翻译使用指南\n\n");
-		sb.append("使用示例：\n");
-		sb.append("翻译足球\n");
-		sb.append("翻译中国足球\n");
-		sb.append("翻译football\n\n");
-		sb.append("回复？显示主菜单。");
+		sb.append("（1） 在卡片管理功能中，将可使用的卡片加入微信卡包，可转赠给微信好友。关注“Carrefour福利社”—卡包—点击卡片—转赠（红包）—转赠—设置密码—点击好友；\n");
+		sb.append("（2） 进行转赠前需先设置转赠密码；\n");
+		sb.append("（3） 12月28日之后购买的卡片，前两次转赠基于微信号转赠，以后则通过受赠人手机号转赠，受赠人会收到一条转赠短信，依照短信内的指引领取；\n");
+		sb.append("（4） “零”元卡不能以任何方式转赠；\n");
+		sb.append("（5） 转赠的卡片可在卡片右下角点击取消转赠；\n");
+		sb.append("（6） 转赠的卡片好友未领取，或未点击好友返回的，卡片会显示“转赠中”，如对方未领取，卡片将在24小时后原路退回您的卡包；\n");
+
 		return sb.toString();
 	}
+	
+	/**
+	 * 退卡规则
+	 * @return
+	 */
+	public static String customerServiceReplyText_3() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("（1）在“家乐福卡”内选择“个人中心”-“退卡”；\n");
+		sb.append("（2）退卡时间：5个工作日；退卡申请提交后不能取消，如有需要，请重新购买；\n");
+		sb.append("（3）退卡条件：卡片属于原购买人，并且购买的电子卡未发生消费/转赠操作，可在线上办理退卡；若购买的电子卡已发生上述操作，则无法退卡；\n");
+		sb.append("（4）退卡金额：按照购卡的实际金额退现，现金退回到购买人的微信钱包；\n");
+		sb.append("（5）如已开票，则无法退卡；\n");
+		sb.append("（6）退卡需要提供：手机号、卡号（退卡时自动上传），上传身份证正反面及微信订单号的截图；\n");
+		sb.append("（7）如您还有其他问题，请拨打客服电话：400-8086-217。\n");
+		return sb.toString();
+	}
+	
+	/**
+	 * 电子发票
+	 * @return
+	 */
+	public static String customerServiceReplyText_4() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("（1）开票时间：7个自然日内通过邮件发送；\n");
+		sb.append("（2）开票条件：只能原购买人申请，并且无退卡，发票开出后，无法退卡；\n");
+		sb.append("（3）开票单位：途皓（北京）商务服务有限公司；\n");
+		sb.append("（4）发票内容：单用途预付费卡；\n");
+		sb.append("（5）发票形式：我方只提供电子发票，请注意查看您的邮箱；\n");
+		sb.append("（6）如您还有其他问题，请拨打客服电话：400-8086-217。\n");
+		return sb.toString();
+	}
+	
+	/**
+	 * 退货
+	 * @return
+	 */
+	public static String customerServiceReplyText_5() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("（1） 请到家乐福原购买门店服务台遵从服务员的指引办理退货；\n");
+		sb.append("（2） 请关注“Carrefour福利社”—个人中心—退货—点击交易订单，出示条码给店员操作；\n");
+		sb.append("（3） 对于客户反应不能退货的，请及时联系客服处理，并提供客户电话/城市/门店信息；（4） 如您还有其他问题，请拨打客服电话：400-8086-217。\n");
+		return sb.toString();
+	}
+	
+	/**
+	 * 激活类
+	 * @return
+	 */
+	public static String customerServiceReplyText_6() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("由于系统和网络原因，卡片激活在3小时以内均属正常，请在网络环境良好的情况下使用卡片，并自行通过刷新解决问题。如您还有其他问题，请拨打客服电话：400-8086-217。\n");
+		return sb.toString();
+	}
+	
+	
+	
 	/**
 	 * 图文消息转为xml
 	 * @param newsMessage

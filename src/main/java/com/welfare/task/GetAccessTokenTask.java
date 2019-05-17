@@ -14,7 +14,7 @@ import org.slf4j.Marker;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.welfare.common.Constants;
+import com.welfare.client.Constants;
 import com.welfare.util.StringUtil;
 
 @Service("getAccessTokenTask")

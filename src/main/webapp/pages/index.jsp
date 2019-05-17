@@ -78,7 +78,7 @@
 				<p>转赠</p>
 			</div>
 			<div class="weui-cell__ft">转赠</div>
-		</a> <a class="weui-cell weui-cell_access" href="account-home.html">
+		</a> <a class="weui-cell weui-cell_access" href="showQRCode">
 			<div class="weui-cell__hd">
 				<i class="fa fa-user-circle-o text-danger p-r-5"
 					style="font-size: 22px"></i>

@@ -7,6 +7,7 @@ public class Button {
 	private String name;
 	//二级菜单
 	private Button[] sub_button;
+	
 	public String getType() {
 		return type;
 	}

@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import com.welfare.common.Constants;
+import com.welfare.client.Constants;
 import com.welfare.model.ResponseList;
 import com.welfare.model.Trans;
 import com.welfare.service.TransService;
