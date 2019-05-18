@@ -54,18 +54,11 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
     <div class="weui-cell__ft">详情</div>
   </a>
   
-  <a class="weui-cell weui-cell_access" href="intoEditPwd">
+  <a class="weui-cell weui-cell_access" href="queryOrderList">
     <div class="weui-cell__bd">
-      <p>发票</p>
+      <p>我的订单</p>
     </div>
-    <div class="weui-cell__ft">申请</div>
-  </a>
-  
-  <a class="weui-cell weui-cell_access" href="intoEditPwd">
-    <div class="weui-cell__bd">
-      <p>退卡</p>
-    </div>
-    <div class="weui-cell__ft">申请</div>
+    <div class="weui-cell__ft">发票、退卡</div>
   </a>
 
 </div>

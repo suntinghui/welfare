@@ -76,6 +76,8 @@ public class HttpUtil {
 	 * @return
 	 */
 	public static String get(String url, String params, Charset charset) {
+		logger.info("{} 请求的OPenID为 {}", url, Constants.OPENID);
+		
 		String result = "";
 		InputStream in = null;
 		if (null != params && !params.equals("")) {
@@ -110,7 +112,7 @@ public class HttpUtil {
 		logger.info("HTTP Get: {}", result);
 		return result;
 	}
-
+	
 	public static String post(String url, HashMap<String, String> map) {
 		StringBuffer sb = new StringBuffer();
 		for (Map.Entry<String, String> entry : map.entrySet()) {
@@ -144,6 +146,7 @@ public class HttpUtil {
 	 * @return
 	 */
 	public static String post(String url, String param, Charset charset) {
+		logger.info("{} 请求的OPenID为 {}", url, Constants.OPENID);
 		logger.info("HTTP Post param: {}", param);
 
 		PrintWriter out = null;

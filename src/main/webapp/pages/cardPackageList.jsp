@@ -14,9 +14,7 @@
 <title>卡包</title>
 <meta charset="utf-8">
 <meta content="IE=edge" http-equiv="X-UA-Compatible">
-<meta content="width=device-width, initial-scale=1, user-scalable=no"
-	name="viewport">
-
+<meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport">
 
 <link href="<%=basePath%>/dist/lib/weui.min.css" rel="stylesheet">
 <link href="<%=basePath%>/dist/css/jquery-weui.css" rel="stylesheet">
@@ -37,15 +35,14 @@
 
 	<div class="p-15">
 
-
-		<c:if test="${not empty list }">
+		<c:if test="${empty list }">
 			<div class="no-data">
 				<img src="<%=basePath%>/pages/images/no-data.png" />
-				<p>暂无数据</p>
+				<p>数据查询成功，暂无可用数据</p>
 			</div>
 		</c:if>
 
-		<c:if test="${empty list }">
+		<c:if test="${not empty list }">
 			<c:forEach var="card" items="${list }">
 
 				<div class="card-list-item m-b-10">

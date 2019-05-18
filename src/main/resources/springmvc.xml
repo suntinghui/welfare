@@ -26,5 +26,6 @@
 	<!-- 静态资源 -->
 	<mvc:resources location="/pages/" mapping="/pages/**"></mvc:resources>
 	<mvc:resources location="/dist/" mapping="/dist/**"></mvc:resources>
+	<mvc:resources location="/" mapping="/*.txt"></mvc:resources>
 
 </beans>

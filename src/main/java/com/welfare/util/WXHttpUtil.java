@@ -18,7 +18,7 @@ import com.alibaba.fastjson.JSONObject;
  * 微信工具类
  *
  */
-public class WeHttpUtil {
+public class WXHttpUtil {
 
 	/**
 	 * get请求

@@ -1,10 +1,15 @@
 eclipse.preferences.version=1
 encoding//src/main/webapp/pages/buyCard.jsp=UTF-8
+encoding//src/main/webapp/pages/cardGift.jsp=UTF-8
 encoding//src/main/webapp/pages/cardPackageDetail.jsp=UTF-8
 encoding//src/main/webapp/pages/cardPackageList.jsp=UTF-8
 encoding//src/main/webapp/pages/editPassword.jsp=UTF-8
 encoding//src/main/webapp/pages/index.jsp=UTF-8
+encoding//src/main/webapp/pages/invoice.jsp=UTF-8
+encoding//src/main/webapp/pages/orderList.jsp=UTF-8
+encoding//src/main/webapp/pages/orderReturn.jsp=UTF-8
 encoding//src/main/webapp/pages/personalCenter.jsp=UTF-8
+encoding//src/main/webapp/pages/result.jsp=UTF-8
 encoding//src/main/webapp/pages/showAllGoods.jsp=UTF-8
 encoding//src/main/webapp/pages/transList.jsp=UTF-8
 encoding/<project>=UTF-8

@@ -1,5 +1,7 @@
 package com.welfare.model;
 
+import com.welfare.util.DataUtil;
+
 /**
  * @author SunTH
  *
@@ -11,6 +13,7 @@ public class Trans {
 	private String cardNoIntr;
 	private String cardno;
 	private String channel;
+	private String cityName;
 	private String code;
 	private String coid;
 	private int id;
@@ -22,6 +25,9 @@ public class Trans {
 	private String recordBalance;
 	private String timeAdd;
 	private int typeTrans;
+	
+	private String typeTransDesp;
+	
 	public double getBalance() {
 		return balance;
 	}
@@ -117,6 +123,12 @@ public class Trans {
 	}
 	public void setTypeTrans(int typeTrans) {
 		this.typeTrans = typeTrans;
+	}
+	
+	public String getTypeTransDesp() {
+		int i = DataUtil.transTypeValue().indexOf(this.typeTrans+"");
+		String val = DataUtil.transTypeDisplay().get(i);
+		return val;
 	}
 	
 	@Override

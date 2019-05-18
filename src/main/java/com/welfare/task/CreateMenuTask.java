@@ -1,6 +1,8 @@
 package com.welfare.task;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -19,6 +21,7 @@ import com.welfare.pojo.Button;
 import com.welfare.pojo.ClickButton;
 import com.welfare.pojo.Menu;
 import com.welfare.pojo.ViewButton;
+import com.welfare.util.WXUtil;
 
 @Service("createMenuTask")
 public class CreateMenuTask {
@@ -57,9 +60,9 @@ public class CreateMenuTask {
 
 	private Menu createMenu() {
 		// 第一系列菜单
-		ViewButton button11 = new ViewButton("购卡", "view", Constants.WEIXIN_HOST + "queryAllGoods");
-		ViewButton button12 = new ViewButton("卡包", "view", Constants.WEIXIN_HOST + "cardPackageList");
-		ViewButton button13 = new ViewButton("个人中心", "view", Constants.WEIXIN_HOST + "personalCenter");
+		ViewButton button11 = new ViewButton("购卡", "view", WXUtil.formatURLGetCode(Constants.WEIXIN_HOST + "queryAllGoods"));
+		ViewButton button12 = new ViewButton("卡包", "view", WXUtil.formatURLGetCode(Constants.WEIXIN_HOST + "cardPackageList"));
+		ViewButton button13 = new ViewButton("个人中心", "view", WXUtil.formatURLGetCode(Constants.WEIXIN_HOST + "personalCenter"));
 		ClickButton button14 = new ClickButton("客服服务", "click", Constants.MENU_SERVICE);
 		Button button1 = new Button();
 		button1.setName("家乐福卡");
@@ -86,5 +89,4 @@ public class CreateMenuTask {
 		menu.setButton(new Button[] { button1, button2, button3 });
 		return menu;
 	}
-
 }

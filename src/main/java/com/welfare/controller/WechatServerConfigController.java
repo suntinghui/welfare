@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.welfare.client.Constants;
-import com.welfare.service.impl.CityServiceImpl;
 import com.welfare.util.EncryptUtil;
 import com.welfare.util.MessageUtil;
 
@@ -30,7 +29,7 @@ public class WechatServerConfigController {
 	public void wechat(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-
+		
 		PrintWriter out = response.getWriter();
 
 		logger.info("========================================");
@@ -42,7 +41,8 @@ public class WechatServerConfigController {
 				out.print(checkServiceUrl(request));
 
 			} else {
-				out.print(processMessage(request));
+				String msg = processMessage(request);
+				out.print(msg);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -69,7 +69,7 @@ public class WechatServerConfigController {
 	private String processMessage(HttpServletRequest request) {
 		try {
 			Map<String, String> map = MessageUtil.xmlToMap(request);
-			logger.info(map.toString());
+			logger.info("用户向微信请求报文 {}",map.toString());
 
 			String fromUserName = map.get("FromUserName");
 			String toUserName = map.get("ToUserName");
@@ -105,11 +105,12 @@ public class WechatServerConfigController {
 				} else if (MessageUtil.MESSAGE_CLICK.equals(eventType)) {
 					if (map.get("EventKey").equals(Constants.MENU_SERVICE)) {
 						message = MessageUtil.initText(toUserName, fromUserName, MessageUtil.customerServiceText());
-					}
+					} 
 
 				} else if (MessageUtil.MESSAGE_VIEW.equals(eventType)) {
 					String url = map.get("EventKey");
 					message = MessageUtil.initText(toUserName, fromUserName, url);
+					
 				} else if (MessageUtil.MESSAGE_SCANCODE.equals(eventType)) {
 					String key = map.get("EventKey");
 					message = MessageUtil.initText(toUserName, fromUserName, key);
@@ -119,7 +120,8 @@ public class WechatServerConfigController {
 				message = MessageUtil.initText(toUserName, fromUserName, label);
 			}
 
-			System.out.println("\nmessage: " + message);
+			logger.info("微信向用户响应报文 {}",message);
+			
 			return message;
 
 		} catch (Exception e) {

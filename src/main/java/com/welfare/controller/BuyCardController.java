@@ -4,18 +4,22 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.welfare.client.Constants;
 import com.welfare.model.City;
 import com.welfare.model.Goods;
 import com.welfare.model.GoodsSKU;
 import com.welfare.service.CityService;
 import com.welfare.service.GoodsService;
 import com.welfare.service.OrderService;
+import com.welfare.util.StringUtil;
+import com.welfare.util.WXUtil;
 
 @Controller
 public class BuyCardController {
@@ -28,7 +32,11 @@ public class BuyCardController {
 	private OrderService orderServiceImpl;
 
 	@RequestMapping(value = "queryAllGoods")
-	public String queryAllGoods(Model model) {
+	public String queryAllGoods(HttpServletRequest request, Model model) {
+		if (StringUtil.isEmpty(Constants.OPENID)) {
+			WXUtil.getOpenID(request.getParameter("code"));
+		}
+		
 		List<Goods> list = goodsServiceImpl.selectList();
 		model.addAttribute("list", list);
 		return "showAllGoods";
@@ -41,6 +49,7 @@ public class BuyCardController {
 
 		List<City> cityList = cityServiceImpl.queryAll();
 		model.addAttribute("cityList", cityList);
+		model.addAttribute("idGoods", idGoods);
 
 		return "buyCard";
 	}
