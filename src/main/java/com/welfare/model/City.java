@@ -1,27 +1,7 @@
 package com.welfare.model;
 
-/**
- * City {
-		all (integer, optional): 是否是全国卡 0：否 1：是 ,
-		city (string, optional): city ,
-		id (integer, optional): id ,
-		idMer (string, optional): 商户id ,
-		idProduct (string, optional): 商品编号 ,
-		jv (string, optional): 城市编号 ,
-		limitSize (integer, optional),
-		limitStart (integer, optional),
-		orderByStr (string, optional),
-		orderByString (inline_model, optional),
-		page (integer, optional),
-		pageCount (integer, optional),
-		sort (integer, optional): 排序序号 ,
-		status (integer, optional): 是否启用：0：否 1：是
- * @author SunTH
- *
- */
-
 public class City {
-	private int all;
+	private int allCity;
 	private String city;
 	private int id;
 	private String idMer;
@@ -33,11 +13,12 @@ public class City {
 	private int page;
 	private int sort;
 	private int status;
-	public int getAll() {
-		return all;
+	
+	public int getAllCity() {
+		return allCity;
 	}
-	public void setAll(int all) {
-		this.all = all;
+	public void setAllCity(int allCity) {
+		this.allCity = allCity;
 	}
 	public String getCity() {
 		return city;
@@ -105,14 +86,5 @@ public class City {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	
-	@Override
-	public String toString() {
-		return "City [all=" + all + ", city=" + city + ", id=" + id + ", idMer=" + idMer + ", idProduct=" + idProduct
-				+ ", jv=" + jv + ", limitSize=" + limitSize + ", limitStart=" + limitStart + ", orderByStr="
-				+ orderByStr + ", page=" + page + ", sort=" + sort + ", status=" + status + "]";
-	}
-	
-	
 
 }

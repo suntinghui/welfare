@@ -36,7 +36,7 @@ public class WechatServerConfigController {
 		logger.info("========================================");
 
 		try {
-			// get方式请求的默认为是验证配置服务器地址
+			// get方式请求的默认为是 后台管理系统 验证配置服务器地址
 			if (request.getMethod().equalsIgnoreCase("GET")) {
 				logger.info("进行服务器地址配置操作。。。");
 				out.print(checkServiceUrl(request));

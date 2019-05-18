@@ -25,17 +25,17 @@ public class GoodsServiceImpl implements GoodsService {
 		String result = HttpUtil.get(Constants.SERVER_HOST + "/goods/selectList", "");
 		logger.debug(result);
 
-		ResponseList<Goods> obj = (ResponseList<Goods>) JSON.parseObject(result,
-				new TypeReference<ResponseList<Goods>>() {});
+		ResponseList<Goods> obj = (ResponseList<Goods>) JSON.parseObject(result, new TypeReference<ResponseList<Goods>>() {
+		});
 		return obj.getData();
 	}
 
 	@Override
 	public List<GoodsSKU> selectSKUById(int idGoods) {
-		String result = HttpUtil.get(Constants.SERVER_HOST+"/goods/selectListByIdGoods/"+idGoods, "");
+		String result = HttpUtil.get(Constants.SERVER_HOST + "/goods/selectListByIdGoods/" + idGoods, "");
 		logger.debug(result);
-		ResponseList<GoodsSKU> obj = (ResponseList<GoodsSKU>) JSON.parseObject(result,
-				new TypeReference<ResponseList<GoodsSKU>>() {});
+		ResponseList<GoodsSKU> obj = (ResponseList<GoodsSKU>) JSON.parseObject(result, new TypeReference<ResponseList<GoodsSKU>>() {
+		});
 		return obj.getData();
 	}
 }

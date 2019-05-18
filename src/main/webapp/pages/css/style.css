@@ -658,15 +658,6 @@
   padding: 3px 6px;
   border-radius: 2px; }
 
-.weui-form-preview {
-  font-size: 14px;
-  margin-bottom: 10px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px; }
-  .weui-form-preview:before, .weui-form-preview:after {
-    border: none; }
-
 .weui-payselect {
   display: flex;
   display: -webkit-flex;
@@ -680,5 +671,52 @@
     .weui-payselect .weui-payselect-li .weui-payselect-on {
       background: #e64340;
       color: #fff; }
+
+.weui-form-preview {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #000;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px; }
+  .weui-form-preview:before, .weui-form-preview:after {
+    border: none; }
+  .weui-form-preview__hd:after {
+    right: 15px; }
+  .weui-form-preview__bd, .weui-form-preview__label {
+    color: #666; }
+  .weui-form-preview a {
+    color: #000; }
+
+.filter-bar {
+  position: fixed;
+  width: 100%;
+  background: #fff;
+  color: #000;
+  z-index: 9999; }
+  .filter-bar .weui-cells {
+    font-size: 12px;
+    padding: 0; }
+  .filter-bar .weui-cell_select .weui-cell__bd:after {
+    content: none; }
+  .filter-bar .weui-input {
+    text-align: center; }
+  .filter-bar .weui-btn {
+    font-size: 12px; }
+  .filter-bar .weui-btn_mini {
+    padding: 3px 6px;
+    line-height: 1.5; }
+
+.no-data {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -100px;
+  margin-top: -90px;
+  text-align: center;
+  color: #999; }
+  .no-data img {
+    width: 100%;
+    max-width: 200px; }
 
 /*# sourceMappingURL=style.css.map */

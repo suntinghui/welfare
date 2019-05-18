@@ -1,4 +1,4 @@
-package com.welfare.task;
+package com.welfare.service.impl;
 
 import java.io.IOException;
 
@@ -10,21 +10,22 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.Marker;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.welfare.client.Constants;
+import com.welfare.pojo.WXUserInfo;
+import com.welfare.service.UserInfoService;
 import com.welfare.util.StringUtil;
 
-@Service("getAccessTokenTask")
-public class GetAccessTokenTask {
+@Service
+public class UserInfoServiceImpl implements UserInfoService {
+	
+	private static final Logger logger = LoggerFactory.getLogger(UserInfoServiceImpl.class);
 
-	private static final Logger logger = LoggerFactory.getLogger(GetAccessTokenTask.class);
-
-	public void getToken() {
-		String url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + Constants.APPID
-				+ "&secret=" + Constants.APP_SECRET;
+	@Override
+	public WXUserInfo getUserInfo() {
+		String url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token="+Constants.ACCESS_TOKEN+"&openid="+Constants.OPENID;
 
 		CloseableHttpClient client = HttpClientBuilder.create().build();
 		HttpGet httpGet = new HttpGet(url);
@@ -35,19 +36,12 @@ public class GetAccessTokenTask {
 			HttpEntity entity = response.getEntity();
 			if (entity != null) {
 				String result = EntityUtils.toString(entity);
-				logger.info("GetAccessTokenTask:{}", result);
+				logger.info("getUserInfo:{}", result);
 
 				jsonObject = JSONObject.parseObject(result);
 				if (null == jsonObject.get("errcode")) {
-					String access_token = (String) jsonObject.get("access_token");
-
-					if (StringUtil.isNotEmpty(access_token)) {
-						logger.info("获取access_token成功:{}", access_token);
-						Constants.ACCESS_TOKEN = access_token;
-						
-					} else {
-						logger.info("获取access_token失败");
-					}
+					WXUserInfo userinfo = jsonObject.toJavaObject(WXUserInfo.class);
+					return userinfo;
 				} else {
 					logger.error("获取access_token失败:{}-{}", jsonObject.get("errcode"), jsonObject.get("errmsg"));
 				}
@@ -57,6 +51,8 @@ public class GetAccessTokenTask {
 			e.printStackTrace();
 			logger.error("获取access_token失败");
 		}
+		
+		return null;
 	}
 
 }

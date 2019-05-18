@@ -264,8 +264,10 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
     var cityValue= new Array();
     
     <c:forEach items="${cityList}" var="city">
-    	cityDisplayValue.push("${city.city}")
-    	cityValue.push("${city.jv}")
+    	<c:if test="${city.status == 1}">
+	    	cityDisplayValue.push("${city.city}")
+	    	cityValue.push("${city.jv}")
+    	</c:if>
     </c:forEach>
 
     //选择城市

@@ -44,6 +44,9 @@ public class CreateMenuTask {
 				if (jsonObject != null) {
 					int code = jsonObject.getInteger("errcode");
 					logger.error("code:{} ", code);
+					if (code == 0) {
+						logger.error("创建菜单成功--------------------------------");
+					}
 				}
 			}
 		} catch (IOException e) {
@@ -55,8 +58,8 @@ public class CreateMenuTask {
 	private Menu createMenu() {
 		// 第一系列菜单
 		ViewButton button11 = new ViewButton("购卡", "view", Constants.WEIXIN_HOST + "queryAllGoods");
-		ViewButton button12 = new ViewButton("卡包", "view", Constants.WEIXIN_HOST + "");
-		ViewButton button13 = new ViewButton("个人中心", "view", Constants.WEIXIN_HOST + "");
+		ViewButton button12 = new ViewButton("卡包", "view", Constants.WEIXIN_HOST + "cardPackageList");
+		ViewButton button13 = new ViewButton("个人中心", "view", Constants.WEIXIN_HOST + "personalCenter");
 		ClickButton button14 = new ClickButton("客服服务", "click", Constants.MENU_SERVICE);
 		Button button1 = new Button();
 		button1.setName("家乐福卡");

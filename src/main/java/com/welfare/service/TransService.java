@@ -7,6 +7,6 @@ import com.welfare.model.Trans;
 
 public interface TransService {
 	
-	public List<Trans> getList(int idMember, int tranType);
+	public List<Trans> getList(int tranType);
 
 }

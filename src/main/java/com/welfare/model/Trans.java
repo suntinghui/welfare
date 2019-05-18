@@ -1,25 +1,6 @@
 package com.welfare.model;
 
 /**
- * Trans {
-balance (number, optional): 余额 ,
-cardId (string, optional): 微信cardId ,
-cardNoIntr (string, optional): 内部卡号 ,
-cardno (string, optional): C4卡号 ,
-channel (string, optional): id ,
-code (string, optional): 微信code ,
-coid (string, optional): 微信订单号 ,
-id (integer, optional): id ,
-idMember (integer, optional): 用户id ,
-jv (string, optional): 城市编号 ,
-limitStart (integer, optional),
-orderByStr (string, optional),
-priceSale (number, optional): 消费金额 ,
-recordBalance (string, optional): recordBalance ,
-timeAdd (string, optional): 添加时间 ,
-typeTrans (integer, optional): 流水类型
-}
-
  * @author SunTH
  *
  */
