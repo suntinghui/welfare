@@ -48,9 +48,7 @@ public class CardPackageController {
 	 */
 	@RequestMapping("cardPackageList")
 	public String cardPackageList(HttpServletRequest request, Model model) {
-		if (StringUtil.isEmpty(Constants.OPENID)) {
-			WXUtil.getOpenID(request.getParameter("code"));
-		}
+		WXUtil.getOpenID(request.getParameter("code"));
 		
 		List<CardListResp> list = memberServiceImpl.getMemberCardListByOpenId();
 		model.addAttribute("list", list);

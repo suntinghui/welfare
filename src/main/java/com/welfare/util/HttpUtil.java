@@ -76,7 +76,6 @@ public class HttpUtil {
 	 * @return
 	 */
 	public static String get(String url, String params, Charset charset) {
-		logger.info("{} 请求的OPenID为 {}", url, Constants.OPENID);
 		
 		String result = "";
 		InputStream in = null;
@@ -95,7 +94,7 @@ public class HttpUtil {
 			conn.setRequestProperty("accept", "*/*");
 			conn.setRequestProperty("connection", "Keep-Alive");
 			conn.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)");
-			conn.setRequestProperty("token", Constants.OPENID);
+			conn.setRequestProperty("token", DataUtil.getSessionData(Constants.kOPENID));
 			conn.connect();
 			in = conn.getInputStream();
 			result = IOUtils.toString(in, charset);
@@ -146,7 +145,6 @@ public class HttpUtil {
 	 * @return
 	 */
 	public static String post(String url, String param, Charset charset) {
-		logger.info("{} 请求的OPenID为 {}", url, Constants.OPENID);
 		logger.info("HTTP Post param: {}", param);
 
 		PrintWriter out = null;
@@ -160,7 +158,7 @@ public class HttpUtil {
 			conn.setRequestProperty("accept", "*/*");
 			conn.setRequestProperty("connection", "Keep-Alive");
 			conn.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)");
-			conn.setRequestProperty("token", Constants.OPENID);
+			conn.setRequestProperty("token", DataUtil.getSessionData(Constants.kOPENID));
 
 			// 发送POST请求必须设置如下两行
 			conn.setDoOutput(true);

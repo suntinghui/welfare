@@ -16,6 +16,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.welfare.client.Constants;
 import com.welfare.pojo.WXUserInfo;
 import com.welfare.service.UserInfoService;
+import com.welfare.util.DataUtil;
 import com.welfare.util.StringUtil;
 
 @Service
@@ -25,7 +26,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 	@Override
 	public WXUserInfo getUserInfo() {
-		String url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token="+Constants.ACCESS_TOKEN+"&openid="+Constants.OPENID;
+		String url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token="+Constants.ACCESS_TOKEN+"&openid="+DataUtil.getSessionData(Constants.kOPENID);
 
 		CloseableHttpClient client = HttpClientBuilder.create().build();
 		HttpGet httpGet = new HttpGet(url);
