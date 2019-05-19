@@ -120,7 +120,7 @@
 			type:"post",
 			url:"<%=Constants.SERVER_HOST%>/member/getVerifyCode/",
 			 headers:{
-			        "token":""
+			        "token":"${sessionScope.kOPENID}"
 				},
 				data : {
 					"phoneNumbers" : phone

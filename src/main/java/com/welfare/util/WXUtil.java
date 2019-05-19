@@ -29,8 +29,16 @@ public class WXUtil {
 			return "";
 		}
 	}
+	
+	public static void main(String args[]) {
+		String url = formatURLGetCode(Constants.WEIXIN_HOST+"selectMemberCardById?id=26098");
+		System.out.println(url);
+	}
 
-	public static void getOpenID(String code) {
+	public static String getOpenID(String code) {
+		if (StringUtil.isEmpty(code))
+			return "";
+			
 		try {
 			String url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + Constants.APPID + "&secret=" + Constants.APP_SECRET + "&code=" + code + "&grant_type=authorization_code";
 			JSONObject jsonObject = WXHttpUtil.doGetStr(url);
@@ -39,12 +47,14 @@ public class WXUtil {
 			DataUtil.saveSessionData(Constants.kOPENID, openId);
 
 			logger.info("通过授权的方式成功得到openID：{}", openId);
+			return openId;
 
 		} catch (ParseException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return "没有取得OPENID!!!!!!!!!";
 	}
 
 	public static String byteToHex(final byte[] hash) {
