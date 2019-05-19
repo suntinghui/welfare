@@ -6,6 +6,8 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://" +request.getServerName()+":" +request.getServerPort()+path+"/" ;   
 %>
 
+<%@ page import="com.welfare.client.Constants"%>
+
 <html>
 <head>
 <title>转赠</title>
@@ -91,15 +93,12 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
         $('#pre-loader').delay(0).fadeOut('slow');
         
         wx.config({
-    	    debug: true, 
+    	    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
     	    appId: "${share.appId}",
     	    timestamp:"${share.timestamp}",
     	    nonceStr: "${share.nonceStr}", 
     	    signature: "${share.signature}",
-    	    jsApiList: ["onMenuShareAppMessage"]
-    	});
-        
-		wx.ready(function () { 
+    	    jsApiList: ["onMenuShareAppMessage","onMenuShareTimeline","checkJsApi","onMenuShareTimeline","onMenuShareWeibo"]
     	});
         
         wx.error(function(res){
@@ -108,21 +107,20 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
     });
     
     function submitAction(){
-    	wx.onMenuShareAppMessage({
-	    	title:"测试",
-	        desc: '测试一下', 
-	        link: 'http://welfare.ngrok.xiaomiqiu.cn/welfare/',
-	        imgUrl: 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo_top_86d58ae1.png', 
-	        success: function () {
-	        	alert("分享成功");
-	        },
-	        cancel: function () {
-				alert("分享失败");
-	        }    	
-	    })
-    	
-    	
-    	
+    	wx.ready(function () {
+    		wx.onMenuShareAppMessage({
+    	    	title:"福利社",
+    	        desc: '点击领取礼品卡', 
+    	        link: "<%=Constants.WEIXIN_HOST%>selectMemberCardById?id=${id}",
+    	        imgUrl: "https://gss3.bdstatic.com/-Po3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=20ce9be6a81ea8d38a227302af315773/42166d224f4a20a45517109a9e529822720ed065.jpg",
+    	        success: function () {
+    	        	alert("分享成功");
+    	        },
+    	        cancel: function () {
+    				alert("分享失败");
+    	        }    	
+    	    });
+    	});
     }
 
     $(".btn-card-gift").click(function(){
@@ -142,6 +140,18 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
         });
 
     });
+</script>
+
+<script>
+//用于去除alert的url
+window.alert = function(name){
+    var iframe = document.createElement("IFRAME");
+    iframe.style.display="none";
+    iframe.setAttribute("src", 'data:text/plain,');
+    document.documentElement.appendChild(iframe);
+    window.frames[0].window.alert(name);
+    iframe.parentNode.removeChild(iframe);
+}
 </script>
 
 </body>

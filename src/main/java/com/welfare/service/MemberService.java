@@ -23,5 +23,14 @@ public interface MemberService {
 	 * 获取验证码
 	 */
 	public String getVerifyCode(String phone);
+	
+	/**
+	 * 修改卡包密码
+	 * @param code
+	 * @param phoneNumber
+	 * @param pwd
+	 * @return
+	 */
+	public String editPackagePwd(String code, String phoneNumber, String pwd);
 
 }

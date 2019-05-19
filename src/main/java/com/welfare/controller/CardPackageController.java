@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +17,9 @@ import com.welfare.client.Constants;
 import com.welfare.model.CardDetailRsp;
 import com.welfare.model.CardGiftRsp;
 import com.welfare.model.CardListResp;
+import com.welfare.model.LinkDetailRsp;
 import com.welfare.model.PayCodeRsp;
+import com.welfare.model.ResponseObject;
 import com.welfare.pojo.WXShare;
 import com.welfare.service.MemberCardService;
 import com.welfare.service.MemberService;
@@ -29,6 +33,8 @@ import com.welfare.util.WXUtil;
  */
 @Controller
 public class CardPackageController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(CardPackageController.class);
 	
 	@Resource
 	private MemberService memberServiceImpl;
@@ -77,9 +83,11 @@ public class CardPackageController {
 	 * @return
 	 */
 	@RequestMapping("startCardGift")
-	public String startCardGift(HttpServletRequest request, Model model) {
-		System.out.println(request.getRequestURL().toString());
-		Map<String, String> map = WXUtil.getConfig(request.getRequestURL().toString());
+	public String startCardGift(HttpServletRequest request,@RequestParam("id") int id , Model model) {
+		logger.info(request.getRequestURL().toString());
+		// 注意：携带参数！！！  否则会签名失败！！！
+		String url = request.getRequestURL().toString()+"?id="+id;
+		Map<String, String> map = WXUtil.getConfig(url);
 		WXShare share = new WXShare();
 		share.setAppId(Constants.APPID);
 		share.setNonceStr(map.get("nonceStr"));
@@ -89,6 +97,7 @@ public class CardPackageController {
 		System.out.println(share.toString());
 		
 		model.addAttribute("share", share);
+		model.addAttribute("id", id);
 		
 		return "cardGift";
 	}
@@ -111,13 +120,35 @@ public class CardPackageController {
 	/**
 	 * 生成付款码
 	 */
-	@RequestMapping("useCardQR")
-	public String getPayCodeBar(@RequestParam("cardNo") String cardNo, Model model) {
-		PayCodeRsp payCode = memberCardServiceImpl.getCardPayCode(cardNo);
-		model.addAttribute("code", "2336639990501385568");
-		return "useCardQR";
+	@RequestMapping("payCode")
+	public String getPayCode(@RequestParam("cardNo") String cardNo, Model model) {
+		//PayCodeRsp payCode = memberCardServiceImpl.getCardPayCode(cardNo);
+		model.addAttribute("payCode", "2336639990501385568");
+		model.addAttribute("cardNo", "6226200102917466");
+		model.addAttribute("balance", "1000");
+		return "payCode";
 	}
 	
+	/**
+	 *  分享后，由领取人点开触发的接口
+	 */
+	@RequestMapping("selectMemberCardById")
+	public String selectMemberCardById(@RequestParam("id") String id, Model model) {
+		LinkDetailRsp detail = memberCardServiceImpl.selectMemberCardById(id);
+		model.addAttribute("detail", detail);
+		return "reciveCard";
+	}
+	
+	/**
+	 * 领取卡
+	 * @return
+	 */
+	@RequestMapping("receiveCard")
+	public String receiveCard(@RequestParam("id") String id, Model model) {
+		ResponseObject<String> resp = memberCardServiceImpl.receiveCard(id);
+		model.addAttribute("result", resp.getRespCode());
+		return "result";
+	}
 	
 	
 	

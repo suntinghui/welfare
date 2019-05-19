@@ -39,7 +39,7 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
   </div>
 </div>
 <div class="p-l-15 p-r-15 p-b-30">
-  <a href="useCardQR?cardNo=${detail.cardNo }" class="weui-btn weui-btn_plain-primary">立即使用</a>
+  <a href="payCode?cardNo=${detail.cardNo }" class="weui-btn weui-btn_plain-primary">立即使用</a>
 </div>
 <div class="weui-cells m-t-0">
   <div class="weui-cell">
@@ -74,7 +74,7 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
     </div>
     <div class="weui-cell__ft text-dark">${detail.gp }</div>
   </div>
-  <a class="weui-cell weui-cell_access" href="startCardGift">
+  <a class="weui-cell weui-cell_access" href="startCardGift?id=255309">
     <div class="weui-cell__bd">
       <p>转赠</p>
     </div>

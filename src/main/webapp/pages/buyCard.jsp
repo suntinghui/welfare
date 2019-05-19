@@ -51,8 +51,8 @@
 				<label class="weui-label">自定义金额</label>
 			</div>
 			<div class="weui-cell__bd">
-				<input class="weui-input" id="priceSaleInput" pattern="[0-9]*"
-					placeholder="请输入整数金额" type="text">
+				<input class="weui-input" id="priceSaleInput"
+					placeholder="金额为整数且不大于1000" type="number" min="1" max="10">
 			</div>
 		</div>
 		<div class="weui-cell" style="display: none;">
@@ -275,28 +275,34 @@
 		src="<%=basePath%>pages/js/lrz.all.bundle.js"></script>
 	<script type="text/javascript"
 		src="<%=basePath%>pages/js/iscroll-zoom-min.js"></script>
-	<script type="text/javascript" src="<%=basePath%>pages/js/PhotoClip.js"></script>
+	<script type="text/javascript" src="<%=basePath%>/pages/js/PhotoClip.js"></script>
+	<script type="text/javascript" src="<%=basePath%>/pages/js/util.js"></script>
 
 	<script type="text/javascript">
-		var idSku = "";
-		var price = ""; // 选择的单价
+		var idSku = ""; // 选择的sku
+		var price = ""; // 选择的单价，全局变量，冗余字段，用于判断
 		
 		function buyAction() {
-			var count = $("#countInput").val();
+			var count = $("#countInput").val(); // 下单总数
 			var jv = $("#select-city-value").val();
-			var priceSale = $("#priceSaleInput").val();
-			var typeBuy = 1;
-			var priceSale = "";
+			var priceSale = $("#priceSaleInput").val(); // 自定义金额
+			var typeBuy = 1; // 1：定额卡 2：自定义金额
 			var idGoods = "${idGoods}";
 
-			if (priceSale == "") {
+			if (priceSale == "") { // 定额选择
 				typeBuy = 1;
 				priceSale = "";
 			} else {
 				// 自定义金额
 				typeBuy = 2;
-				priceSale = priceSale;
 			}
+			
+			// 进行输入项校验
+			// 选择金额或是自定义金额必须选择一项
+			//if (isEmpty(price) && isEmpty(priceSale)) {
+			//	alert("请选择金额或自定义金额");
+			//	return;
+			//}
 
 			window.location.href = "orderAdd?count=" + count + "&type=1&jv="
 					+ jv + "&idSku=" + idSku + "&typeBuy=" + typeBuy

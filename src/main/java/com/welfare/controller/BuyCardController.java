@@ -65,7 +65,7 @@ public class BuyCardController {
 		paramMap.put("priceSale", priceSale);
 		paramMap.put("idGoods", idGoods);
 		orderServiceImpl.add(paramMap);
-		return "";
+		return "result";
 	}
 	
 	@RequestMapping(value = "showQRCode")

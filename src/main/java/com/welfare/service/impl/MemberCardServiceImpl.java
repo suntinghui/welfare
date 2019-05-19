@@ -7,10 +7,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.welfare.client.Constants;
 import com.welfare.model.CardDetailRsp;
 import com.welfare.model.CardGiftRsp;
+import com.welfare.model.LinkDetailRsp;
 import com.welfare.model.PayCodeRsp;
+import com.welfare.model.ResponseObject;
 import com.welfare.service.MemberCardService;
 import com.welfare.util.HttpUtil;
 
@@ -45,6 +48,14 @@ public class MemberCardServiceImpl implements MemberCardService {
 		CardGiftRsp obj = JSON.parseObject(result, CardGiftRsp.class);
 		return obj;
 	}
+	
+	@Override
+	public String cancelCardGift(String id) {
+		String result = HttpUtil.get(Constants.SERVER_HOST + "/card/cancelCardGift/" + id, "");
+		logger.debug(result);
+		String obj = JSON.parseObject(result, String.class);
+		return obj;
+	}
 
 	@Override
 	public PayCodeRsp getCardPayCode(String cardNo) {
@@ -53,6 +64,24 @@ public class MemberCardServiceImpl implements MemberCardService {
 		String result = HttpUtil.post(Constants.SERVER_HOST + "/card/getCardPayCode/", map);
 		logger.debug(result);
 		PayCodeRsp obj = JSON.parseObject(result, PayCodeRsp.class);
+		return obj;
+	}
+
+	@Override
+	public LinkDetailRsp selectMemberCardById(String id) {
+		String result = HttpUtil.get(Constants.SERVER_HOST + "/card/selectMemberCardById/" + id, "");
+		logger.debug(result);
+		LinkDetailRsp obj = JSON.parseObject(result, LinkDetailRsp.class);
+		return obj;
+	}
+
+	@Override
+	public ResponseObject<String> receiveCard(String id) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("id", id);
+		String result = HttpUtil.post(Constants.SERVER_HOST + "/card/receiveCard/", map);
+		logger.debug(result);
+		ResponseObject<String> obj = (ResponseObject<String>)JSON.parseObject(result, new TypeReference<ResponseObject<String>>() {});
 		return obj;
 	}
 

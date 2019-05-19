@@ -49,4 +49,16 @@ public class MemberServiceImpl implements MemberService {
 				
 	}
 
+	@Override
+	public String editPackagePwd(String code, String phoneNumber, String pwd) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("code", code);
+		map.put("phoneNumbers", phoneNumber);
+		map.put("pwd", pwd );
+		String result = HttpUtil.post(Constants.SERVER_HOST + "/member/editPackagePwd/", map);
+		logger.debug(result);
+		String res = JSON.parseObject(result, String.class);
+		return res;
+	}
+
 }
