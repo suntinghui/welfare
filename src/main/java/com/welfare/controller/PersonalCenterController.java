@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.welfare.client.Constants;
 import com.welfare.model.OrderInfo;
@@ -59,13 +60,22 @@ public class PersonalCenterController {
 	public String intoEditPwd() {
 		return "editPassword";
 	}
-	
-	@RequestMapping("editPwd")
-	public String getVerifyCode(@RequestParam("phone") String phone) {
+	@ResponseBody
+	@RequestMapping(value="getVerifyCode", produces = "application/json; charset=utf-8")
+	public String getVerifyCode(@RequestParam("phoneNumbers") String phone) {
 		String code = memberServiceImpl.getVerifyCode(phone);
-		return "editPassword?code="+code;
+		return code;
 	}
-	
+	/*
+	 * 修改密码
+	 */
+	@ResponseBody
+	@RequestMapping(value="editPackagePwd", produces = "application/json; charset=utf-8")
+	public String editPackagePwd(HttpServletRequest req)
+	{
+		String result=memberServiceImpl.editPackagePwd(req.getParameter("code"), req.getParameter("phoneNumber"), req.getParameter("pwd"));
+		return result;
+	}
 	@RequestMapping("queryOrderList")
 	public String queryOrderList(Model model) {
 		List<OrderInfo> list = orderServiceImpl.selectListOiByIdMember();

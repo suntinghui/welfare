@@ -39,9 +39,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public String getVerifyCode(String phone) {
+	public String getVerifyCode(String phoneNumbers) {
 		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("phoneNumbers", phone);
+		map.put("phoneNumbers", phoneNumbers);
 		String result = HttpUtil.post(Constants.SERVER_HOST + "/member/getVerifyCode/", map);
 		logger.debug(result);
 		String code = JSON.parseObject(result, String.class);
