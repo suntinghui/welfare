@@ -111,7 +111,7 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
     		wx.onMenuShareAppMessage({
     	    	title:"福利社",
     	        desc: '点击领取礼品卡', 
-    	        link: "<%=Constants.WEIXIN_HOST%>selectMemberCardById?id=${id}",
+    	        link: "${link}",
     	        imgUrl: "https://gss3.bdstatic.com/-Po3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=20ce9be6a81ea8d38a227302af315773/42166d224f4a20a45517109a9e529822720ed065.jpg",
     	        success: function () {
     	        	alert("分享成功");

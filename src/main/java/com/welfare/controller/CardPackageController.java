@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -85,6 +86,10 @@ public class CardPackageController {
 		logger.info(request.getRequestURL().toString());
 		// 注意：携带参数！！！  否则会签名失败！！！
 		String url = request.getRequestURL().toString()+"?id="+id;
+		logger.info("==============={}", url);
+		
+		logger.info("_+_+_+{}",request.getParameter("code"));
+		
 		Map<String, String> map = WXUtil.getConfig(url);
 		WXShare share = new WXShare();
 		share.setAppId(Constants.APPID);
@@ -96,6 +101,10 @@ public class CardPackageController {
 		
 		model.addAttribute("share", share);
 		model.addAttribute("id", id);
+		
+		String link = WXUtil.formatURLGetCode(Constants.WEIXIN_HOST+"selectMemberCardById?id="+id);
+		logger.info("**********{}", link);
+		model.addAttribute("link", Constants.WEIXIN_HOST+"selectMemberCardById?id="+id);
 		
 		return "cardGift";
 	}
@@ -131,10 +140,15 @@ public class CardPackageController {
 	 *  分享后，由领取人点开触发的接口
 	 */
 	@RequestMapping("selectMemberCardById")
-	public String selectMemberCardById(@RequestParam("id") String id, Model model) {
+	public String selectMemberCardById(HttpServletRequest request, @RequestParam("id") String id, Model model) {
+		String code = request.getParameter("code");
+		logger.info("++++++++++++++++++++++++++++++++{}",code);
+		
+		logger.info("================================{}", WXUtil.getOpenID(code));
+		
 		LinkDetailRsp detail = memberCardServiceImpl.selectMemberCardById(id);
 		model.addAttribute("detail", detail);
-		return "reciveCard";
+		return "receiveCard";
 	}
 	
 	/**
