@@ -104,6 +104,10 @@
         $('#pre-loader').delay(0).fadeOut('slow');
     });
     
+    function Validate(){
+    	
+    	
+    }
     
     $("#getVerifyBtn").click(function(){
     	var phone = $("#phoneInput").val();
