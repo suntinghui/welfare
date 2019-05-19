@@ -116,7 +116,7 @@
 			type:"post",
 			url:"<%=Constants.SERVER_HOST%>/member/getVerifyCode/",
 			 headers:{
-			        "token":"<%=Constants.OPENID%>"
+			        "token":""
 				},
 				data : {
 					"phoneNumbers" : phone

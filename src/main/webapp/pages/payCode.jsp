@@ -87,8 +87,22 @@
 	</script>
 
 	<script type="text/javascript">
-	var barCodeRepeat = function(){
-		JsBarcode("#barcode", ${payCode},{width:5,height:260,displayValue:true,fontSize:60});
+	
+	function InitCode(){
+		JsBarcode("#barcode", "${payCode}",{width:5,height:260,displayValue:true,fontSize:60});
+		
+		var qrcode = new QRCode(document.getElementById("qrcode"), {
+			text : ${payCode},
+			width : 256,
+			height : 256,
+			colorDark : "#000000",
+			colorLight : "#ffffff",
+			correctLevel : QRCode.CorrectLevel.H
+		});
+	}
+	
+/* 	var barCodeRepeat = function(){
+		JsBarcode("#barcode", "${payCode}",{width:5,height:260,displayValue:true,fontSize:60});
 	};
 	
 	var qrcode = new QRCode(document.getElementById("qrcode"), {
@@ -99,27 +113,30 @@
 		colorLight : "#ffffff",
 		correctLevel : QRCode.CorrectLevel.H
 	});
-	
+	 */
 	var timer = 60;
 	var timerCount = function () {
 		timer = timer-1;
 		if (timer==0) {
 			timer = 60;
+			//alert("刷新付款码");
+			InitCode();
 		}
 		
 		$("#timerDiv").html("有效期倒计时 "+timer+" 秒");
 		$("#progressDiv").width(timer/60*100+"%");
+		 
 	}
 	
 	setInterval(timerCount,1000);
 	timerCount();
 	
-	barCodeRepeat();
+	InitCode();
 	
 	
 	</script>
 
-	</script>
+	 
 
 </body>
 

@@ -295,14 +295,34 @@
 			} else {
 				// 自定义金额
 				typeBuy = 2;
+				if(priceSale!=""){
+					
+					var r = /^\+?[1-9][0-9]*$/;
+					if (r.test(priceSale)&&parseInt(priceSale)<=1000) {
+					 //true
+					}else{
+						
+						alert("自定义金额须为整数且不大于1000");
+						return false;
+					}
+				}
 			}
 			
 			// 进行输入项校验
 			// 选择金额或是自定义金额必须选择一项
-			//if (isEmpty(price) && isEmpty(priceSale)) {
-			//	alert("请选择金额或自定义金额");
-			//	return;
-			//}
+			 if (isEmpty(price) && isEmpty(priceSale)) {
+			 	alert("请选择金额或自定义金额");
+			 	return false;
+			 }
+			 if(isEmpty(jv)){
+				 alert("请选择城市");
+				 return false;
+			 }
+			 if(!$("#weuiAgree").prop("checked")){
+				 
+				 alert("请阅读并同意相关条款");
+				 return false;
+			 }
 
 			window.location.href = "orderAdd?count=" + count + "&type=1&jv="
 					+ jv + "&idSku=" + idSku + "&typeBuy=" + typeBuy
