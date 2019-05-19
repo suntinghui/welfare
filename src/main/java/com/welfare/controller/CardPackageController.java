@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import javax.sound.midi.Receiver;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.mysql.fabric.xmlrpc.base.Data;
 import com.welfare.client.Constants;
 import com.welfare.model.CardDetailRsp;
 import com.welfare.model.CardGiftRsp;
@@ -24,6 +26,7 @@ import com.welfare.model.ResponseObject;
 import com.welfare.pojo.WXShare;
 import com.welfare.service.MemberCardService;
 import com.welfare.service.MemberService;
+import com.welfare.util.DataUtil;
 import com.welfare.util.StringUtil;
 import com.welfare.util.WXUtil;
 
@@ -49,7 +52,7 @@ public class CardPackageController {
 	 */
 	@RequestMapping("cardPackageList")
 	public String cardPackageList(HttpServletRequest request, Model model) {
-		WXUtil.getOpenID(request.getParameter("code"));
+		WXUtil.saveLocalOpenID(request.getParameter("code"));
 		
 		List<CardListResp> list = memberServiceImpl.getMemberCardListByOpenId();
 		model.addAttribute("list", list);
@@ -102,9 +105,9 @@ public class CardPackageController {
 		model.addAttribute("share", share);
 		model.addAttribute("id", id);
 		
-		String link = WXUtil.formatURLGetCode(Constants.WEIXIN_HOST+"selectMemberCardById?id="+id);
-		logger.info("**********{}", link);
-		model.addAttribute("link", Constants.WEIXIN_HOST+"selectMemberCardById?id="+id);
+		// 分享的链接，用户点开后会触发selectMemberCardById请求。
+		// 加一个发送人的openid，一是知道是谁发送的，二是进入页面时使用该OPENID进行请求数据。
+		model.addAttribute("link", Constants.WEIXIN_HOST+"selectMemberCardById?id="+id+"&sendOpenId="+DataUtil.getSessionData(Constants.kOPENID));
 		
 		return "cardGift";
 	}
@@ -137,17 +140,20 @@ public class CardPackageController {
 	}
 	
 	/**
-	 *  分享后，由领取人点开触发的接口
+	 *  分享后，由领取人点开触发的接口，然后打开领取页面
 	 */
 	@RequestMapping("selectMemberCardById")
-	public String selectMemberCardById(HttpServletRequest request, @RequestParam("id") String id, Model model) {
-		String code = request.getParameter("code");
-		logger.info("++++++++++++++++++++++++++++++++{}",code);
-		
-		logger.info("================================{}", WXUtil.getOpenID(code));
+	public String selectMemberCardById(@RequestParam("id") String id, @RequestParam("sendOpenId") String sendOpenId , Model model) {
+		// 此处首先保存一个OPENID用于调接口。领取时要更换记录的OPENID。
+		logger.info("发送人的OpenId - {}", sendOpenId);
+		DataUtil.saveSessionData(Constants.kOPENID, sendOpenId);
 		
 		LinkDetailRsp detail = memberCardServiceImpl.selectMemberCardById(id);
 		model.addAttribute("detail", detail);
+		
+		// 将领取卡做成可以获得微信CODE的链接
+		String getCodeUrl = WXUtil.formatURLGetCode(Constants.WEIXIN_HOST+"receiveCard?id="+id);
+		model.addAttribute("link", getCodeUrl);
 		return "receiveCard";
 	}
 	
@@ -156,7 +162,13 @@ public class CardPackageController {
 	 * @return
 	 */
 	@RequestMapping("receiveCard")
-	public String receiveCard(@RequestParam("id") String id, Model model) {
+	public String receiveCard(HttpServletRequest request, @RequestParam("id") String id, Model model) {
+		String code = request.getParameter("code");
+		// 领取人的OPENID
+		String receiveOpenId = WXUtil.getOpenID(code);
+		logger.info("领取人的OPENID - {}", receiveOpenId);
+		DataUtil.saveSessionData(Constants.kOPENID, receiveOpenId);
+		
 		ResponseObject<String> resp = memberCardServiceImpl.receiveCard(id);
 		model.addAttribute("result", resp.getRespCode());
 		return "result";

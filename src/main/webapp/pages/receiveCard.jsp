@@ -35,9 +35,9 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
 
 <div class="collar-card">
   <div class="collar-card-logo">
-    <img src="${detail.headimgurl }" /></div>
+    <img src="<%=basePath%>/pages/images/img-demo-logo.png" /></div>
   <div class="user-info">
-    <img src="images/avatar.jpg"/>
+    <img src="${detail.headimgurl }"/>
     <h3>${detail.mssage }</h3>
     <p>${detail.phoneFrom } 赠送的礼品卡</p>
     <div class="p-20 collar-card-buttons">
@@ -63,8 +63,7 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
     });
     
     function receiveAction() {
-    	var url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf8ae9d1b9f9708bc&redirect_uri=http%3A%2F%2Fwelfare.ngrok.xiaomiqiu.cn%2Fwelfare%2FselectMemberCardById%3Fid%3D26098&response_type=code&scope=snsapi_base&state=210#wechat_redirect";
-    	window.location.href = url;
+    	window.location.href = '${link}';
     }
 
 </script>
