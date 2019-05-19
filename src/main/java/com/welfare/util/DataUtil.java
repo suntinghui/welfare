@@ -4,7 +4,25 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
 public class DataUtil {
+	
+	public static void saveSessionData(String key, String value) {
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+		HttpSession session = request.getSession();
+		session.setAttribute(key, value);
+	}
+	
+	public static String getSessionData(String key) {
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+		HttpSession session = request.getSession();
+		return (String)session.getAttribute(key);
+	}
 	
 	public static List<String> transTypeValue() {
 		ArrayList<String> list = new ArrayList<>();

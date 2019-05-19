@@ -35,7 +35,8 @@ public class WXUtil {
 			String url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + Constants.APPID + "&secret=" + Constants.APP_SECRET + "&code=" + code + "&grant_type=authorization_code";
 			JSONObject jsonObject = WXHttpUtil.doGetStr(url);
 			String openId = (String) jsonObject.get("openid");
-			Constants.OPENID = openId;
+			// 保存用户的OPENID到Session中
+			DataUtil.saveSessionData(Constants.kOPENID, openId);
 
 			logger.info("通过授权的方式成功得到openID：{}", openId);
 

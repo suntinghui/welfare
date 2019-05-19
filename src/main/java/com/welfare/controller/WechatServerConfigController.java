@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.welfare.client.Constants;
+import com.welfare.util.DataUtil;
 import com.welfare.util.EncryptUtil;
 import com.welfare.util.MessageUtil;
 
@@ -76,8 +77,8 @@ public class WechatServerConfigController {
 			String msgType = map.get("MsgType");
 			String content = map.get("Content");
 
-			// 保存用户的OPENID
-			Constants.OPENID = fromUserName;
+			// 保存用户的OPENID到Session中
+			DataUtil.saveSessionData(Constants.kOPENID, fromUserName);
 
 			String message = null;
 			if (MessageUtil.MESSAGE_TEXT.equals(msgType)) {
@@ -102,6 +103,7 @@ public class WechatServerConfigController {
 				String eventType = map.get("Event");
 				if (MessageUtil.MESSAGE_SUBSCRIBE.equals(eventType)) {
 					message = MessageUtil.initText(toUserName, fromUserName, MessageUtil.subscribeText());
+					
 				} else if (MessageUtil.MESSAGE_CLICK.equals(eventType)) {
 					if (map.get("EventKey").equals(Constants.MENU_SERVICE)) {
 						message = MessageUtil.initText(toUserName, fromUserName, MessageUtil.customerServiceText());

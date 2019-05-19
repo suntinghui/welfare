@@ -33,9 +33,7 @@ public class BuyCardController {
 
 	@RequestMapping(value = "queryAllGoods")
 	public String queryAllGoods(HttpServletRequest request, Model model) {
-		if (StringUtil.isEmpty(Constants.OPENID)) {
-			WXUtil.getOpenID(request.getParameter("code"));
-		}
+		WXUtil.getOpenID(request.getParameter("code"));
 		
 		List<Goods> list = goodsServiceImpl.selectList();
 		model.addAttribute("list", list);
