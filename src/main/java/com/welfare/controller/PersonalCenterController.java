@@ -38,7 +38,7 @@ public class PersonalCenterController {
 	
 	@RequestMapping("personalCenter")
 	public String personalCenter(HttpServletRequest request,Model model) {
-		WXUtil.getOpenID(request.getParameter("code"));
+		WXUtil.saveLocalOpenID(request.getParameter("code"));
 		
 		WXUserInfo wxuserInfo = userInfoServiceImpl.getUserInfo();
 		model.addAttribute("wxuser", wxuserInfo);

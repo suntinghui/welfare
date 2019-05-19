@@ -29,24 +29,18 @@ public class WXUtil {
 			return "";
 		}
 	}
-	
-	public static void main(String args[]) {
-		String url = formatURLGetCode(Constants.WEIXIN_HOST+"selectMemberCardById?id=26098");
-		System.out.println(url);
-	}
 
 	public static String getOpenID(String code) {
 		if (StringUtil.isEmpty(code))
 			return "";
-			
+
 		try {
 			String url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + Constants.APPID + "&secret=" + Constants.APP_SECRET + "&code=" + code + "&grant_type=authorization_code";
 			JSONObject jsonObject = WXHttpUtil.doGetStr(url);
 			String openId = (String) jsonObject.get("openid");
-			// 保存用户的OPENID到Session中
-			DataUtil.saveSessionData(Constants.kOPENID, openId);
 
 			logger.info("通过授权的方式成功得到openID：{}", openId);
+
 			return openId;
 
 		} catch (ParseException e) {
@@ -54,7 +48,18 @@ public class WXUtil {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return "没有取得OPENID!!!!!!!!!";
+		return "";
+	}
+
+	/**
+	 * 存储本人的OPENID
+	 * 
+	 * @param code
+	 */
+	public static void saveLocalOpenID(String code) {
+		String openId = getOpenID(code);
+		// 保存用户的OPENID到Session中
+		DataUtil.saveSessionData(Constants.kOPENID, openId);
 	}
 
 	public static String byteToHex(final byte[] hash) {
@@ -78,41 +83,33 @@ public class WXUtil {
 	public static Map<String, String> getConfig(String url) {
 		Map<String, String> ret = new HashMap<String, String>();
 		String jsapi_ticket = Constants.JSAPI_TICKET;
-        String nonce_str = create_nonce_str();
-        String timestamp = create_timestamp();
-        String string1;
-        String signature = "";
+		String nonce_str = create_nonce_str();
+		String timestamp = create_timestamp();
+		String string1;
+		String signature = "";
 
-        //注意这里参数名必须全部小写，且必须有序
-        string1 = "jsapi_ticket=" + jsapi_ticket +
-                  "&noncestr=" + nonce_str +
-                  "&timestamp=" + timestamp +
-                  "&url=" + url;
-        try
-        {
-            MessageDigest crypt = MessageDigest.getInstance("SHA-1");
-            crypt.reset();
-            crypt.update(string1.getBytes("UTF-8"));
-            signature = byteToHex(crypt.digest());
-        }
-        catch (NoSuchAlgorithmException e)
-        {
-            e.printStackTrace();
-        }
-        catch (UnsupportedEncodingException e)
-        {
-            e.printStackTrace();
-        }
+		// 注意这里参数名必须全部小写，且必须有序
+		string1 = "jsapi_ticket=" + jsapi_ticket + "&noncestr=" + nonce_str + "&timestamp=" + timestamp + "&url=" + url;
+		try {
+			MessageDigest crypt = MessageDigest.getInstance("SHA-1");
+			crypt.reset();
+			crypt.update(string1.getBytes("UTF-8"));
+			signature = byteToHex(crypt.digest());
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 
-        ret.put("url", url);
-        ret.put("jsapi_ticket", jsapi_ticket);
-        ret.put("nonceStr", nonce_str);
-        ret.put("timestamp", timestamp);
-        ret.put("signature", signature);
-        
-        logger.info(ret.toString());
+		ret.put("url", url);
+		ret.put("jsapi_ticket", jsapi_ticket);
+		ret.put("nonceStr", nonce_str);
+		ret.put("timestamp", timestamp);
+		ret.put("signature", signature);
 
-        return ret;
+		logger.info(ret.toString());
+
+		return ret;
 	}
 
 }
