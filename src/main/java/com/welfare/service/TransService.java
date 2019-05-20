@@ -11,5 +11,7 @@ public interface TransService {
 	public List<Trans> getList(int tranType);
 	
 	public List<Trans> getList(HashMap<String, String> param);
+	
+	public Trans getDetail(int id);
 
 }

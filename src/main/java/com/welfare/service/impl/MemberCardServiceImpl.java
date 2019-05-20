@@ -33,11 +33,11 @@ public class MemberCardServiceImpl implements MemberCardService {
 	 * 激活卡
 	 */
 	@Override
-	public String getCardActive(int id) {
+	public ResponseObject<String> getCardActive(int id) {
 		String result = HttpUtil.get(Constants.SERVER_HOST + "/card/active/" + id, "");
 		logger.debug(result);
 		ResponseObject<String> obj = (ResponseObject<String>)JSON.parseObject(result, new TypeReference<ResponseObject<String>>() {});
-		return obj.getRespCode();
+		return obj;
 	}
 
 	/**

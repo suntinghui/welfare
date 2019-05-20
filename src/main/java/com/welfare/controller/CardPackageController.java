@@ -74,9 +74,11 @@ public class CardPackageController {
 	 * 激活
 	 */
 	@RequestMapping("cardActive")
-	public String cardActive(@RequestParam("id") int id) {
-		String res = memberCardServiceImpl.getCardActive(id);
-		return "";
+	public String cardActive(@RequestParam("id") int id, Model model) {
+		ResponseObject<String> resp = memberCardServiceImpl.getCardActive(id);
+		model.addAttribute("respCode", resp.getRespCode());
+		model.addAttribute("respMsg", resp.getRespMsg());
+		return "result2";
 	}
 	
 	/**

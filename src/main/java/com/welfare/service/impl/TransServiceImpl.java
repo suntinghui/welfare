@@ -12,7 +12,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.welfare.client.Constants;
 import com.welfare.model.ResponseList;
+import com.welfare.model.ResponseObject;
 import com.welfare.model.Trans;
+import com.welfare.model.UserInfo;
 import com.welfare.service.TransService;
 import com.welfare.util.HttpUtil;
 
@@ -47,6 +49,14 @@ public class TransServiceImpl implements TransService {
 		} else {
 			return new ArrayList<>();
 		}
+	}
+
+	@Override
+	public Trans getDetail(int id) {
+		String result = HttpUtil.get(Constants.SERVER_HOST + "/trans/selectTranById/"+id, "");
+		logger.debug(result);
+		ResponseObject<Trans> obj = (ResponseObject<Trans>)JSON.parseObject(result, new TypeReference<ResponseObject<Trans>>() {});
+		return obj.getData();
 	}
 
 }
