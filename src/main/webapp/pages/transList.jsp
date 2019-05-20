@@ -43,13 +43,8 @@ body {
 		<div class="weui-cells weui-cells_form weui-flex m-t-0 text-center">
 			<div class="weui-cell weui-cell_select">
 				<div class="weui-cell__bd">
-					<select class="weui-select" name="select1">
-						<option selected="" value="0">全部</option>
-						<option value="1">购卡</option>
-						<option value="2">领取</option>
-						<option value="3">转赠</option>
-						<option value="4">退货</option>
-					</select>
+					<input class="weui-input" id="select-city" type="text" value="请选择城市">
+				    <input class="weui-input" id="select-city-value" value="" type="hidden">
 				</div>
 			</div>
 			<div class="weui-cell weui-flex__item">
@@ -119,6 +114,35 @@ body {
 			$("#datetime-start").calendar()
 			$("#datetime-end").calendar();
 			
+			
+			//选择城市
+			 var cityDisplayValue = new Array();
+		var cityValue = new Array();
+
+		<c:forEach items="${cityList}" var="city">
+		<c:if test="${city.status == 1}">
+		cityDisplayValue.push("${city.city}")
+		cityValue.push("${city.jv}")
+		</c:if>
+		</c:forEach>
+
+		//选择城市
+		$("#select-city").picker({
+			title : "请选择城市",
+			cols : [ {
+				textAlign : 'center',
+				values : cityDisplayValue,
+			} ],
+			onChange : function(p, v, dv) {
+				var index = $.inArray("" + v, cityDisplayValue);
+				$("#select-city-value").val(cityValue[index]);
+
+			},
+			onClose : function(p, v, d) {
+
+			}
+		});
+		
 			
 			$("#btnSearch").on('click', function() {
 				 

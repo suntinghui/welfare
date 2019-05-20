@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.welfare.client.Constants;
+import com.welfare.model.City;
 import com.welfare.model.OrderInfo;
 import com.welfare.model.Trans;
 import com.welfare.model.UserInfo;
 import com.welfare.pojo.WXUserInfo;
+import com.welfare.service.CityService;
 import com.welfare.service.MemberService;
 import com.welfare.service.OrderService;
 import com.welfare.service.TransService;
@@ -35,6 +37,9 @@ public class PersonalCenterController {
 	@Resource
 	private OrderService orderServiceImpl;
 	
+	@Resource
+	private CityService cityServiceImpl;
+	
 	
 	@RequestMapping("personalCenter")
 	public String personalCenter(HttpServletRequest request,Model model) {
@@ -53,6 +58,8 @@ public class PersonalCenterController {
 	public String getTransList(@RequestParam("transType") int transType, Model model) {
 		List<Trans> list = transServiceImpl.getList(transType);
 		model.addAttribute("list",  list);
+		List<City> cityList = cityServiceImpl.queryAll();
+		model.addAttribute("cityList", cityList);
 		return "transList";
 	}
 	
