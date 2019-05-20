@@ -65,8 +65,8 @@ body {
 
 	 
 	 
-			<c:forEach var="trans" items="${list }">
-				<div class="weui-form-preview">
+			 
+				<div id="listContent" class="weui-form-preview">
 					<a href="order-detail.html">
 						<div class="weui-form-preview__hd">
 							<label class="weui-form-preview__label">消费金额</label> <em
@@ -88,8 +88,7 @@ body {
 						</div>
 					</a>
 				</div>
-			</c:forEach>
-
+			 
 	 
 
 	</div>
@@ -98,7 +97,7 @@ body {
 	<script src="<%=basePath%>/dist/lib/jquery-2.1.4.js"></script>
 	<script src="<%=basePath%>/dist/lib/fastclick.js"></script>
 	<script src="<%=basePath%>/dist/js/jquery-weui.js"></script>
-
+    <script type="text/javascript" src="<%=basePath%>/pages/js/util.js"></script>
 	<script>
 	//选择消费类型
 	 var transTypeDisplayValue;
@@ -130,6 +129,19 @@ body {
 	        });
 	    }
 	   
+	     var itemTemp='<a href="order-detail.html">';
+	     itemTemp+='<div class="weui-form-preview__hd">';
+	     itemTemp+='<label class="weui-form-preview__label">消费金额</label> <emclass="weui-form-preview__value">¥{priceSale}</em></div>';
+	     itemTemp+='<div class="weui-form-preview__bd">';
+	     itemTemp+='<div class="weui-form-preview__item">';
+	     itemTemp+='<label class="weui-form-preview__label">订单号</label> <span lass="weui-form-preview__value">{coid}</span></div>';
+	     itemTemp+='<div class="weui-form-preview__item">';
+	     itemTemp+='<label class="weui-form-preview__label">流水类型</label> <span class="weui-form-preview__value">{typeTransDesp}</span>';
+	     itemTemp+='</div>';
+	     itemTemp+='<div class="weui-form-preview__item">';
+	     itemTemp+='<label class="weui-form-preview__label">添加时间</label> <span class="weui-form-preview__value">{timeAdd}</span>';
+	     itemTemp+='</div>';
+	     itemTemp+='</div> </a>';
 	    function LoadTranList(){
 	    	
 	    	var transType=$("#select-transType-value").val();
@@ -142,7 +154,13 @@ body {
 	            type: 'POST',
 	            data: {transType:transType,startDate:startDate,endDate:endDate},
 	            success: function(data , textStatus){
-	            
+	             
+				   $("#listContent").empty();
+				   for(var i=0;i<data.length;i++){
+					   var trans= data[i];
+					   var itemStr=itemTemp.format(trans);
+					   $("#listContent").append(itemStr);
+				   }
 	            },
 	            error: function(jqXHR , textStatus , errorThrown){
 	              console.log("error");
@@ -179,8 +197,9 @@ body {
 
 			}
 		});
-		
-			
+		 //$("#select-transType").picker("setValue",["购卡"]);-laji,meyong
+		 $("#select-transType-value").val("${param.transType}");
+		 LoadTranList();
 			$("#btnSearch").on('click', function() {
 				 
 				LoadTranList();

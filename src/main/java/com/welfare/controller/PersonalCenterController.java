@@ -87,12 +87,8 @@ public class PersonalCenterController {
 		pars.put("startDate", req.getParameter("startDate"));
 		pars.put("endDate", req.getParameter("endDate"));
 		List<Trans> list = transServiceImpl.getList(transType);
-		model.addAttribute("list", list);
-		/*
-		 * List<City> cityList = cityServiceImpl.queryAll();
-		 * model.addAttribute("cityList", cityList);
-		 */
-		return "transList";
+		
+		return JSON.toJSONString(list);
 	}
 
 	@RequestMapping("intoEditPwd")

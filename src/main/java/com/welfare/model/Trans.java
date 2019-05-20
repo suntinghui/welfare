@@ -15,7 +15,7 @@ public class Trans {
 	private String channel;
 	private String cityName;
 	private String code;
-	private String coid;
+	private String coid="";
 	private int id;
 	private int idMember;
 	private String jv;
