@@ -95,10 +95,18 @@ public class PersonalCenterController {
 		
 		return JSON.toJSONString(list);
 	}
-
-	@RequestMapping("intoEditPwd")
-	public String intoEditPwd() {
-		return "editPassword";
+	
+	/**
+	 * 查询流水详情
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "getTransDetail")
+	public String getTransDetail(@RequestParam("id") int id, Model model) {
+		Trans trans = transServiceImpl.getDetail(id);
+		model.addAttribute("detail", trans);
+		return "transDetail";
 	}
 
 	@ResponseBody

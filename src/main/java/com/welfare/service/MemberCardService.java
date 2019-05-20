@@ -13,7 +13,7 @@ public interface MemberCardService {
 	/**
 	 * 激活卡
 	 */
-	public String getCardActive(int id);
+	public ResponseObject<String> getCardActive(int id);
 
 	/**
 	 * 查询卡详情接口

@@ -25,6 +25,7 @@ public class Trans {
 	private String recordBalance;
 	private String timeAdd;
 	private int typeTrans;
+	private String typeTransName;
 	
 	private String typeTransDesp;
 	
@@ -117,6 +118,22 @@ public class Trans {
 	}
 	public void setTimeAdd(String timeAdd) {
 		this.timeAdd = timeAdd;
+	}
+	
+	public String getCityName() {
+		return cityName;
+	}
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+	public void setTypeTransDesp(String typeTransDesp) {
+		this.typeTransDesp = typeTransDesp;
+	}
+	public String getTypeTransName() {
+		return typeTransName;
+	}
+	public void setTypeTransName(String typeTransName) {
+		this.typeTransName = typeTransName;
 	}
 	public int getTypeTrans() {
 		return typeTrans;

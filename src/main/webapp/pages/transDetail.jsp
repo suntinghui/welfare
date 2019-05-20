@@ -43,34 +43,49 @@ body {
 	<div class="p-15">
 		<div class="weui-form-preview">
 			<div class="weui-form-preview__hd">
-				<label class="weui-form-preview__label">付款金额</label> <em
-					class="weui-form-preview__value">¥2400.00</em>
+				<label class="weui-form-preview__label">消费金额</label> <em
+					class="weui-form-preview__value">¥ ${detail.priceSale }</em>
 			</div>
 			<div class="weui-form-preview__bd">
 				<div class="weui-form-preview__item">
 					<label class="weui-form-preview__label">流水类型</label> <span
-						class="weui-form-preview__value">退卡</span>
-				</div>
-				<div class="weui-form-preview__item">
-					<label class="weui-form-preview__label">添加时间</label> <span
-						class="weui-form-preview__value">2019-05-14 12:00:00</span>
-				</div>
-				<div class="weui-form-preview__item">
-					<label class="weui-form-preview__label">订单号</label> <span
-						class="weui-form-preview__value">343423434234234234234</span>
-				</div>
-				<div class="weui-form-preview__item">
-					<label class="weui-form-preview__label">微信订单号</label> <span
-						class="weui-form-preview__value">343423434234234234234</span>
+						class="weui-form-preview__value">${detail.typeTransName }</span>
 				</div>
 				<div class="weui-form-preview__item">
 					<label class="weui-form-preview__label">余额</label> <span
-						class="weui-form-preview__value">¥100.00</span>
+						class="weui-form-preview__value">¥ ${detail.balance }</span>
 				</div>
+				<div class="weui-form-preview__item">
+					<label class="weui-form-preview__label">添加时间</label> <span
+						class="weui-form-preview__value">${detail.timeAdd }</span>
+				</div>
+				<div class="weui-form-preview__item">
+					<label class="weui-form-preview__label">城市</label> <span
+						class="weui-form-preview__value">${detail.cityName }</span>
+				</div>
+				<div class="weui-form-preview__item">
+					<label class="weui-form-preview__label">微信订单号</label> <span
+						class="weui-form-preview__value">${detail.coid }</span>
+				</div>
+				
+				<div class="weui-form-preview__item">
+					<label class="weui-form-preview__label">用户ID</label> <span
+						class="weui-form-preview__value">${detail.idMember }</span>
+				</div>
+				
+				<div class="weui-form-preview__item">
+					<label class="weui-form-preview__label">C4卡号</label> <span
+						class="weui-form-preview__value">${detail.cardno }</span>
+				</div>
+				<div class="weui-form-preview__item">
+					<label class="weui-form-preview__label">内部卡号</label> <span
+						class="weui-form-preview__value">${detail.cardNoIntr }</span>
+				</div>
+				
 			</div>
-			<div class="weui-form-preview__ft">
+			<div class="weui-form-preview__ft" onClick="javascript:history.back(-1);">
 				<a class="weui-form-preview__btn weui-form-preview__btn_default"
-					href="order-list.html">返回列表</a>
+					href="#" onClick="javascript:history.back(-1);">返回列表</a>
 			</div>
 		</div>
 	</div>

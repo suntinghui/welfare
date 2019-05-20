@@ -33,13 +33,19 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
 
 <div class="p-15 p-b-10">
   <div class="card-list-item">
-    <a href="payment-code.html">
+    <a href="#">
       <img src="${detail.backgroundPicUrl }" width="100%" class="img-card-item"/>
     </a>
   </div>
 </div>
 <div class="p-l-15 p-r-15 p-b-30">
-  <a href="payCode?cardNo=${detail.cardNo }" class="weui-btn weui-btn_plain-primary">立即使用</a>
+  <c:if test="${detail.statusActive == 1 }">
+  	<a href="payCode?cardNo=${detail.cardNo }" class="weui-btn weui-btn_plain-primary">立即使用</a>
+  </c:if>
+  
+  <c:if test="${detail.statusActive == 2 }">
+  	<a href="cardActive?id=${detail.id }" class="weui-btn weui-btn_plain-primary">立即激活</a>
+  </c:if>
 </div>
 <div class="weui-cells m-t-0">
   <div class="weui-cell">
@@ -66,7 +72,7 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
     <div class="weui-cell__bd">
       <p>余额</p>
     </div>
-    <div class="weui-cell__ft text-dark">${detail.balance }元</div>
+    <div class="weui-cell__ft text-dark">￥ ${detail.balance }元</div>
   </div>
   <div class="weui-cell">
     <div class="weui-cell__bd">

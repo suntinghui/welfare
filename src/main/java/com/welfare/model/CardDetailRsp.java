@@ -13,6 +13,8 @@ public class CardDetailRsp {
 	private int idMember;
 	private String name;
 	private int point;
+	private int statusActive;
+	private String urlPic;
 	
 	public String getBackgroundPicUrl() {
 		return backgroundPicUrl;
@@ -80,7 +82,17 @@ public class CardDetailRsp {
 	public void setPoint(int point) {
 		this.point = point;
 	}
+	public int getStatusActive() {
+		return statusActive;
+	}
+	public void setStatusActive(int statusActive) {
+		this.statusActive = statusActive;
+	}
+	public String getUrlPic() {
+		return urlPic;
+	}
+	public void setUrlPic(String urlPic) {
+		this.urlPic = urlPic;
+	}
 	
-	
-
 }

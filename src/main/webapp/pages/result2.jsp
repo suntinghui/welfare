@@ -6,13 +6,6 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://" +request.getServerName()+":" +request.getServerPort()+path+"/" ;   
 %>
 
-<%
-
-String respMsg = request.getParameter("respMsg");
-respMsg = new String(respMsg.getBytes("ISO-8859-1"), "UTF-8");
-
-%>
-
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -42,12 +35,12 @@ respMsg = new String(respMsg.getBytes("ISO-8859-1"), "UTF-8");
 <!--=================================
  preloader -->
  
-<c:if test="${param.respCode=='00' }">
+<c:if test="${respCode=='00' }">
 
 	<div class="weui-msg">
   <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
   <div class="weui-msg__text-area">
-    <h2 class="weui-msg__title"><%=respMsg %></h2>
+    <h2 class="weui-msg__title">${respMsg }</h2>
     <p class="weui-msg__desc"></p>
   </div>
   
@@ -55,11 +48,11 @@ respMsg = new String(respMsg.getBytes("ISO-8859-1"), "UTF-8");
 
 </c:if>
 
-<c:if test="${param.respCode != '00'  }">
+<c:if test="${respCode != '00'  }">
 <div class="weui-msg">
   <div class="weui-msg__icon-area"><i class="weui-icon-warn weui-icon_msg"></i></div>
   <div class="weui-msg__text-area">
-    <h2 class="weui-msg__title"><%=respMsg %></h2>
+    <h2 class="weui-msg__title">${respMsg }</h2>
     <p class="weui-msg__desc"></p>
   </div>
   
