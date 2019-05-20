@@ -86,7 +86,7 @@
 		</div>
 	</div>
 	<div class="p-15">
-		<a href="javascript:;" class="weui-btn weui-btn_warn btn-submit"
+		<a href="javascript:;" class="weui-btn weui-btn_warn btn-submit weui-btn_disabled"
 			id="okBtn">确定</a>
 	</div>
 
@@ -104,6 +104,8 @@
         
         
     	$("#okBtn").click(function() {
+    		if($(this).hasClass('weui-btn_disabled'))
+    				return;
 			/* $.toast("修改成功", "", function() {
 				window.location.href = "";
 			}); */
@@ -118,7 +120,7 @@
     	            data: pars,
     	            success: function(data , textStatus){
     	              console.log("success");
-    	              if(data.success){
+    	              if(data.respCode=="00"){
     	            	  $.toast("修改成功");
     	              }else{
     	            	  $.toast(data.respMsg);
@@ -152,8 +154,9 @@
     					dataType : "json",
     					success : function(data) {
     						//alert(data)
-    						if(data.success){
+    						if(data.respCode=="00"){
     							$("#hidVcode").val(data.respCode);
+    							$("#okBtn").removeClass("weui-btn_disabled");
     						}else{
     							
     							$.toast(data.respMsg);
