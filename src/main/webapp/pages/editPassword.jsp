@@ -95,41 +95,38 @@
 	<script src="<%=basePath%>/dist/js/jquery-weui.js"></script>
 
 	<script>
-    $(function () {
-        FastClick.attach(document.body);
+		$(function() {
+			FastClick.attach(document.body);
 
+			//LOADING
+			$("#pre-loader").fadeOut();
+			$('#pre-loader').delay(0).fadeOut('slow');
+		});
 
-        //LOADING
-        $("#pre-loader").fadeOut();
-        $('#pre-loader').delay(0).fadeOut('slow');
-    });
-    
-    
-    $("#getVerifyBtn").click(function(){
-    	var phone = $("#phoneInput").val();
-    	if (phone.length < 11) {
-    		$.toast("手机号长度必须 是11位");
-    		return;
-    	}
-    	
-    	$.ajax({
-			type:"post",
-			url:"<%=Constants.SERVER_HOST%>/member/getVerifyCode/",
-			 headers:{
-			        "token":"${sessionScope.kOPENID}"
+		$("#getVerifyBtn").click(function() {
+			var phone = $("#phoneInput").val();
+			if (phone.length < 11) {
+				$.toast("手机号长度必须 是11位");
+				return;
+			}
+
+			$.ajax({
+				type : "post",
+				url : "getVerifyCode",
+				headers : {
+					"token" : "${sessionScope.kOPENID}"
 				},
 				data : {
 					"phoneNumbers" : phone
 				},
 				dataType : "json",
-				contentType : "application/json; charset=utf-8",
 				success : function(data) {
 					alert(data)
 				},
 				error : function(XMLHttpRequest, textStatus, errorThrown) {
 					alert(XMLHttpRequest.status);
-                    alert(XMLHttpRequest.readyState);
-                    alert(textStatus);
+					alert(XMLHttpRequest.readyState);
+					alert(textStatus);
 
 				}
 
