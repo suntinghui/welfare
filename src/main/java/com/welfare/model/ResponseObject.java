@@ -5,6 +5,8 @@ public class ResponseObject<T> {
 	private String respCode;
 	private String respMsg;
 	private T data;
+	private int totalPage;
+	private int totalSize;
 	
 	public String getRespCode() {
 		return respCode;
@@ -24,7 +26,17 @@ public class ResponseObject<T> {
 	public void setData(T data) {
 		this.data = data;
 	}
+	public int getTotalPage() {
+		return totalPage;
+	}
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+	}
+	public int getTotalSize() {
+		return totalSize;
+	}
+	public void setTotalSize(int totalSize) {
+		this.totalSize = totalSize;
+	}
 	
-	
-
 }

@@ -31,10 +31,10 @@ public class MemberCardServiceImpl implements MemberCardService {
 	}
 
 	@Override
-	public String getCardActive(int id) {
+	public ResponseObject<String> getCardActive(int id) {
 		String result = HttpUtil.get(Constants.SERVER_HOST + "/card/active/" + id, "");
 		logger.debug(result);
-		String obj = JSON.parseObject(result, String.class);
+		ResponseObject<String> obj = (ResponseObject<String>)JSON.parseObject(result, new TypeReference<ResponseObject<String>>() {});
 		return obj;
 	}
 

@@ -1,5 +1,6 @@
 package com.welfare.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -27,7 +28,11 @@ public class TransServiceImpl implements TransService {
 
 		ResponseList<Trans> obj = (ResponseList<Trans>) JSON.parseObject(result, new TypeReference<ResponseList<Trans>>() {
 		});
-		return obj.getData();
+		if (obj.getRespCode() == "00") {
+			return obj.getData();
+		} else {
+			return new ArrayList<>();
+		}
 	}
 
 	@Override
@@ -37,7 +42,11 @@ public class TransServiceImpl implements TransService {
 
 		ResponseList<Trans> obj = (ResponseList<Trans>) JSON.parseObject(result, new TypeReference<ResponseList<Trans>>() {
 		});
-		return obj.getData();
+		if (obj.getRespCode() == "00") {
+			return obj.getData();
+		} else {
+			return new ArrayList<>();
+		}
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.welfare.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.mysql.fabric.xmlrpc.base.Array;
 import com.welfare.client.Constants;
 import com.welfare.model.Goods;
 import com.welfare.model.GoodsSKU;
@@ -27,7 +29,12 @@ public class GoodsServiceImpl implements GoodsService {
 
 		ResponseList<Goods> obj = (ResponseList<Goods>) JSON.parseObject(result, new TypeReference<ResponseList<Goods>>() {
 		});
-		return obj.getData();
+		if (obj.getRespCode() == "00") {
+			return obj.getData();
+		} else {
+			return new ArrayList<>();
+		}
+		
 	}
 
 	@Override
@@ -36,6 +43,10 @@ public class GoodsServiceImpl implements GoodsService {
 		logger.debug(result);
 		ResponseList<GoodsSKU> obj = (ResponseList<GoodsSKU>) JSON.parseObject(result, new TypeReference<ResponseList<GoodsSKU>>() {
 		});
-		return obj.getData();
+		if (obj.getRespCode() == "00") {
+			return obj.getData();
+		} else {
+			return new ArrayList<>();
+		}
 	}
 }
