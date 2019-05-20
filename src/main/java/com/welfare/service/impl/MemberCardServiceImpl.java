@@ -23,10 +23,10 @@ public class MemberCardServiceImpl implements MemberCardService {
 	private static final Logger logger = LoggerFactory.getLogger(MemberCardServiceImpl.class);
 
 	@Override
-	public CardDetailRsp getCardDetail(int id) {
+	public ResponseObject<CardDetailRsp>  getCardDetail(int id) {
 		String result = HttpUtil.get(Constants.SERVER_HOST + "/card/selectCardDetail/" + id, "");
-		logger.debug(result);
-		CardDetailRsp obj = JSON.parseObject(result, CardDetailRsp.class);
+		 
+		ResponseObject<CardDetailRsp> obj =(ResponseObject<CardDetailRsp>)JSON.parseObject(result, new TypeReference<ResponseObject<CardDetailRsp>>() {});;
 		return obj;
 	}
 

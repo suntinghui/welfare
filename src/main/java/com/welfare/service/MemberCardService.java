@@ -20,7 +20,7 @@ public interface MemberCardService {
 	 * 
 	 * @return
 	 */
-	public CardDetailRsp getCardDetail(int id);
+	public ResponseObject<CardDetailRsp>  getCardDetail(int id);
 
 	/**
 	 * 转赠
