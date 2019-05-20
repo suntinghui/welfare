@@ -41,7 +41,7 @@
 	<%
 		String oid = request.getParameter("oid");
 	%>
-
+    
 	<div class="weui-cells weui-cells_form m-t-0">
 		<input id="oidInput" type="hidden" value="<%=oid%>" />
 
@@ -127,6 +127,9 @@
 	</script>
 	
 	<script type="text/javascript">
+	
+	    
+	    
 		function submitAction() {
 			//swal("完成", "这是一个完成的提示","success");
 		}

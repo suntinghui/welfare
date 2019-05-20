@@ -26,6 +26,26 @@ String.prototype.format = function (args) {
     return result;
 }
 
+function ValidatePhone(val){
+    var isPhone = /^([0-9]{3,4}-)?[0-9]{7,8}$/;//手机号码
+    var isMob= /^0?1[3|4|5|8][0-9]\d{8}$/;// 座机格式
+    if(isMob.test(val)||isPhone.test(val)){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+function ValidateEmail(val){
+	
+	var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+	 if(reg.test(val)){
+	        return true;
+	    }
+	    else{
+	        return false;
+	    }
+}
 
 function jsTrim(x) {
 	return x.replace(new RegExp("/^\s+|\s+$/gm"),'');
