@@ -28,6 +28,8 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public WXUserInfo getUserInfo() {
 		String url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token="+Constants.ACCESS_TOKEN+"&openid="+DataUtil.getSessionData(Constants.kOPENID);
 
+		logger.info("-----{}", url);
+		
 		CloseableHttpClient client = HttpClientBuilder.create().build();
 		HttpGet httpGet = new HttpGet(url);
 
@@ -44,7 +46,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 					WXUserInfo userinfo = jsonObject.toJavaObject(WXUserInfo.class);
 					return userinfo;
 				} else {
-					logger.error("获取access_token失败:{}-{}", jsonObject.get("errcode"), jsonObject.get("errmsg"));
+					logger.error("获取getUserInfo失败:{}-{}", jsonObject.get("errcode"), jsonObject.get("errmsg"));
 				}
 
 			}
