@@ -129,7 +129,7 @@ body {
 	        });
 	    }
 	   
-	     var itemTemp='<a href="order-detail.html">';
+	     var itemTemp='<a href="transDetail?detail=">';
 	     itemTemp+='<div class="weui-form-preview__hd">';
 	     itemTemp+='<label class="weui-form-preview__label">消费金额</label> <emclass="weui-form-preview__value">¥{priceSale}</em></div>';
 	     itemTemp+='<div class="weui-form-preview__bd">';
