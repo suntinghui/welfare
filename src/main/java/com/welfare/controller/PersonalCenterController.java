@@ -19,12 +19,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.welfare.client.Constants;
 import com.welfare.model.City;
+import com.welfare.model.Invoice;
 import com.welfare.model.OrderInfo;
 import com.welfare.model.ResponseObject;
 import com.welfare.model.Trans;
 import com.welfare.model.UserInfo;
 import com.welfare.pojo.WXUserInfo;
 import com.welfare.service.CityService;
+import com.welfare.service.InvoiceService;
 import com.welfare.service.MemberService;
 import com.welfare.service.OrderService;
 import com.welfare.service.TransService;
@@ -45,7 +47,8 @@ public class PersonalCenterController {
 	private TransService transServiceImpl;
 	@Resource
 	private OrderService orderServiceImpl;
-
+    @Resource
+    private InvoiceService invoiceServiceImpl;
 	@Resource
 	private CityService cityServiceImpl;
 
@@ -122,5 +125,13 @@ public class PersonalCenterController {
 		model.addAttribute("list", list);
 		return "orderList";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "invoiceAdd", produces = "application/json; charset=utf-8")
+	public String invoiceAdd(Invoice invoice,HttpServletRequest req) {
+		ResponseObject<String> resp = invoiceServiceImpl.add(invoice);
+		return resp.getRespCode();
+	}
+
 
 }
