@@ -43,8 +43,8 @@ body {
 		<div class="weui-cells weui-cells_form weui-flex m-t-0 text-center">
 			<div class="weui-cell weui-cell_select">
 				<div class="weui-cell__bd">
-					<input class="weui-input" id="select-city" type="text" value="请选择城市">
-				    <input class="weui-input" id="select-city-value" value="" type="hidden">
+					<input class="weui-input" id="select-transType" type="text" value="请选择消费类型">
+				    <input class="weui-input" id="select-transType-value" value="" type="hidden">
 				</div>
 			</div>
 			<div class="weui-cell weui-flex__item">
@@ -63,12 +63,8 @@ body {
 	</div>
 	<div style="padding: 65px 15px 15px 15px;">
 
-		<c:if test="${empty list }">
-
-		</c:if>
-
-		<c:if test="${not empty list }">
-
+	 
+	 
 			<c:forEach var="trans" items="${list }">
 				<div class="weui-form-preview">
 					<a href="order-detail.html">
@@ -94,7 +90,7 @@ body {
 				</div>
 			</c:forEach>
 
-		</c:if>
+	 
 
 	</div>
 
@@ -104,24 +100,28 @@ body {
 	<script src="<%=basePath%>/dist/js/jquery-weui.js"></script>
 
 	<script>
-	//选择城市
-	 var cityDisplayValue;
-     var cityValue;
-	    function LoadCityDic(){
-	    	cityDisplayValue = new Array();
-	    	cityValue = new Array();
+	//选择消费类型
+	 var transTypeDisplayValue;
+     var transTypeValue;
+	    function LoadtransTypeDic(){
+	    	transTypeDisplayValue = new Array();
+	    	transTypeValue = new Array();
 	    	$.ajax({
-	            url: '<%=basePath%>/getCitys',
+	            url: '<%=basePath%>/getTypeTrans',
 	            async: false,
 	            dataType: 'json',
 	            type: 'POST',
 	            data: '',
 	            success: function(data , textStatus){
 	              console.log("success");
-	              for(var i=0;i<data.length;i++){
+	             /*  for(var i=0;i<data.length;i++){
 	            	  var city=data[i];
 	            	  cityDisplayValue.push(city.city);
 	          		  cityValue.push(city.jv);
+	              } */
+	              for (var propKey in data) {
+	            	  transTypeValue.push(propKey);
+	            	  transTypeDisplayValue.push(data[propKey]);
 	              }
 	            },
 	            error: function(jqXHR , textStatus , errorThrown){
@@ -132,9 +132,22 @@ body {
 	   
 	    function LoadTranList(){
 	    	
-	    	var city=$("#select-city-value").val();
+	    	var transType=$("#select-transType-value").val();
 	    	var startDate=$("#datetime-start").val();
 	    	var endDate=$("#datetime-start").val();
+	    	
+	    	$.ajax({
+	            url: '<%=basePath%>/getTransList',
+	            dataType: 'json',
+	            type: 'POST',
+	            data: {transType:transType,startDate:startDate,endDate:endDate},
+	            success: function(data , textStatus){
+	            
+	            },
+	            error: function(jqXHR , textStatus , errorThrown){
+	              console.log("error");
+	            },
+	        });
 	    }
 	    
 		$(function() {
@@ -149,17 +162,17 @@ body {
 			
 			
 		
-		LoadCityDic();
-		//选择城市
-		$("#select-city").picker({
-			title : "请选择城市",
+		LoadtransTypeDic();
+		//选择消费类型
+		$("#select-transType").picker({
+			title : "请选择消费类型",
 			cols : [ {
 				textAlign : 'center',
-				values : cityDisplayValue,
+				values : transTypeDisplayValue,
 			} ],
 			onChange : function(p, v, dv) {
-				var index = $.inArray("" + v, cityDisplayValue);
-				$("#select-city-value").val(cityValue[index]);
+				var index = $.inArray("" + v, transTypeDisplayValue);
+				$("#select-transType-value").val(transTypeValue[index]);
 
 			},
 			onClose : function(p, v, d) {
@@ -170,7 +183,7 @@ body {
 			
 			$("#btnSearch").on('click', function() {
 				 
-				
+				LoadTranList();
 				
 			});
 		});

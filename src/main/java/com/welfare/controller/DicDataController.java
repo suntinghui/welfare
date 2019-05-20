@@ -36,11 +36,9 @@ public class DicDataController {
 	@ResponseBody
 	@RequestMapping(value="getTypeTrans", produces = "application/json; charset=utf-8")
 	public String getTypeTrans(Model model) {
-		/*
-		 * HashMap<String, String> list=DataUtil.transType(); return
-		 * JSON.toJSONString(list);
-		 */
-		 List<City> list = cityServiceImpl.queryAll();
-		 return JSON.toJSONString(list);
+		
+		  HashMap<String, String> list=DataUtil.transType(); 
+		  return JSON.toJSONString(list);
+		 
 	}
 }

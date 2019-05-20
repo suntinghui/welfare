@@ -1,5 +1,6 @@
 package com.welfare.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -60,9 +61,30 @@ public class PersonalCenterController {
 		
 		return "personalCenter";
 	}
-	
 	@RequestMapping("transList")
-	public String getTransList(@RequestParam("transType") int transType, Model model) {
+	public String transList(HttpServletRequest request,Model model) {
+	 
+		return "transList";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="getTransList",produces = "application/json; charset=utf-8")
+	public String getTransList(HttpServletRequest req, Model model) {
+		String transTypeStr=req.getParameter("transType");
+		int transType=0;
+		if(!transTypeStr.isEmpty()) {
+			
+			try {
+				transType=Integer.parseInt(transTypeStr);
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		HashMap<String, String>  pars = new HashMap<>();
+		pars.put("typeTrans",transType+"");
+		pars.put("startDate",req.getParameter("startDate"));
+		pars.put("endDate",req.getParameter("endDate"));
 		List<Trans> list = transServiceImpl.getList(transType);
 		model.addAttribute("list",  list);
 		/*
