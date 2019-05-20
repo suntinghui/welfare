@@ -86,6 +86,8 @@ public class HttpUtil {
 				url += "?" + params;
 			}
 		}
+		
+		logger.info("URL: - {}", url);
 
 		try {
 			URL realUrl = new URL(url);
@@ -145,6 +147,7 @@ public class HttpUtil {
 	 * @return
 	 */
 	public static String post(String url, String param, Charset charset) {
+		logger.info("HTTP Post URL: - {}", url);
 		logger.info("HTTP Post param: {}", param);
 
 		PrintWriter out = null;
