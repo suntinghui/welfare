@@ -55,7 +55,7 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
 	<div class="weui-cells weui-cells_form">
 		<div class="weui-cell">
 			<div class="weui-cell__bd">
-				<textarea class="weui-textarea" placeholder="一片心意，希望你喜欢！" rows="3"></textarea>
+				<textarea id="titleInput" class="weui-textarea" placeholder="一片心意，希望你喜欢！" rows="3"></textarea>
 				<div class="weui-textarea-counter">
 					<span>0</span>/200
 				</div>
@@ -82,6 +82,7 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
 	<script src="<%=basePath%>/dist/lib/jquery-2.1.4.js"></script>
 	<script src="<%=basePath%>/dist/lib/fastclick.js"></script>
 	<script src="<%=basePath%>/dist/js/jquery-weui.js"></script>
+	<script src="<%=basePath%>/pages/js/util.js"></script>
 
 	<script>
     $(function () {
@@ -107,17 +108,25 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
     });
     
     function submitAction(){
+    	// 是否已经输入内容
+    	var shareTitle = $("#titleInput").val();
+    	if (isEmpty(shareTitle)) {
+    		shareTitle = "一片心意，希望你喜欢";
+    	}
+    	
     	wx.ready(function () {
     		wx.onMenuShareAppMessage({
-    	    	title:"福利社",
+    	    	title:"***", // TODO 如何将title值设为shareTitle
     	        desc: '点击领取礼品卡', 
     	        link: "${link}",
     	        imgUrl: "https://gss3.bdstatic.com/-Po3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=20ce9be6a81ea8d38a227302af315773/42166d224f4a20a45517109a9e529822720ed065.jpg",
     	        success: function () {
-    	        	alert("分享成功");
+    	        	//alert("分享成功");
+    	        	// TODO 进入结果页面
     	        },
     	        cancel: function () {
-    				alert("分享失败");
+    				// alert("分享失败");
+    				// TODO 进入结果页面
     	        }    	
     	    });
     	});

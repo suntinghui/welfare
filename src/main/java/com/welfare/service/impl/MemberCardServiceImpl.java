@@ -25,19 +25,24 @@ public class MemberCardServiceImpl implements MemberCardService {
 	@Override
 	public ResponseObject<CardDetailRsp>  getCardDetail(int id) {
 		String result = HttpUtil.get(Constants.SERVER_HOST + "/card/selectCardDetail/" + id, "");
-		 
 		ResponseObject<CardDetailRsp> obj =(ResponseObject<CardDetailRsp>)JSON.parseObject(result, new TypeReference<ResponseObject<CardDetailRsp>>() {});
 		return obj;
 	}
 
+	/**
+	 * 激活卡
+	 */
 	@Override
-	public ResponseObject<String> getCardActive(int id) {
+	public String getCardActive(int id) {
 		String result = HttpUtil.get(Constants.SERVER_HOST + "/card/active/" + id, "");
 		logger.debug(result);
 		ResponseObject<String> obj = (ResponseObject<String>)JSON.parseObject(result, new TypeReference<ResponseObject<String>>() {});
-		return obj;
+		return obj.getRespCode();
 	}
 
+	/**
+	 * 转赠
+	 */
 	@Override
 	public CardGiftRsp cardGift(String cardNo, String message) {
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -57,19 +62,22 @@ public class MemberCardServiceImpl implements MemberCardService {
 		return obj;
 	}
 
+	/**
+	 *   生成付款码
+	 */
 	@Override
 	public PayCodeRsp getCardPayCode(String cardNo) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("cardNo", cardNo);
 		String result = HttpUtil.post(Constants.SERVER_HOST + "/card/getCardPayCode/", map);
 		logger.debug(result);
-		//PayCodeRsp obj = JSON.parseObject(result, PayCodeRsp.class);
-		//return obj;
-		
 		ResponseObject<PayCodeRsp> obj = (ResponseObject<PayCodeRsp>)JSON.parseObject(result, new TypeReference<ResponseObject<PayCodeRsp>>() {});;
 		return obj.getData();
 	}
 
+	/**
+	 * 查看链接接口
+	 */
 	@Override
 	public LinkDetailRsp selectMemberCardById(String id) {
 		String result = HttpUtil.get(Constants.SERVER_HOST + "/card/selectMemberCardById/" + id, "");
@@ -78,6 +86,9 @@ public class MemberCardServiceImpl implements MemberCardService {
 		return obj;
 	}
 
+	/**
+	 * 领取卡
+	 */
 	@Override
 	public ResponseObject<String> receiveCard(String id) {
 		HashMap<String, String> map = new HashMap<String, String>();
