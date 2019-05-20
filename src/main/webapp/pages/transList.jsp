@@ -104,6 +104,39 @@ body {
 	<script src="<%=basePath%>/dist/js/jquery-weui.js"></script>
 
 	<script>
+	//选择城市
+	 var cityDisplayValue;
+     var cityValue;
+	    function LoadCityDic(){
+	    	cityDisplayValue = new Array();
+	    	cityValue = new Array();
+	    	$.ajax({
+	            url: '<%=basePath%>/getCitys',
+	            async: false,
+	            dataType: 'json',
+	            type: 'POST',
+	            data: '',
+	            success: function(data , textStatus){
+	              console.log("success");
+	              for(var i=0;i<data.length;i++){
+	            	  var city=data[i];
+	            	  cityDisplayValue.push(city.city);
+	          		  cityValue.push(city.jv);
+	              }
+	            },
+	            error: function(jqXHR , textStatus , errorThrown){
+	              console.log("error");
+	            },
+	        });
+	    }
+	   
+	    function LoadTranList(){
+	    	
+	    	var city=$("#select-city-value").val();
+	    	var startDate=$("#datetime-start").val();
+	    	var endDate=$("#datetime-start").val();
+	    }
+	    
 		$(function() {
 			FastClick.attach(document.body);
 
@@ -115,17 +148,8 @@ body {
 			$("#datetime-end").calendar();
 			
 			
-			//选择城市
-			 var cityDisplayValue = new Array();
-		var cityValue = new Array();
-
-		<c:forEach items="${cityList}" var="city">
-		<c:if test="${city.status == 1}">
-		cityDisplayValue.push("${city.city}")
-		cityValue.push("${city.jv}")
-		</c:if>
-		</c:forEach>
-
+		
+		LoadCityDic();
 		//选择城市
 		$("#select-city").picker({
 			title : "请选择城市",

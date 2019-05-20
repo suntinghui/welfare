@@ -65,8 +65,10 @@ public class PersonalCenterController {
 	public String getTransList(@RequestParam("transType") int transType, Model model) {
 		List<Trans> list = transServiceImpl.getList(transType);
 		model.addAttribute("list",  list);
-		List<City> cityList = cityServiceImpl.queryAll();
-		model.addAttribute("cityList", cityList);
+		/*
+		 * List<City> cityList = cityServiceImpl.queryAll();
+		 * model.addAttribute("cityList", cityList);
+		 */
 		return "transList";
 	}
 	
