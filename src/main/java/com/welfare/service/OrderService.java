@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.welfare.model.OrderInfo;
+import com.welfare.model.PayResp;
 import com.welfare.model.ResponseObject;
 
 public interface OrderService {
@@ -13,7 +14,7 @@ public interface OrderService {
 	 * @param param
 	 * @return
 	 */
-	public ResponseObject<String> add(HashMap<String, String> param);
+	public ResponseObject<PayResp> add(HashMap<String, String> param);
 	
 	/**
 	 * 主订单列表

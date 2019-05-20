@@ -12,6 +12,7 @@ import com.alibaba.fastjson.TypeReference;
 import com.welfare.client.Constants;
 import com.welfare.model.CardListResp;
 import com.welfare.model.ResponseList;
+import com.welfare.model.ResponseObject;
 import com.welfare.model.UserInfo;
 import com.welfare.service.MemberService;
 import com.welfare.util.HttpUtil;
@@ -34,31 +35,30 @@ public class MemberServiceImpl implements MemberService {
 	public UserInfo selectByOpenId() {
 		String result = HttpUtil.get(Constants.SERVER_HOST + "/member/selectByOpenId/", "");
 		logger.debug(result);
-		UserInfo obj = JSON.parseObject(result, UserInfo.class);
-		return obj;
+		ResponseObject<UserInfo> obj = (ResponseObject<UserInfo>)JSON.parseObject(result, new TypeReference<ResponseObject<UserInfo>>() {});
+		return obj.getData();
 	}
 
 	@Override
-	public String getVerifyCode(String phoneNumbers) {
+	public ResponseObject<String> getVerifyCode(String phoneNumbers) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("phoneNumbers", phoneNumbers);
 		String result = HttpUtil.post(Constants.SERVER_HOST + "/member/getVerifyCode/", map);
 		logger.debug(result);
-		String code = JSON.parseObject(result, String.class);
-		return code;
-				
+		ResponseObject<String> obj = (ResponseObject<String>)JSON.parseObject(result, new TypeReference<ResponseObject<String>>() {});
+		return obj;
 	}
 
 	@Override
-	public String editPackagePwd(String code, String phoneNumber, String pwd) {
+	public ResponseObject<String> editPackagePwd(String code, String phoneNumber, String pwd) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("code", code);
 		map.put("phoneNumbers", phoneNumber);
 		map.put("pwd", pwd );
 		String result = HttpUtil.post(Constants.SERVER_HOST + "/member/editPackagePwd/", map);
 		logger.debug(result);
-		String res = JSON.parseObject(result, String.class);
-		return res;
+		ResponseObject<String> obj = (ResponseObject<String>)JSON.parseObject(result, new TypeReference<ResponseObject<String>>() {});
+		return obj;
 	}
 
 }

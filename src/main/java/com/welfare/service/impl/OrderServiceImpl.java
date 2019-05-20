@@ -11,6 +11,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.welfare.client.Constants;
 import com.welfare.model.OrderInfo;
+import com.welfare.model.PayResp;
 import com.welfare.model.ResponseList;
 import com.welfare.model.ResponseObject;
 import com.welfare.service.OrderService;
@@ -22,12 +23,12 @@ public class OrderServiceImpl implements OrderService {
 	private static final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
 
 	@Override
-	public ResponseObject<String> add(HashMap<String, String> param) {
+	public ResponseObject<PayResp> add(HashMap<String, String> param) {
 		
 		String result = HttpUtil.post(Constants.SERVER_HOST+"/order/add", param);
 		logger.debug(result);
 		
-		ResponseObject<String> obj = (ResponseObject<String>)JSON.parseObject(result, new TypeReference<ResponseObject<String>>() {});
+		ResponseObject<PayResp> obj = (ResponseObject<PayResp>)JSON.parseObject(result, new TypeReference<ResponseObject<PayResp>>() {});
 		return obj;
 	}
 

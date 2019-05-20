@@ -74,7 +74,8 @@ public class CardPackageController {
 	 */
 	@RequestMapping("cardActive")
 	public String cardActive(@RequestParam("id") int id) {
-		String str = memberCardServiceImpl.getCardActive(id);
+		ResponseObject<String> resp = memberCardServiceImpl.getCardActive(id);
+		
 		return "";
 	}
 	

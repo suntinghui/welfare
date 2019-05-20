@@ -3,6 +3,7 @@ package com.welfare.service;
 import java.util.List;
 
 import com.welfare.model.CardListResp;
+import com.welfare.model.ResponseObject;
 import com.welfare.model.UserInfo;
 
 public interface MemberService {
@@ -22,7 +23,7 @@ public interface MemberService {
 	/**
 	 * 获取验证码
 	 */
-	public String getVerifyCode(String phone);
+	public ResponseObject<String> getVerifyCode(String phone);
 	
 	/**
 	 * 修改卡包密码
@@ -31,6 +32,6 @@ public interface MemberService {
 	 * @param pwd
 	 * @return
 	 */
-	public String editPackagePwd(String code, String phoneNumber, String pwd);
+	public ResponseObject<String> editPackagePwd(String code, String phoneNumber, String pwd);
 
 }
