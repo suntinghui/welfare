@@ -50,7 +50,15 @@ public class DataUtil {
 		list.add("激活卡");
 		return list;
 	}
-	
+	public static HashMap<String, String> transType() {
+		HashMap<String, String>  map = new HashMap<>();
+		map.put("0", "全部");
+		map.put("1", "购卡");
+		map.put("4", "领取");
+		map.put("5", "转赠");
+		map.put("11", "退货");
+		return map;
+	}
 	// 开票状态
 	public static HashMap<String, String> invoiceMap() {
 		HashMap<String, String>  map = new HashMap<>();

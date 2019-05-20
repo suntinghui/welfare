@@ -1,5 +1,6 @@
 package com.welfare.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -17,10 +18,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.welfare.client.Constants;
+import com.welfare.model.City;
 import com.welfare.model.OrderInfo;
 import com.welfare.model.Trans;
 import com.welfare.model.UserInfo;
 import com.welfare.pojo.WXUserInfo;
+import com.welfare.service.CityService;
 import com.welfare.service.MemberService;
 import com.welfare.service.OrderService;
 import com.welfare.service.TransService;
@@ -42,6 +45,9 @@ public class PersonalCenterController {
 	@Resource
 	private OrderService orderServiceImpl;
 	
+	@Resource
+	private CityService cityServiceImpl;
+	
 	
 	@RequestMapping("personalCenter")
 	public String personalCenter(HttpServletRequest request,Model model) {
@@ -55,11 +61,36 @@ public class PersonalCenterController {
 		
 		return "personalCenter";
 	}
-	
 	@RequestMapping("transList")
-	public String getTransList(@RequestParam("transType") int transType, Model model) {
+	public String transList(HttpServletRequest request,Model model) {
+	 
+		return "transList";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="getTransList",produces = "application/json; charset=utf-8")
+	public String getTransList(HttpServletRequest req, Model model) {
+		String transTypeStr=req.getParameter("transType");
+		int transType=0;
+		if(!transTypeStr.isEmpty()) {
+			
+			try {
+				transType=Integer.parseInt(transTypeStr);
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		HashMap<String, String>  pars = new HashMap<>();
+		pars.put("typeTrans",transType+"");
+		pars.put("startDate",req.getParameter("startDate"));
+		pars.put("endDate",req.getParameter("endDate"));
 		List<Trans> list = transServiceImpl.getList(transType);
 		model.addAttribute("list",  list);
+		/*
+		 * List<City> cityList = cityServiceImpl.queryAll();
+		 * model.addAttribute("cityList", cityList);
+		 */
 		return "transList";
 	}
 	

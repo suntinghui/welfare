@@ -1,5 +1,6 @@
 package com.welfare.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -22,6 +23,16 @@ public class TransServiceImpl implements TransService {
 	@Override
 	public List<Trans> getList(int typeTrans) {
 		String result = HttpUtil.get(Constants.SERVER_HOST + "/trans/selectByCardTrans/"+typeTrans,"");
+		logger.debug(result);
+
+		ResponseList<Trans> obj = (ResponseList<Trans>) JSON.parseObject(result, new TypeReference<ResponseList<Trans>>() {
+		});
+		return obj.getData();
+	}
+
+	@Override
+	public List<Trans> getList(HashMap<String, String> param) {
+		String result = HttpUtil.post(Constants.SERVER_HOST+"/trans/selectByCardTrans", param);
 		logger.debug(result);
 
 		ResponseList<Trans> obj = (ResponseList<Trans>) JSON.parseObject(result, new TypeReference<ResponseList<Trans>>() {
