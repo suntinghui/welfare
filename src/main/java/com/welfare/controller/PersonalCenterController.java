@@ -67,14 +67,22 @@ public class PersonalCenterController {
 	public String intoEditPwd() {
 		return "editPassword";
 	}
-	
+
 	@ResponseBody
-	@RequestMapping(value="getVerifyCode",method = RequestMethod.POST)
-	public String getVerifyCode(HttpServletRequest request, HttpServletResponse response) {
-		String phone = request.getParameter("phoneNumbers");
-		logger.info("phone: {}", phone);
+	@RequestMapping(value="getVerifyCode", produces = "application/json; charset=utf-8")
+	public String getVerifyCode(@RequestParam("phoneNumbers") String phone) {
 		String code = memberServiceImpl.getVerifyCode(phone);
-		return JSON.toJSONString(code);
+		return code;
+	}
+	/*
+	 * 修改密码
+	 */
+	@ResponseBody
+	@RequestMapping(value="editPackagePwd", produces = "application/json; charset=utf-8")
+	public String editPackagePwd(HttpServletRequest req)
+	{
+		String result=memberServiceImpl.editPackagePwd(req.getParameter("code"), req.getParameter("phoneNumber"), req.getParameter("pwd"));
+		return result;
 	}
 	
 	@RequestMapping("queryOrderList")

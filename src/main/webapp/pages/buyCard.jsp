@@ -302,7 +302,7 @@
 					 //true
 					}else{
 						
-						alert("自定义金额须为整数且不大于1000");
+						$.toast("自定义金额须为整数且不大于1000");
 						return false;
 					}
 				}
@@ -311,16 +311,16 @@
 			// 进行输入项校验
 			// 选择金额或是自定义金额必须选择一项
 			 if (isEmpty(price) && isEmpty(priceSale)) {
-			 	alert("请选择金额或自定义金额");
+				 $.toast("请选择金额或自定义金额");
 			 	return false;
 			 }
 			 if(isEmpty(jv)){
-				 alert("请选择城市");
+				 $.toast("请选择城市");
 				 return false;
 			 }
 			 if(!$("#weuiAgree").prop("checked")){
 				 
-				 alert("请阅读并同意相关条款");
+				 $.toast("请阅读并同意相关条款");
 				 return false;
 			 }
 

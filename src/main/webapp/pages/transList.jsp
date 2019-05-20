@@ -61,7 +61,7 @@ body {
 					data-toggle='date' placeholder="结束日期">
 			</div>
 			<div class="weui-cell">
-				<a href="javascrip:;"
+				<a id="btnSearch" href="javascrip:;"
 					class="weui-btn weui-btn_mini weui-btn_default">筛选</a>
 			</div>
 		</div>
@@ -118,6 +118,13 @@ body {
 
 			$("#datetime-start").calendar()
 			$("#datetime-end").calendar();
+			
+			
+			$("#btnSearch").on('click', function() {
+				 
+				
+				
+			});
 		});
 	</script>
 
