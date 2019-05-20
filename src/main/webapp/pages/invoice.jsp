@@ -38,19 +38,16 @@
 	<!--=================================
  preloader -->
 
-	<%
-		String oid = request.getParameter("oid");
-	%>
-    
+ 
 	<div class="weui-cells weui-cells_form m-t-0">
-		<input id="oidInput" type="hidden" value="<%=oid%>" />
+		<input id="oid" type="hidden" value='<%=request.getParameter("oid")%>' />
 
 		<div class="weui-cell">
 			<div class="weui-cell__hd">
 				<label class="weui-label">抬头</label>
 			</div>
 			<div class="weui-cell__bd">
-				<input id="titleInput" class="weui-input" type="text" placeholder="请输入抬头">
+				<input id="title" valisate="req" class="weui-input" type="text" placeholder="请输入抬头">
 			</div>
 		</div>
 		<div class="weui-cell">
@@ -58,7 +55,7 @@
 				<label class="weui-label">税号</label>
 			</div>
 			<div class="weui-cell__bd">
-				<input id="codeInput" class="weui-input" type="text" placeholder="请输入税号">
+				<input id="code" valisate="req" class="weui-input" type="text" placeholder="请输入税号">
 			</div>
 		</div>
 	</div>
@@ -69,7 +66,7 @@
 				<label class="weui-label">姓名</label>
 			</div>
 			<div class="weui-cell__bd">
-				<input id="nameInput" class="weui-input" type="text" placeholder="请输入收件人姓名">
+				<input id="name" valisate="req" class="weui-input" type="text" placeholder="请输入收件人姓名">
 			</div>
 		</div>
 		<div class="weui-cell">
@@ -77,7 +74,7 @@
 				<label class="weui-label">电话</label>
 			</div>
 			<div class="weui-cell__bd">
-				<input id="phoneInput" class="weui-input" type="tel" placeholder="请输入收件人电话">
+				<input id="phone" valisate="req-phone" class="weui-input" type="tel" placeholder="请输入收件人电话">
 			</div>
 		</div>
 		<div class="weui-cell">
@@ -85,7 +82,7 @@
 				<label class="weui-label">email</label>
 			</div>
 			<div class="weui-cell__bd">
-				<input id="emailInput" class="weui-input" type="text" placeholder="请输入邮件地址">
+				<input id="email" valisate="req-email" class="weui-input" type="text" placeholder="请输入邮件地址">
 			</div>
 		</div>
 		<div class="weui-cell">
@@ -93,12 +90,12 @@
 				<label class="weui-label">所在地区</label>
 			</div>
 			<div class="weui-cell__bd">
-				<input id="addressInput" class="weui-input" type="text" placeholder="请输入收件人详细地址">
+				<input id="address" valisate="req" class="weui-input" type="text" placeholder="请输入收件人详细地址">
 			</div>
 		</div>
 		<div class="weui-cell">
 			<div class="weui-cell__bd">
-				<textarea id="bzInput" class="weui-textarea" placeholder="请输入备注" rows="3"></textarea>
+				<textarea id="bz"   class="weui-textarea" placeholder="请输入备注" rows="3"></textarea>
 				<div class="weui-textarea-counter">
 					<span>0</span>/200
 				</div>
@@ -131,6 +128,30 @@
 	    
 	    
 		function submitAction() {
+			var pars=DoValidate();
+			if (pars) {
+				pars.oid=$("#oid").val();
+				$.ajax({
+					url : '<%=basePath%>/invoiceAdd',
+					async : false,
+					dataType : 'json',
+					type : 'POST',
+					data : pars,
+					success : function(data, textStatus) {
+						 
+						/* if (data.respCode == "00") {
+							
+						} else {
+							$.toast(data.respMsg);
+						} */
+						window.location.href ="<%=basePath%>pages/result.jsp?respCode="+data.respCode+"&respMsg="+data.respMsg;
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+						console.log("error");
+						$.toast("error");
+					}
+				});
+			}
 			//swal("完成", "这是一个完成的提示","success");
 		}
 		

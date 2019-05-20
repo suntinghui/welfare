@@ -87,9 +87,9 @@ body {
 						</div>
 					</div>
 					<div class="weui-form-preview__ft">
-						<a dataFiled="btn_invoice" class="weui-form-preview__btn weui-form-preview__btn_default weui-btn_disabled"
-							href="<%=basePath%>/pages/invoice.jsp?oid=${order.oid}">开票</a> 
-						<a dataFiled="btn_orderReturn"
+						<a dataFiled="btn_invoice"  onclick="invoice(this,'${order.oid}')"  class="weui-form-preview__btn weui-form-preview__btn_default weui-btn_disabled"
+							href="#">开票</a> 
+						<a dataFiled="btn_orderReturn" disabled
 							class="weui-form-preview__btn weui-form-preview__btn_primary weui-btn_disabled"
 							href="<%=basePath%>/pages/orderReturn.jsp">退卡</a>
 					</div>
@@ -107,6 +107,16 @@ body {
 	<script src="<%=basePath%>/dist/js/jquery-weui.js"></script>
 
 	<script>
+	    function invoice(obj,oid){
+	    	if($(obj).hasClass('weui-btn_disabled'))
+	    		return;
+	    	window.location.href ="<%=basePath%>/pages/invoice.jsp?oid="+oid;
+	    }
+	    function orderReturn(obj,oid){
+	    	if($(obj).hasClass('weui-btn_disabled'))
+	    		return;
+	    	window.location.href ="<%=basePath%>/pages/orderReturn.jsp?oid="+oid;
+	    }
 		$(function() {
 			FastClick.attach(document.body);
 
