@@ -26,7 +26,7 @@ public class MemberCardServiceImpl implements MemberCardService {
 	public ResponseObject<CardDetailRsp>  getCardDetail(int id) {
 		String result = HttpUtil.get(Constants.SERVER_HOST + "/card/selectCardDetail/" + id, "");
 		 
-		ResponseObject<CardDetailRsp> obj =(ResponseObject<CardDetailRsp>)JSON.parseObject(result, new TypeReference<ResponseObject<CardDetailRsp>>() {});;
+		ResponseObject<CardDetailRsp> obj =(ResponseObject<CardDetailRsp>)JSON.parseObject(result, new TypeReference<ResponseObject<CardDetailRsp>>() {});
 		return obj;
 	}
 
@@ -45,8 +45,8 @@ public class MemberCardServiceImpl implements MemberCardService {
 		map.put("mssage", message);
 		String result = HttpUtil.post(Constants.SERVER_HOST + "/card/cardGift/", map);
 		logger.debug(result);
-		CardGiftRsp obj = JSON.parseObject(result, CardGiftRsp.class);
-		return obj;
+		ResponseObject<CardGiftRsp> obj = (ResponseObject<CardGiftRsp>)JSON.parseObject(result, new TypeReference<ResponseObject<CardGiftRsp>>() {});;
+		return obj.getData();
 	}
 	
 	@Override
@@ -63,8 +63,11 @@ public class MemberCardServiceImpl implements MemberCardService {
 		map.put("cardNo", cardNo);
 		String result = HttpUtil.post(Constants.SERVER_HOST + "/card/getCardPayCode/", map);
 		logger.debug(result);
-		PayCodeRsp obj = JSON.parseObject(result, PayCodeRsp.class);
-		return obj;
+		//PayCodeRsp obj = JSON.parseObject(result, PayCodeRsp.class);
+		//return obj;
+		
+		ResponseObject<PayCodeRsp> obj = (ResponseObject<PayCodeRsp>)JSON.parseObject(result, new TypeReference<ResponseObject<PayCodeRsp>>() {});;
+		return obj.getData();
 	}
 
 	@Override

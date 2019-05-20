@@ -67,7 +67,9 @@ public class PersonalCenterController {
 
 		return "transList";
 	}
-
+/*
+ * 流水列表数据
+ */
 	@ResponseBody
 	@RequestMapping(value = "getTransList", produces = "application/json; charset=utf-8")
 	public String getTransList(HttpServletRequest req, Model model) {

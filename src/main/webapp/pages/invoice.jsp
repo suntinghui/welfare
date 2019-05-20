@@ -128,7 +128,7 @@
 	
 	<script type="text/javascript">
 		function submitAction() {
-			swal("完成", "这是一个完成的提示","success");
+			//swal("完成", "这是一个完成的提示","success");
 		}
 		
 	</script>

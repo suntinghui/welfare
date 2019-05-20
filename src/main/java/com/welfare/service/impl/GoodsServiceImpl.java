@@ -29,7 +29,7 @@ public class GoodsServiceImpl implements GoodsService {
 
 		ResponseList<Goods> obj = (ResponseList<Goods>) JSON.parseObject(result, new TypeReference<ResponseList<Goods>>() {
 		});
-		if (obj.getRespCode() == "00") {
+		if (obj.getRespCode().equals("00")) {
 			return obj.getData();
 		} else {
 			return new ArrayList<>();
@@ -43,7 +43,7 @@ public class GoodsServiceImpl implements GoodsService {
 		logger.debug(result);
 		ResponseList<GoodsSKU> obj = (ResponseList<GoodsSKU>) JSON.parseObject(result, new TypeReference<ResponseList<GoodsSKU>>() {
 		});
-		if (obj.getRespCode() == "00") {
+		if (obj.getRespCode().equals("00")) {
 			return obj.getData();
 		} else {
 			return new ArrayList<>();
