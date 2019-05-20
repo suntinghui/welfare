@@ -65,6 +65,7 @@ public class CardPackageController {
 	@RequestMapping("cardPackageDetail")
 	public String cardPackageDetail(@RequestParam("id") int id, Model model) {
 		ResponseObject<CardDetailRsp> detail = memberCardServiceImpl.getCardDetail(id);
+		// TODO 此处应该判断是否查询成功
 		model.addAttribute("detail", detail.getData());
 		return "cardPackageDetail";
 	}
@@ -74,8 +75,7 @@ public class CardPackageController {
 	 */
 	@RequestMapping("cardActive")
 	public String cardActive(@RequestParam("id") int id) {
-		ResponseObject<String> resp = memberCardServiceImpl.getCardActive(id);
-		
+		String res = memberCardServiceImpl.getCardActive(id);
 		return "";
 	}
 	
