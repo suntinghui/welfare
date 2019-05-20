@@ -64,8 +64,8 @@ public class CardPackageController {
 	 */
 	@RequestMapping("cardPackageDetail")
 	public String cardPackageDetail(@RequestParam("id") int id, Model model) {
-		CardDetailRsp detail = memberCardServiceImpl.getCardDetail(id);
-		model.addAttribute("detail", detail);
+		ResponseObject<CardDetailRsp> detail = memberCardServiceImpl.getCardDetail(id);
+		model.addAttribute("detail", detail.getData());
 		return "cardPackageDetail";
 	}
 	

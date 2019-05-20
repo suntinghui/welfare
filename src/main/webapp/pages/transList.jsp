@@ -67,7 +67,7 @@ body {
 	 
 			 
 				<div id="listContent" class="weui-form-preview">
-					<a href="order-detail.html">
+					<%-- <a href="order-detail.html">
 						<div class="weui-form-preview__hd">
 							<label class="weui-form-preview__label">消费金额</label> <em
 								class="weui-form-preview__value">¥${trans.priceSale }</em>
@@ -86,7 +86,7 @@ body {
 									class="weui-form-preview__value">${trans.timeAdd }</span>
 							</div>
 						</div>
-					</a>
+					</a> --%>
 				</div>
 			 
 	 

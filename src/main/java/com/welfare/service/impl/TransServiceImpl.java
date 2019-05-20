@@ -28,7 +28,7 @@ public class TransServiceImpl implements TransService {
 
 		ResponseList<Trans> obj = (ResponseList<Trans>) JSON.parseObject(result, new TypeReference<ResponseList<Trans>>() {
 		});
-		if (obj.getRespCode() == "00") {
+		if (obj.getRespCode().equals("00")) {
 			return obj.getData();
 		} else {
 			return new ArrayList<>();
@@ -42,7 +42,7 @@ public class TransServiceImpl implements TransService {
 
 		ResponseList<Trans> obj = (ResponseList<Trans>) JSON.parseObject(result, new TypeReference<ResponseList<Trans>>() {
 		});
-		if (obj.getRespCode() == "00") {
+		if (obj.getRespCode().equals("00"))  {
 			return obj.getData();
 		} else {
 			return new ArrayList<>();

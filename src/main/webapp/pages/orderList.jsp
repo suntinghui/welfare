@@ -59,7 +59,7 @@ body {
 
 			<c:forEach var="order" items="${list }">
 
-				<div class="weui-form-preview">
+				<div class="weui-form-preview" isInvoice="${order.isInvoice}" status="${order.status}">
 					<div class="weui-form-preview__hd">
 						<label class="weui-form-preview__label">实付金额</label> <em
 							class="weui-form-preview__value">¥${order.priceReal }</em>
@@ -67,7 +67,7 @@ body {
 					<div class="weui-form-preview__bd">
 						<div class="weui-form-preview__item">
 							<label class="weui-form-preview__label">卡号</label> <span
-								class="weui-form-preview__value">423423523452345</span>
+								class="weui-form-preview__value">???</span>
 						</div>
 						<div class="weui-form-preview__item">
 							<label class="weui-form-preview__label">订单类型</label> <span
@@ -87,10 +87,10 @@ body {
 						</div>
 					</div>
 					<div class="weui-form-preview__ft">
-						<a id="invoice" class="weui-form-preview__btn weui-form-preview__btn_default"
+						<a dataFiled="btn_invoice" class="weui-form-preview__btn weui-form-preview__btn_default weui-btn_disabled"
 							href="<%=basePath%>/pages/invoice.jsp?oid=${order.oid}">开票</a> 
-						<a id="orderReturn"
-							class="weui-form-preview__btn weui-form-preview__btn_primary"
+						<a dataFiled="btn_orderReturn"
+							class="weui-form-preview__btn weui-form-preview__btn_primary weui-btn_disabled"
 							href="<%=basePath%>/pages/orderReturn.jsp">退卡</a>
 					</div>
 				</div>
@@ -117,8 +117,23 @@ body {
 			$("#datetime-start").calendar()
 			$("#datetime-end").calendar();
 			
-			
-			
+			 InitBtnStatus=function(){
+				 $(".weui-form-preview").each(function (i) {
+					 //是否已开发票0：未开 1：审核中 2：已开；
+	                 var isInvoice= $(this).attr("isInvoice");
+					 //订单状态： 1：未完成-待支付 2：已完成 3：支付超时状态
+	                 var status= $(this).attr("status");
+	                 var btn_invoice=$(this).find("[dataFiled=btn_invoice]");
+					 var btn_orderReturn=$(this).find("[dataFiled=btn_invoice]");
+	                 if(isInvoice=='0'&&status=='2'){
+	                	 btn_invoice.removeClass("weui-btn_disabled");
+	                	 btn_orderReturn.removeClass("weui-btn_disabled");
+	                 }
+	                  
+	             }
+	            );
+			 };
+			 InitBtnStatus();
 		});
 	</script>
 

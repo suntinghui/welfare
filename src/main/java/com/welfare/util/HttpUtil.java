@@ -110,6 +110,7 @@ public class HttpUtil {
 			} catch (IOException ex) {
 			}
 		}
+		logger.info(url);
 		logger.info("HTTP Get: {}", result);
 		return result;
 	}
@@ -124,7 +125,7 @@ public class HttpUtil {
 		if (sb.toString().endsWith("&")) {
 			sb.deleteCharAt(sb.length() - 1);
 		}
-
+		logger.info(url);
 		return post(url, sb.toString());
 	}
 
