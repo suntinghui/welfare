@@ -113,7 +113,7 @@
 				var pars = Validate();
 				if (pars) {
 					$.ajax({
-						url : 'editPackagePwd',
+						url : '<%=basePath%>editPackagePwd',
 						async : false,
 						dataType : 'json',
 						type : 'POST',
@@ -148,7 +148,7 @@
 
 				$.ajax({
 					type : "POST",
-					url : "getVerifyCode",
+					url : "<%=basePath%>getVerifyCode",
 					data : {
 						token : "oaPc35wLEs7uj_NtmbDf0gLn8UpY",
 						"phoneNumbers" : phoneNum

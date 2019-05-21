@@ -95,7 +95,7 @@
 		</div>
 		<div class="weui-cell">
 			<div class="weui-cell__bd">
-				<textarea id="bz"   class="weui-textarea" placeholder="请输入备注" rows="3"></textarea>
+				<textarea id="bz" valisate  class="weui-textarea" placeholder="请输入备注" rows="3"></textarea>
 				<div class="weui-textarea-counter">
 					<span>0</span>/200
 				</div>
