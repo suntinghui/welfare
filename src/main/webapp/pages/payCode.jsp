@@ -45,9 +45,9 @@
 				</div>
 				<div class="weui-media-box__bd">
 					<h4 class="weui-media-box__title">
-						余额：<span class="text-danger">${balance } 元</span>
+						金额：<span class="text-danger">${payCode.amount } 元</span>
 					</h4>
-					<p class="weui-media-box__desc">${cardNo}</p>
+					<p class="weui-media-box__desc">${payCode.barCode}</p>
 				</div>
 			</a>
 		</div>
@@ -89,10 +89,10 @@
 	<script type="text/javascript">
 	
 	function InitCode(){
-		JsBarcode("#barcode", "${payCode}",{width:5,height:260,displayValue:true,fontSize:60});
+		JsBarcode("#barcode", "${payCode.barCode}",{width:5,height:260,displayValue:true,fontSize:60});
 		
 		var qrcode = new QRCode(document.getElementById("qrcode"), {
-			text : ${payCode},
+			text : ${payCode.barCode},
 			width : 256,
 			height : 256,
 			colorDark : "#000000",

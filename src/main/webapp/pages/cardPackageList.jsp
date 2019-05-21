@@ -45,7 +45,7 @@
 		<c:if test="${not empty list }">
 			<c:forEach var="card" items="${list }">
 
-				<div class="card-list-item m-b-10">
+				<div class="card-list-item">
 					<a href="cardPackageDetail?id=${card.id }" class="text-white">
 						<img src="${card.backgroundPicUrl }" width="100%"
 						class="img-card-item" />
