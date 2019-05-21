@@ -32,18 +32,6 @@ body {
 </head>
 
 <body ontouchstart>
-	<!--=================================
- preloader -->
-	<div id="pre-loader">
-		<img src="<%=basePath%>/pages/images/pre-loader/loader-08.svg" alt="">
-	</div>
-	<!--=================================
- preloader -->
-
-	<!--<div class="no-data">-->
-	<!--  <img src="images/no-data.png" />-->
-	<!--  <p>暂无数据</p>-->
-	<!--</div>-->
 
 	<div class="p-15">
 
@@ -124,9 +112,7 @@ body {
 		$(function() {
 			FastClick.attach(document.body);
 
-			//LOADING
-			$("#pre-loader").fadeOut();
-			$('#pre-loader').delay(0).fadeOut('slow');
+			
 
 			$("#datetime-start").calendar()
 			$("#datetime-end").calendar();

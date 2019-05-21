@@ -28,13 +28,7 @@
 </head>
 
 <body ontouchstart>
-	<!--=================================
- preloader -->
-	<div id="pre-loader">
-		<img src="<%=basePath%>/pages/images/pre-loader/loader-08.svg" alt="">
-	</div>
-	<!--=================================
- preloader -->
+
 	<div class="weui-flex p-t-15 p-b-15 weui-payselect">
 
 		<c:forEach var="sku" items="${skuList }">
@@ -334,9 +328,6 @@
 		$(function() {
 			FastClick.attach(document.body);
 
-			//LOADING
-			$("#pre-loader").fadeOut();
-			$('#pre-loader').delay(0).fadeOut('slow');
 		});
 
 		//选择金额

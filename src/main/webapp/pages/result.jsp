@@ -34,13 +34,6 @@ respMsg = new String(respMsg.getBytes("ISO-8859-1"), "UTF-8");
 </head>
 
 <body ontouchstart>
-<!--=================================
- preloader -->
-<div id="pre-loader">
-  <img src="<%=basePath%>/pages/images/pre-loader/loader-08.svg" alt="">
-</div>
-<!--=================================
- preloader -->
  
 <c:if test="${param.respCode=='00' }">
 
@@ -75,10 +68,6 @@ respMsg = new String(respMsg.getBytes("ISO-8859-1"), "UTF-8");
     $(function () {
         FastClick.attach(document.body);
 
-
-        //LOADING
-        $("#pre-loader").fadeOut();
-        $('#pre-loader').delay(0).fadeOut('slow');
     });
 
 </script>

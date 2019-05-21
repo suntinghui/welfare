@@ -34,13 +34,7 @@
 </head>
 
 <body ontouchstart>
-<!--=================================
- preloader -->
-<div id="pre-loader">
-  <img src="<%=basePath%>/pages/images/pre-loader/loader-08.svg" alt="">
-</div>
-<!--=================================
- preloader -->
+
 <form id="form1" action="<%=basePath%>orderReturnAdd" modelAttribute="multiFileUploadForm" method="post" enctype="multipart/form-data">
 <input type="hidden" id="oid" name="oid" valisate value='<%=request.getParameter("oid")%>'/>
   <div class="weui-cells weui-cells_form m-t-0">
@@ -163,12 +157,6 @@
 <script>
     $(function () {
         FastClick.attach(document.body);
-
-
-        //LOADING
-        $("#pre-loader").fadeOut();
-        $('#pre-loader').delay(0).fadeOut('slow');
-        
         
         
     });

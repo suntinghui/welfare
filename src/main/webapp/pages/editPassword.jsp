@@ -36,13 +36,6 @@
 </head>
 
 <body ontouchstart>
-	<!--=================================
- preloader -->
-	<div id="pre-loader">
-		<img src="<%=basePath%>/pages/images/pre-loader/loader-08.svg" alt="">
-	</div>
-	<!--=================================
- preloader -->
 
 	<div class="weui-cells weui-cells_form m-t-0">
 		
@@ -100,9 +93,7 @@
 	<script>
 		$(function() {
 			FastClick.attach(document.body);
-			//LOADING
-			$("#pre-loader").fadeOut();
-			$('#pre-loader').delay(0).fadeOut('slow');
+			
 
 			$("#okBtn").click(function() {
 				if ($(this).hasClass('weui-btn_disabled'))

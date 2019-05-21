@@ -43,13 +43,6 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
 </head>
 
 <body ontouchstart>
-	<!--=================================
- preloader -->
-	<div id="pre-loader">
-		<img src="<%=basePath%>/pages/images/pre-loader/loader-08.svg" alt="">
-	</div>
-	<!--=================================
- preloader -->
 
 	<div class="weui-cells__title">请输入转赠留言</div>
 	<div class="weui-cells weui-cells_form">
@@ -89,9 +82,6 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
         FastClick.attach(document.body);
 
 
-        //LOADING
-        $("#pre-loader").fadeOut();
-        $('#pre-loader').delay(0).fadeOut('slow');
         
         wx.config({
     	    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。

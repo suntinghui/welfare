@@ -25,13 +25,6 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
 </head>
 
 <body ontouchstart>
-<!--=================================
- preloader -->
-<div id="pre-loader">
-  <img src="<%=basePath%>/pages/images/pre-loader/loader-08.svg" alt="">
-</div>
-<!--=================================
- preloader -->
 
 <div class="collar-card">
   <div class="collar-card-logo">
@@ -56,10 +49,6 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
     $(function () {
         FastClick.attach(document.body);
 
-
-        //LOADING
-        $("#pre-loader").fadeOut();
-        $('#pre-loader').delay(0).fadeOut('slow');
     });
     
     function receiveAction() {

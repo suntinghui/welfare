@@ -29,11 +29,7 @@
 </head>
 
 <body ontouchstart>
-	<!--================================= preloader -->
-	<div id="pre-loader">
-		<img src="<%=basePath%>/pages/images/pre-loader/loader-08.svg" alt="">
-	</div>
-	<!--================================= preloader -->
+
 	<div class="swiper-container" data-space-between='10'
 		data-pagination='.swiper-pagination' data-autoplay="1000">
 		<div class="swiper-wrapper">
@@ -103,9 +99,6 @@
 				autoplay : 3000
 			});
 
-			//LOADING
-			$("#pre-loader").fadeOut();
-			$('#pre-loader').delay(0).fadeOut('slow');
 		});
 	</script>
 

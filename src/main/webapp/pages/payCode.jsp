@@ -30,13 +30,7 @@
 </head>
 
 <body ontouchstart>
-	<!--=================================
- preloader -->
-	<div id="pre-loader">
-		<img src="<%=basePath%>/pages/images/pre-loader/loader-08.svg" alt="">
-	</div>
-	<!--=================================
- preloader -->
+
 
 	<div class="weui-panel weui-panel_access m-t-0">
 		<div class="weui-panel__bd">
@@ -82,9 +76,6 @@
 		$(function() {
 			FastClick.attach(document.body);
 			
-			//LOADING
-			$("#pre-loader").fadeOut();
-			$('#pre-loader').delay(0).fadeOut('slow');
 		});
 	</script>
 

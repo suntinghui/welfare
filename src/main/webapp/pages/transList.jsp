@@ -32,16 +32,10 @@ body {
 </head>
 
 <body ontouchstart>
-	<!--=================================
- preloader -->
-	<div id="pre-loader">
-		<img src="<%=basePath%>/pages/images/pre-loader/loader-08.svg" alt="">
-	</div>
-	<!--=================================
- preloader -->
+
 	<div class="filter-bar">
 		<div class="weui-cells weui-cells_form weui-flex m-t-0 text-center">
-			<div class="weui-cell weui-cell_select">
+			<div class="weui-cell weui-flex__item">
 				<div class="weui-cell__bd">
 					<input class="weui-input" id="select-transType" type="text" value="类型">
 				    <input class="weui-input" id="select-transType-value" value="" type="hidden">
@@ -62,9 +56,6 @@ body {
 		</div>
 	</div>
 	<div style="padding: 65px 15px 15px 15px;">
-
-	 
-	 
 			 
 				<div id="listContent" class="weui-form-preview">
 					<%-- <a href="order-detail.html">
@@ -171,9 +162,6 @@ body {
 		$(function() {
 			FastClick.attach(document.body);
 
-			//LOADING
-			$("#pre-loader").fadeOut();
-			$('#pre-loader').delay(0).fadeOut('slow');
 
 			$("#datetime-start").calendar()
 			$("#datetime-end").calendar();

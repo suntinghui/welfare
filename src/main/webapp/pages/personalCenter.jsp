@@ -26,13 +26,7 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
 </head>
 
 <body ontouchstart>
-<!--=================================
- preloader -->
-<div id="pre-loader">
-  <img src="<%=basePath %>/pages/images/pre-loader/loader-08.svg" alt="">
-</div>
-<!--=================================
- preloader -->
+
 
 <div class="account-info">
   <img src="${wxuser.headimgurl }" class="account-avatar"/>
@@ -72,9 +66,6 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
         FastClick.attach(document.body);
 
 
-        //LOADING
-        $("#pre-loader").fadeOut();
-        $('#pre-loader').delay(0).fadeOut('slow');
     });
 
 
