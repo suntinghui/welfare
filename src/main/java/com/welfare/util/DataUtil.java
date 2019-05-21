@@ -24,7 +24,7 @@ public class DataUtil {
 		String value = (String)session.getAttribute(key);
 		System.out.println(value);
 		if (value==null || value.equals("")) {
-			value="oaPc35wLEs7uj_NtmbDf0gLn8UpY";;
+			value="oaPc35wLEs7uj_NtmbDf0gLn8UpY";
 		}
 		return value;
 	}

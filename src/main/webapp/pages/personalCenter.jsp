@@ -47,7 +47,7 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
     <div class="weui-cell__ft">修改</div>
   </a>
   
-  <a class="weui-cell weui-cell_access" href="transList?transType=1">
+  <a class="weui-cell weui-cell_access" href="transList?transType=0">
     <div class="weui-cell__bd">
       <p>交易流水</p>
     </div>
