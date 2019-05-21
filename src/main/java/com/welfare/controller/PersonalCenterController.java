@@ -15,12 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
 import com.welfare.client.Constants;
 import com.welfare.model.City;
 import com.welfare.model.Invoice;
 import com.welfare.model.OrderInfo;
+import com.welfare.model.OrderReturn;
+import com.welfare.model.RequestOrderReturn;
 import com.welfare.model.ResponseObject;
 import com.welfare.model.Trans;
 import com.welfare.model.UserInfo;
@@ -28,6 +31,7 @@ import com.welfare.pojo.WXUserInfo;
 import com.welfare.service.CityService;
 import com.welfare.service.InvoiceService;
 import com.welfare.service.MemberService;
+import com.welfare.service.OrderReturnService;
 import com.welfare.service.OrderService;
 import com.welfare.service.TransService;
 import com.welfare.service.UserInfoService;
@@ -49,6 +53,9 @@ public class PersonalCenterController {
 	private OrderService orderServiceImpl;
     @Resource
     private InvoiceService invoiceServiceImpl;
+    @Resource
+    private OrderReturnService orderReturnServiceImpl;
+    
 	@Resource
 	private CityService cityServiceImpl;
 
@@ -115,7 +122,8 @@ public class PersonalCenterController {
 		String phone = request.getParameter("phoneNumbers");
 		logger.info("phone: {}", phone);
 		ResponseObject<String> resp = memberServiceImpl.getVerifyCode(phone);
-		return resp.getRespCode();
+		//return resp.getRespCode();
+		return JSON.toJSONString(resp);
 	}
 	
 	/*
@@ -125,7 +133,8 @@ public class PersonalCenterController {
 	@RequestMapping(value = "editPackagePwd", produces = "application/json; charset=utf-8")
 	public String editPackagePwd(HttpServletRequest req) {
 		ResponseObject<String> resp = memberServiceImpl.editPackagePwd(req.getParameter("code"), req.getParameter("phoneNumber"), req.getParameter("pwd"));
-		return resp.getRespCode();
+		return JSON.toJSONString(resp);
+		//return resp.getRespCode();
 	}
 
 	@RequestMapping("queryOrderList")
@@ -134,12 +143,30 @@ public class PersonalCenterController {
 		model.addAttribute("list", list);
 		return "orderList";
 	}
-	
+	/**
+	 * 申请发票
+	 * @param invoice
+	 * @param req
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = "invoiceAdd", produces = "application/json; charset=utf-8")
 	public String invoiceAdd(Invoice invoice,HttpServletRequest req) {
 		ResponseObject<String> resp = invoiceServiceImpl.add(invoice);
-		return resp.getRespCode();
+		//return resp.getRespCode();
+		return JSON.toJSONString(resp);
+	}
+	
+	@ResponseBody
+	@RequestMapping("orderReturnAdd")
+	public String orderReturnAdd(RequestOrderReturn files,HttpServletRequest request) throws Exception{
+		String phone = request.getParameter("phone");
+		String oid=request.getParameter("oid");
+		OrderReturn model=new OrderReturn();
+		model.setOid(oid);;
+		model.setPhone(phone);
+		ResponseObject<String> resp=orderReturnServiceImpl.add(model);
+		return JSON.toJSONString(resp);
 	}
 
 

@@ -88,10 +88,10 @@ body {
 					</div>
 					<div class="weui-form-preview__ft">
 						<a dataFiled="btn_invoice"  onclick="invoice(this,'${order.oid}')"  class="weui-form-preview__btn weui-form-preview__btn_default weui-btn_disabled"
-							href="#">开票</a> 
+							>开票</a> 
 						<a dataFiled="btn_orderReturn" disabled
-							class="weui-form-preview__btn weui-form-preview__btn_primary weui-btn_disabled"
-							href="<%=basePath%>/pages/orderReturn.jsp">退卡</a>
+							class="weui-form-preview__btn weui-form-preview__btn_default weui-btn_disabled"
+							onclick="orderReturn(this,'${order.oid}')" >退卡</a>
 					</div>
 				</div>
 
@@ -134,11 +134,11 @@ body {
 					 //订单状态： 1：未完成-待支付 2：已完成 3：支付超时状态
 	                 var status= $(this).attr("status");
 	                 var btn_invoice=$(this).find("[dataFiled=btn_invoice]");
-					 var btn_orderReturn=$(this).find("[dataFiled=btn_invoice]");
-	                 if(isInvoice=='0'&&status=='2'){
+					 var btn_orderReturn=$(this).find("[dataFiled=btn_orderReturn]");
+	                 //if(isInvoice=='0'&&status=='2'){
 	                	 btn_invoice.removeClass("weui-btn_disabled");
 	                	 btn_orderReturn.removeClass("weui-btn_disabled");
-	                 }
+	                 //}
 	                  
 	             }
 	            );

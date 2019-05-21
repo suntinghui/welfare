@@ -92,7 +92,7 @@ function DoValidate(){
 		 $.toast(placeholder);
 		 console.log(placeholder);
 		 data= itemResult;
-		 return;
+		 return false;
 		}
 		data[key]=value;
     }

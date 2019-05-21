@@ -40,12 +40,13 @@
 </div>
 <!--=================================
  preloader -->
-
-<div class="weui-cells weui-cells_form m-t-0">
+<form id="form1" action="<%=basePath%>orderReturnAdd" method="post" enctype="multipart/form-data">
+<input type="hidden" id="oid" name="oid" valisate value='<%=request.getParameter("oid")%>'/>
+  <div class="weui-cells weui-cells_form m-t-0">
   <div class="weui-cell">
     <div class="weui-cell__hd"><label class="weui-label">手机号</label></div>
     <div class="weui-cell__bd">
-      <input class="weui-input" type="tel" placeholder="请输入手机号">
+      <input class="weui-input" id="phone" name="phone" type="tel" valisate="req" placeholder="请输入手机号">
     </div>
   </div>
   <div class="weui-cell">
@@ -60,7 +61,7 @@
 
           </ul>
           <div class="weui-uploader__input-box">
-            <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+            <input   class="weui-uploader__input" id="CardFront" name="multiUploadFiles[0]" valisate="req" placeholder="请选择身份证正面" type="file" accept="image/*" multiple="">
           </div>
         </div>
       </div>
@@ -78,7 +79,7 @@
 
           </ul>
           <div class="weui-uploader__input-box">
-            <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+            <input  class="weui-uploader__input" id="CardBack" name="multiUploadFiles[1]"   type="file" accept="image/*" multiple="">
           </div>
         </div>
       </div>
@@ -96,7 +97,7 @@
 
           </ul>
           <div class="weui-uploader__input-box">
-            <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+            <input   class="weui-uploader__input" id="ShopingRec" name="multiUploadFiles[2]"  type="file" accept="image/*" multiple="">
           </div>
         </div>
       </div>
@@ -107,9 +108,13 @@
   <a href="javascript:;" style="color: #6F7198;" class="open-popup" data-target="#checkOutRule">《退卡规则》</a>
 </div>
 <div class="p-15">
-  <a href="javascript:;" class="weui-btn weui-btn_warn">提交</a>
+  <!-- <a href="javascript:;" onclick="submitAction();" class="weui-btn weui-btn_warn">提交</a> -->
+  <input type="submit" class="weui-btn weui-btn_warn"> 
   <p class="m-t-10" style="font-size: 14px; color: #c00;"><i class="fa fa-exclamation-circle"></i> 提示消费纪录请在微信支付中找到账单详情然后截取</p>
 </div>
+ </form>
+
+
 <!--退卡规则 -->
 <div id="checkOutRule" class="weui-popup__container">
   <div class="weui-popup__overlay"></div>
@@ -152,7 +157,7 @@
 <script src="<%=basePath%>/dist/lib/jquery-2.1.4.js"></script>
 <script src="<%=basePath%>/dist/lib/fastclick.js"></script>
 <script src="<%=basePath%>/dist/js/jquery-weui.js"></script>
-
+<script src="<%=basePath%>/pages/js/util.js" type="text/javascript"></script>
 <script>
     $(function () {
         FastClick.attach(document.body);
@@ -162,7 +167,14 @@
         $("#pre-loader").fadeOut();
         $('#pre-loader').delay(0).fadeOut('slow');
     });
-
+	function submitAction() {
+		var pars=DoValidate();
+		if (pars) {
+			
+		 $("#form1").submit();
+		}
+	}
+	
 </script>
 
 </body>
