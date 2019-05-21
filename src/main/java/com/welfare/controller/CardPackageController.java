@@ -113,9 +113,9 @@ public class CardPackageController {
 		// 首先判断用户是否设置了密码
 		ResponseObject<String> pwdResp = memberServiceImpl.checkForCardPwd();
 		// 65:没有设置 00：已设置
-		if (!pwdResp.getRespCode().equals("00")) {
-			return "editPassword";
-		}
+//		if (!pwdResp.getRespCode().equals("00")) {
+//			return "editPassword";
+//		}
 		
 		
 		logger.info(request.getRequestURL().toString());
