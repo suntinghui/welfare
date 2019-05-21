@@ -80,7 +80,7 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
     </div>
     <div class="weui-cell__ft text-dark">${detail.gp }</div>
   </div>
-  <a class="weui-cell weui-cell_access" href="startCardGift?id=255309">
+  <a class="weui-cell weui-cell_access" href="startCardGift?id=${detail.id }&cardNo=${detail.cardNo }">
     <div class="weui-cell__bd">
       <p>转赠</p>
     </div>

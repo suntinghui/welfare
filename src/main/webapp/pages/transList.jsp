@@ -43,7 +43,7 @@ body {
 		<div class="weui-cells weui-cells_form weui-flex m-t-0 text-center">
 			<div class="weui-cell weui-cell_select">
 				<div class="weui-cell__bd">
-					<input class="weui-input" id="select-transType" type="text" value="请选择消费类型">
+					<input class="weui-input" id="select-transType" type="text" value="类型">
 				    <input class="weui-input" id="select-transType-value" value="" type="hidden">
 				</div>
 			</div>

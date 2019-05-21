@@ -24,6 +24,7 @@ import com.welfare.model.City;
 import com.welfare.model.Invoice;
 import com.welfare.model.OrderInfo;
 import com.welfare.model.OrderReturn;
+import com.welfare.model.RequestOrderReturn;
 import com.welfare.model.ResponseObject;
 import com.welfare.model.Trans;
 import com.welfare.model.UserInfo;
@@ -159,7 +160,7 @@ public class PersonalCenterController {
 	
 	@ResponseBody
 	@RequestMapping(value="orderReturnAdd",method = RequestMethod.POST)
-	public String orderReturnAdd(@ModelAttribute("multiFileUploadForm")RequestOrderReturn files,HttpServletRequest request) throws Exception{
+	public String orderReturnAdd(@ModelAttribute("multiFileUploadForm") RequestOrderReturn files,HttpServletRequest request) throws Exception{
 		String phone = request.getParameter("phone");
 		String oid=request.getParameter("oid");
 		OrderReturn model=new OrderReturn();
