@@ -42,7 +42,7 @@
 				</div>
 				<div class="weui-media-box__bd">
 					<h4 class="weui-media-box__title">
-						金额：<span id="amountDiv" class="text-danger"> 元</span>
+						金额：<span id="amountDiv" class="text-danger">0.00 元</span>
 					</h4>
 					<p id="barCodeDiv" class="weui-media-box__desc"><%= cardNo %></p>
 				</div>
