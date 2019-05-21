@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+ 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String path = request.getContextPath();
@@ -47,7 +47,7 @@
   <div class="weui-cell">
     <div class="weui-cell__hd"><label class="weui-label">手机号</label></div>
     <div class="weui-cell__bd">
-      <input class="weui-input" id="phone" name="phone" type="tel" valisate="req" placeholder="请输入手机号">
+      <input class="weui-input" id="phone" name="phone" type="text" valisate="req" placeholder="请输入手机号" />
     </div>
   </div>
   <div class="weui-cell">
@@ -62,7 +62,7 @@
 
           </ul>
           <div class="weui-uploader__input-box">
-            <input   class="weui-uploader__input" id="CardFront" name="multiUploadFiles[0]" valisate="req" placeholder="请选择身份证正面" type="file" accept="image/*" multiple="">
+            <input   class="weui-uploader__input" id="CardFront" name="multiUploadFiles[0]" valisate="req" placeholder="请选择身份证正面" type="file" accept="image/*" multiple=""/>
           </div>
         </div>
       </div>
@@ -80,7 +80,7 @@
 
           </ul>
           <div class="weui-uploader__input-box">
-            <input  class="weui-uploader__input" id="CardBack" name="multiUploadFiles[1]"   type="file" accept="image/*" multiple="">
+            <input  class="weui-uploader__input" id="CardBack" name="multiUploadFiles[1]"   type="file" accept="image/*" multiple="" />
           </div>
         </div>
       </div>
@@ -98,7 +98,7 @@
 
           </ul>
           <div class="weui-uploader__input-box">
-            <input   class="weui-uploader__input" id="ShopingRec" name="multiUploadFiles[2]"  type="file" accept="image/*" multiple="">
+            <input   class="weui-uploader__input" id="ShopingRec" name="multiUploadFiles[2]"  type="file" accept="image/*" multiple="" />
           </div>
         </div>
       </div>

@@ -158,16 +158,23 @@ public class PersonalCenterController {
 		return JSON.toJSONString(resp);
 	}
 	
-	@ResponseBody
+
 	@RequestMapping(value="orderReturnAdd",method = RequestMethod.POST)
-	public String orderReturnAdd(@ModelAttribute("multiFileUploadForm")RequestOrderReturn files,HttpServletRequest request) throws Exception{
-		String phone = request.getParameter("phone");
-		String oid=request.getParameter("oid");
-		OrderReturn model=new OrderReturn();
-		model.setOid(oid);;
-		model.setPhone(phone);
-		ResponseObject<String> resp=orderReturnServiceImpl.add(model);
-		return JSON.toJSONString(resp);
+	public String orderReturnAdd(@ModelAttribute("multiFileUploadForm")RequestOrderReturn pars,HttpServletRequest request, Model model) throws Exception{
+		/*
+		 * String phone = request.getParameter("phone"); String
+		 * oid=request.getParameter("oid");
+		 */
+		 /**
+		  * 保存文件
+		  * 设置文件地址
+		  */
+		pars.setMultiUploadFiles(null);
+		ResponseObject<String> resp=orderReturnServiceImpl.add(pars);
+		//return JSON.toJSONString(resp);
+		model.addAttribute("respCode", resp.getRespCode());
+		model.addAttribute("respMsg", resp.getRespMsg());
+		return "result2";
 	}
 
 
