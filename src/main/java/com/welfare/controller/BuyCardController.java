@@ -15,6 +15,8 @@ import com.welfare.client.Constants;
 import com.welfare.model.City;
 import com.welfare.model.Goods;
 import com.welfare.model.GoodsSKU;
+import com.welfare.model.PayResp;
+import com.welfare.model.ResponseObject;
 import com.welfare.service.CityService;
 import com.welfare.service.GoodsService;
 import com.welfare.service.OrderService;
@@ -62,8 +64,10 @@ public class BuyCardController {
 		paramMap.put("typeBuy", typeBuy);
 		paramMap.put("priceSale", priceSale);
 		paramMap.put("idGoods", idGoods);
-		orderServiceImpl.add(paramMap);
-		return "result";
+		ResponseObject<PayResp> obj = orderServiceImpl.add(paramMap);
+		model.addAttribute("respCode", obj.getRespCode());
+		model.addAttribute("respMsg", obj.getRespMsg());
+		return "result2";
 	}
 	
 	@RequestMapping(value = "showQRCode")

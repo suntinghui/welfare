@@ -117,7 +117,7 @@ public class PersonalCenterController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value="getVerifyCode",method = RequestMethod.POST)
+	@RequestMapping(value="getVerifyCode")
 	public String getVerifyCode(HttpServletRequest request, HttpServletResponse response) {
 		String phone = request.getParameter("phoneNumbers");
 		logger.info("phone: {}", phone);
@@ -125,6 +125,7 @@ public class PersonalCenterController {
 		//return resp.getRespCode();
 		return JSON.toJSONString(resp);
 	}
+	
 	/*
 	 * 修改密码
 	 */

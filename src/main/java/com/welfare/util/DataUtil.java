@@ -22,7 +22,7 @@ public class DataUtil {
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 		HttpSession session = request.getSession();
 		return "oaPc35wLEs7uj_NtmbDf0gLn8UpY";
-		//return (String)session.getAttribute(key);
+//		return (String)session.getAttribute(key);
 	}
 	
 	public static List<String> transTypeValue() {
