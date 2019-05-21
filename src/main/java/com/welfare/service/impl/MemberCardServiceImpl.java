@@ -66,13 +66,13 @@ public class MemberCardServiceImpl implements MemberCardService {
 	 *   生成付款码
 	 */
 	@Override
-	public PayCodeRsp getCardPayCode(String cardNo) {
+	public ResponseObject<PayCodeRsp> getCardPayCode(String cardNo) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("cardNo", cardNo);
 		String result = HttpUtil.post(Constants.SERVER_HOST + "/card/getCardPayCode/", map);
 		logger.debug(result);
 		ResponseObject<PayCodeRsp> obj = (ResponseObject<PayCodeRsp>)JSON.parseObject(result, new TypeReference<ResponseObject<PayCodeRsp>>() {});;
-		return obj.getData();
+		return obj;
 	}
 
 	/**

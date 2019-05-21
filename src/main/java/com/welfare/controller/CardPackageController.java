@@ -135,11 +135,17 @@ public class CardPackageController {
 	 */
 	@RequestMapping("payCode")
 	public String getPayCode(@RequestParam("cardNo") String cardNo, Model model) {
-		//PayCodeRsp payCode = memberCardServiceImpl.getCardPayCode(cardNo);
-		model.addAttribute("payCode", "2336639990501385568");
-		model.addAttribute("cardNo", "6226200102917466");
-		model.addAttribute("balance", "1000");
-		return "payCode";
+		ResponseObject<PayCodeRsp> resp = memberCardServiceImpl.getCardPayCode(cardNo);
+		if (resp.getRespCode().equals("00")) {
+			model.addAttribute("payCode", resp.getData());
+			return "payCode";
+			
+		} else {
+			model.addAttribute("respCode", resp.getRespCode());
+			model.addAttribute("respMsg", resp.getRespMsg());
+			return "result2";
+		}
+		
 	}
 	
 	/**

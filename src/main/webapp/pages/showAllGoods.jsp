@@ -39,7 +39,7 @@
 	<div class="p-15">
 
 		<c:forEach var="goods" items="${list }">
-			<div class="card-list-item m-b-10">
+			<div class="card-list-item">
 				<a href="querySKU?idGoods=${goods.id }" class="text-white"> <img
 					src="${goods.urlPic }" width="100%" class="img-card-item" />
 					<div class="card-list-city">${goods.name }</div>

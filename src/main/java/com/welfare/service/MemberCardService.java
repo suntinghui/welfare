@@ -44,7 +44,7 @@ public interface MemberCardService {
 	 * @param cardNo
 	 * @return
 	 */
-	public PayCodeRsp getCardPayCode(String cardNo);
+	public ResponseObject<PayCodeRsp> getCardPayCode(String cardNo);
 	
 	/**
 	 * 查看连接接口
