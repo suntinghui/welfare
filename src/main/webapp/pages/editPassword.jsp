@@ -113,7 +113,17 @@
 						success : function(data, textStatus) {
 							console.log("success");
 							if (data.respCode == "00") {
-								$.toast("修改成功");
+								//$.toast("修改成功");
+								$.modal({
+									  title: "修改成功",
+									  text: "点击确认返回个人中心",
+									  buttons: [
+									    { text: "确认", className: "default", onClick: function(){  
+									    	window.location.href ="<%=basePath%>personalCenter";
+									    },
+									    }
+									  ]
+									});
 							} else {
 								$.toast(data.respMsg);
 							}

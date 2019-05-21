@@ -97,9 +97,9 @@ public class PersonalCenterController {
 		}
 		HashMap<String, String> pars = new HashMap<>();
 		pars.put("typeTrans", transType + "");
-		pars.put("startDate", req.getParameter("startDate"));
-		pars.put("endDate", req.getParameter("endDate"));
-		List<Trans> list = transServiceImpl.getList(transType);
+		pars.put("startTime", req.getParameter("startDate"));
+		pars.put("endTime", req.getParameter("endDate"));
+		List<Trans> list = transServiceImpl.getList(pars);
 		
 		return JSON.toJSONString(list);
 	}

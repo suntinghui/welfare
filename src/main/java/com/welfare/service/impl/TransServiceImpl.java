@@ -39,7 +39,7 @@ public class TransServiceImpl implements TransService {
 
 	@Override
 	public List<Trans> getList(HashMap<String, String> param) {
-		String result = HttpUtil.post(Constants.SERVER_HOST+"/trans/selectByCardTrans", param);
+		String result = HttpUtil.post(Constants.SERVER_HOST+"/trans/selectByCardTrans/", param);
 		logger.debug(result);
 
 		ResponseList<Trans> obj = (ResponseList<Trans>) JSON.parseObject(result, new TypeReference<ResponseList<Trans>>() {

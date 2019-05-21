@@ -79,10 +79,9 @@ body {
 						</div>
 					</div>
 					<div class="weui-form-preview__ft">
-						<a dataFiled="btn_invoice"  onclick="invoice(this,'${order.oid}')"  class="weui-form-preview__btn weui-form-preview__btn_default weui-btn_disabled"
-							>开票</a> 
+						<a dataFiled="btn_invoice"  onclick="invoice(this,'${order.oid}')"  class="weui-form-preview__btn ">开票</a> 
 						<a dataFiled="btn_orderReturn"  
-							class="weui-form-preview__btn weui-form-preview__btn_default weui-btn_disabled"
+							class="weui-form-preview__btn weui-btn_disabled"
 							onclick="orderReturn(this,'${order.oid}')" >退卡</a>
 					</div>
 				</div>

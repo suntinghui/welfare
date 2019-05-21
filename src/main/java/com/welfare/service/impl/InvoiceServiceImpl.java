@@ -32,7 +32,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 		 * invoice.getBz()); paramMap.put("email", invoice.getEmail());
 		 */
 		//MapUtil.obj2Map(invoice)
-		String result = HttpUtil.post(Constants.SERVER_HOST+"/invoice/add", MapUtil.obj2Map(invoice));
+		String result = HttpUtil.post(Constants.SERVER_HOST+"/invoice/add/", MapUtil.obj2Map(invoice));
 		logger.debug(result);
 		
 		ResponseObject<String> obj = (ResponseObject<String>)JSON.parseObject(result, new TypeReference<ResponseObject<String>>() {});

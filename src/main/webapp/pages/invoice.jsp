@@ -133,7 +133,8 @@
 						} else {
 							$.toast(data.respMsg);
 						} */
-						window.location.href ="<%=basePath%>pages/result.jsp?respCode="+data.respCode+"&respMsg="+data.respMsg;
+						
+						window.location.href="<%=basePath%>pages/result.jsp?respCode="+data.respCode+"&respMsg="+data.respMsg;
 					},
 					error : function(jqXHR, textStatus, errorThrown) {
 						console.log("error");
