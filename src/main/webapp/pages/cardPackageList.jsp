@@ -25,13 +25,6 @@
 </head>
 
 <body ontouchstart>
-	<!--=================================
- preloader -->
-	<div id="pre-loader">
-		<img src="<%=basePath%>/pages/images/pre-loader/loader-08.svg" alt="">
-	</div>
-	<!--=================================
- preloader -->
 
 	<div class="p-15">
 
@@ -45,14 +38,13 @@
 		<c:if test="${not empty list }">
 			<c:forEach var="card" items="${list }">
 
-				<div class="card-list-item">
+				<div class="card-list-item m-b-20">
 					<a href="cardPackageDetail?id=${card.id }" class="text-white">
-						<img src="${card.backgroundPicUrl }" width="100%"
-						class="img-card-item" />
+						<img src="${card.backgroundPicUrl }" width="100%" class="img-card-item" />
 
 						<div class="card-list-city">${card.cityName }</div>
 						<div class="card-list-number">${card.cardNo }</div>
-						<div class="card-list-mask"></div>
+						<div class="card-list-mask" style="bottom: 0px;"></div>
 					</a>
 				</div>
 
@@ -70,10 +62,7 @@
 	<script>
 		$(function() {
 			FastClick.attach(document.body);
-
-			//LOADING
-			$("#pre-loader").fadeOut();
-			$('#pre-loader').delay(0).fadeOut('slow');
+			
 		});
 	</script>
 

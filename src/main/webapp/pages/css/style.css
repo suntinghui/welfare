@@ -573,19 +573,19 @@
 
 .card-list-item .card-list-number {
   position: absolute;
-  bottom: 16px;
+  bottom: 12px;
   left: 20px;
   z-index: 11; }
 
 .card-list-item .card-list-city {
   position: absolute;
-  bottom: 40px;
+  bottom: 35px;
   left: 20px;
   z-index: 11; }
 
 .card-list-item .card-list-value {
   position: absolute;
-  bottom: 16px;
+  bottom: 12px;
   right: 20px;
   font-size: 30px;
   font-weight: bold;

@@ -28,22 +28,16 @@
 </head>
 
 <body ontouchstart>
-	<!--=================================
- preloader -->
-	<div id="pre-loader">
-		<img src="<%=basePath%>/pages/images/pre-loader/loader-08.svg" alt="">
-	</div>
-	<!--=================================
- preloader -->
 
 	<div class="p-15">
 
 		<c:forEach var="goods" items="${list }">
-			<div class="card-list-item">
+			<div class="card-list-item  m-b-20">
 				<a href="querySKU?idGoods=${goods.id }" class="text-white"> <img
 					src="${goods.urlPic }" width="100%" class="img-card-item" />
 					<div class="card-list-city">${goods.name }</div>
-					<div class="card-list-mask"></div>
+					<div class="card-list-number">${goods.timeAdd }</div>
+					<div class="card-list-mask" style="bottom: 0px;"></div>
 				</a>
 			</div>
 		</c:forEach>
@@ -58,9 +52,6 @@
 		$(function() {
 			FastClick.attach(document.body);
 
-			//LOADING
-			$("#pre-loader").fadeOut();
-			$('#pre-loader').delay(0).fadeOut('slow');
 		});
 	</script>
 
