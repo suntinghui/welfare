@@ -21,8 +21,12 @@ public class DataUtil {
 	public static String getSessionData(String key) {
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 		HttpSession session = request.getSession();
-		return "oaPc35wLEs7uj_NtmbDf0gLn8UpY";
-		//return (String)session.getAttribute(key);
+		String value = (String)session.getAttribute(key);
+		System.out.println(value);
+		if (value==null || value.equals("")) {
+			value="oaPc35wLEs7uj_NtmbDf0gLn8UpY";
+		}
+		return value;
 	}
 	
 	public static List<String> transTypeValue() {
