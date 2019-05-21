@@ -172,8 +172,9 @@ public class PersonalCenterController {
 		pars.setMultiUploadFiles(null);
 		ResponseObject<String> resp=orderReturnServiceImpl.add(pars);
 		//return JSON.toJSONString(resp);
-		model.addAttribute("respCode", resp.getRespCode());
-		model.addAttribute("respMsg", resp.getRespMsg());
+ 
+		model.addAttribute("resp", resp);
+	 
 		return "result2";
 	}
 
