@@ -191,7 +191,7 @@ body {
 			onChange : function(p, v, dv) {
 				var index = $.inArray("" + v, transTypeDisplayValue);
 				$("#select-transType-value").val(transTypeValue[index]);
-
+				LoadTranList();
 			},
 			onClose : function(p, v, d) {
 
