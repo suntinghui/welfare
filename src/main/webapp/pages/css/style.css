@@ -556,7 +556,9 @@
 
 .card-list-item {
   position: relative;
-  color: #fff; }
+  color: #fff; 
+  min-height:80px;
+  }
 
 .card-list-item .img-logo-card {
   width: 60;
