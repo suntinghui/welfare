@@ -65,19 +65,19 @@ public class MemberServiceImpl implements MemberService {
 	 * 65:没有设置 00：已设置
 	 */
 	@Override
-	public String checkForCardPwd() {
+	public ResponseObject<String> checkForCardPwd() {
 		String result = HttpUtil.get(Constants.SERVER_HOST + "/member/checkForCardPwd/", "");
 		logger.debug(result);
 		ResponseObject<String> obj = (ResponseObject<String>)JSON.parseObject(result, new TypeReference<ResponseObject<String>>() {});
-		return obj.getRespCode();
+		return obj;
 	}
 
 	@Override
-	public String verifyPwdCard(String pwd) {
+	public ResponseObject<String> verifyPwdCard(String pwd) {
 		String result = HttpUtil.post(Constants.SERVER_HOST + "/member/verifyPwdCard/"+pwd, "");
 		logger.debug(result);
 		ResponseObject<String> obj = (ResponseObject<String>)JSON.parseObject(result, new TypeReference<ResponseObject<String>>() {});
-		return obj.getRespCode();
+		return obj;
 	}
 
 }

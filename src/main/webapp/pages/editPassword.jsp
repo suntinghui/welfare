@@ -45,6 +45,7 @@
  preloader -->
 
 	<div class="weui-cells weui-cells_form m-t-0">
+		
 		<div class="weui-cell">
 			<div class="weui-cell__hd">
 				<label class="weui-label">手机号</label>
@@ -85,7 +86,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="p-15">
+	<div class="p-20">
 		<a href="javascript:;"
 			class="weui-btn weui-btn_warn btn-submit weui-btn_disabled"
 			id="okBtn">确定</a>

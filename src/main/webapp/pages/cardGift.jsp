@@ -63,7 +63,7 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
 		</div>
 	</div>
 	<div class="p-15">
-		<a href="javascript:void(0);" onclick="submitAction();" class="weui-btn weui-btn_warn btn-card-gift">转赠</a>
+		<a href="javascript:void(0);" class="weui-btn weui-btn_warn btn-card-gift">转赠</a>
 	</div>
 
 	<div class="weui-cells__title">
@@ -107,7 +107,8 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
         });
     });
     
-    function submitAction(){
+   
+    function shareAction(){
     	// 是否已经输入内容
     	var shareTitle = $("#titleInput").val();
     	if (isEmpty(shareTitle)) {
@@ -139,20 +140,53 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
     $(".btn-card-gift").click(function(){
         $.modal({
             title: '温馨提示',
-            text: '<input class="input-pay-number" pattern="[0-9]*" placeholder="请输入卡包密码" type="number">',
+            text: '<input id="pwdInput" class="input-pay-number" pattern="[0-9]*" placeholder="请输入卡包密码" type="password">',
             empty: false, // 是否允许为空
             buttons: [
-                { text: "设置密码", onClick: function(){
+                { text: "修改密码", onClick: function(){
                         window.location.href="<%=basePath %>pages/editPassword.jsp";
                     } },
                 { text: "确定", onClick: function(){
-                        $("#share-gift").popup();
+                	checkInputPwd();
                     } },
                 { text: "取消", className: "default", onClick: function(){ console.log("取消")} },
             ]
         });
 
     });
+    
+    function checkInputPwd() {
+    	var pwd = $("#pwdInput").val();
+    	if (pwd==""){
+    		$.toast("请输入密码");
+    		return;
+    	}
+    	
+    	// 校验密码
+    	$.ajax({
+			type : "post",
+			url : "<%=basePath%>verifyPwdCard?pwd="+pwd,
+			header:{
+				"token" : "${sessionScope.kOPENID}",
+			},
+			data : {
+			},
+			dataType : "json",
+			success : function(resp) {
+				if (resp.respCode=='00') {
+					$("#share-gift").popup();
+					shareAction();
+				} else {
+					$.toast(resp.respMsg);
+				}
+				
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				$.toast("验证密码失败");
+			}
+
+		});
+    }
 </script>
 
 <script>

@@ -84,7 +84,7 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
     <div class="weui-cell__bd">
       <p>转赠</p>
     </div>
-    <div class="weui-cell__ft">
+    <div id="giftTip" class="weui-cell__ft">
     </div>
   </a>
 </div>
@@ -101,7 +101,33 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
         //LOADING
         $("#pre-loader").fadeOut();
         $('#pre-loader').delay(0).fadeOut('slow');
+        
+        hasPwd();
     });
+    
+    // 先校验是否设置了密码
+    function hasPwd() {
+    	$.ajax({
+			type : "get",
+			url : "<%=basePath%>checkPwdTip",
+			header:{
+				"token" : "${sessionScope.kOPENID}",
+			},
+			data : {
+			},
+			dataType : "json",
+			success : function(resp) {
+				if (resp.respCode！='00') {
+					$("#giftTip").html("需先设置密码");
+				} 
+				
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				$.toast("验证密码失败");
+			}
+
+		});
+	}
 
 </script>
 

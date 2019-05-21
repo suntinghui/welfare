@@ -89,9 +89,20 @@ public class CardPackageController {
 		model.addAttribute("resp", resp);
 		return "result2";
 	}
+	
+	/**
+	 * 是否设置密码。该方法用于卡片详情页面的转赠后的小提示。
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("checkPwdTip")
+	public String checkForCardPwd(HttpServletRequest request, HttpServletResponse response) {
+		ResponseObject<String> resp = memberServiceImpl.checkForCardPwd();
+		return JSON.toJSONString(resp);
+	}
 
 	/**
-	 * 进入转赠
+	 * 进入转赠。如果没有设置密码会先跳转到设置密码界面
 	 * 
 	 * @param cardNo
 	 * @param model
@@ -99,6 +110,14 @@ public class CardPackageController {
 	 */
 	@RequestMapping("startCardGift")
 	public String startCardGift(HttpServletRequest request, @RequestParam("id") int id, @RequestParam("cardNo") String cardNo, Model model) {
+		// 首先判断用户是否设置了密码
+		ResponseObject<String> pwdResp = memberServiceImpl.checkForCardPwd();
+		// 65:没有设置 00：已设置
+		if (!pwdResp.getRespCode().equals("00")) {
+			return "editPassword";
+		}
+		
+		
 		logger.info(request.getRequestURL().toString());
 		// 注意：携带参数！！！ 否则会签名失败！！！
 		String url = request.getRequestURL().toString() + "?id=" + id + "&cardNo=" + cardNo;
@@ -184,6 +203,15 @@ public class CardPackageController {
 		ResponseObject<String> resp = memberCardServiceImpl.receiveCard(id);
 		model.addAttribute("resp", resp);
 		return "result2";
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("verifyPwdCard")
+	public String verifyPwdCardPwd(HttpServletRequest request, HttpServletResponse response) {
+		String pwd = request.getParameter("pwd");
+		ResponseObject<String> resp = memberServiceImpl.verifyPwdCard(pwd);
+		return JSON.toJSONString(resp);
 	}
 
 }

@@ -74,11 +74,7 @@ body {
 				</div>
 				
 				<div class="weui-form-preview__item">
-					<label class="weui-form-preview__label">C4卡号</label> <span
-						class="weui-form-preview__value">${detail.cardno }</span>
-				</div>
-				<div class="weui-form-preview__item">
-					<label class="weui-form-preview__label">内部卡号</label> <span
+					<label class="weui-form-preview__label">卡号</label> <span
 						class="weui-form-preview__value">${detail.cardNoIntr }</span>
 				</div>
 				

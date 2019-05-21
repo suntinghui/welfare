@@ -38,12 +38,12 @@ public interface MemberService {
 	 * 检查是否设置了卡密码。
 	 * @return  65:没有设置 00：已设置
 	 */
-	public String checkForCardPwd();
+	public ResponseObject<String> checkForCardPwd();
 	
 	/**
 	 * 校验卡包密码
 	 * @return 65：未设置卡包密码，请设置卡包密码 00：校验通过 64：校验不通过"
 	 */
-	public String verifyPwdCard(String pwd);
+	public ResponseObject<String> verifyPwdCard(String pwd);
 
 }

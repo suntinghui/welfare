@@ -58,4 +58,6 @@ public interface MemberCardService {
 	 */
 	public ResponseObject<String> receiveCard(String id);
 	
+	
+	
 }

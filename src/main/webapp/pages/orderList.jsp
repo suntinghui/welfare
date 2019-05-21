@@ -66,8 +66,8 @@ body {
 					</div>
 					<div class="weui-form-preview__bd">
 						<div class="weui-form-preview__item">
-							<label class="weui-form-preview__label">卡号</label> <span
-								class="weui-form-preview__value">???</span>
+							<label class="weui-form-preview__label">订单号</label> <span
+								class="weui-form-preview__value">${order.oid }</span>
 						</div>
 						<div class="weui-form-preview__item">
 							<label class="weui-form-preview__label">订单类型</label> <span
@@ -76,6 +76,10 @@ body {
 						<div class="weui-form-preview__item">
 							<label class="weui-form-preview__label">下单时间</label> <span
 								class="weui-form-preview__value">${order.timeAdd }</span>
+						</div>
+						<div class="weui-form-preview__item">
+							<label class="weui-form-preview__label">支付时间</label> <span
+								class="weui-form-preview__value">${order.timePay }</span>
 						</div>
 						<div class="weui-form-preview__item">
 							<label class="weui-form-preview__label">订单状态</label> <span
