@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sound.midi.Receiver;
 
 import org.slf4j.Logger;
@@ -14,7 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.mysql.fabric.xmlrpc.base.Data;
 import com.welfare.client.Constants;
 import com.welfare.model.CardDetailRsp;
@@ -64,10 +67,15 @@ public class CardPackageController {
 	 */
 	@RequestMapping("cardPackageDetail")
 	public String cardPackageDetail(@RequestParam("id") int id, Model model) {
-		ResponseObject<CardDetailRsp> detail = memberCardServiceImpl.getCardDetail(id);
-		// TODO 此处应该判断是否查询成功
-		model.addAttribute("detail", detail.getData());
-		return "cardPackageDetail";
+		ResponseObject<CardDetailRsp> resp = memberCardServiceImpl.getCardDetail(id);
+		if (resp.getRespCode().equals("00")) {
+			model.addAttribute("detail", resp.getData());
+			return "cardPackageDetail";
+		} else {
+			model.addAttribute("resp", resp);
+			return "result2";
+		}
+		
 	}
 	
 	/**
@@ -76,8 +84,7 @@ public class CardPackageController {
 	@RequestMapping("cardActive")
 	public String cardActive(@RequestParam("id") int id, Model model) {
 		ResponseObject<String> resp = memberCardServiceImpl.getCardActive(id);
-		model.addAttribute("respCode", resp.getRespCode());
-		model.addAttribute("respMsg", resp.getRespMsg());
+		model.addAttribute("resp", resp);
 		return "result2";
 	}
 	
@@ -133,19 +140,12 @@ public class CardPackageController {
 	/**
 	 * 生成付款码
 	 */
+	@ResponseBody
 	@RequestMapping("payCode")
-	public String getPayCode(@RequestParam("cardNo") String cardNo, Model model) {
+	public String getPayCode(HttpServletRequest request, HttpServletResponse response) {
+		String cardNo = request.getParameter("cardNo");
 		ResponseObject<PayCodeRsp> resp = memberCardServiceImpl.getCardPayCode(cardNo);
-		if (resp.getRespCode().equals("00")) {
-			model.addAttribute("payCode", resp.getData());
-			return "payCode";
-			
-		} else {
-			model.addAttribute("respCode", resp.getRespCode());
-			model.addAttribute("respMsg", resp.getRespMsg());
-			return "result2";
-		}
-		
+		return JSON.toJSONString(resp);
 	}
 	
 	/**
@@ -179,8 +179,7 @@ public class CardPackageController {
 		DataUtil.saveSessionData(Constants.kOPENID, receiveOpenId);
 		
 		ResponseObject<String> resp = memberCardServiceImpl.receiveCard(id);
-		model.addAttribute("respCode", resp.getRespCode());
-		model.addAttribute("respMsg", resp.getRespMsg());
+		model.addAttribute("resp", resp);
 		return "result2";
 	}
 	

@@ -23,7 +23,6 @@ import com.welfare.model.City;
 import com.welfare.model.Invoice;
 import com.welfare.model.OrderInfo;
 import com.welfare.model.OrderReturn;
-import com.welfare.model.RequestOrderReturn;
 import com.welfare.model.ResponseObject;
 import com.welfare.model.Trans;
 import com.welfare.model.UserInfo;
@@ -157,17 +156,17 @@ public class PersonalCenterController {
 		return JSON.toJSONString(resp);
 	}
 	
-	@ResponseBody
-	@RequestMapping("orderReturnAdd")
-	public String orderReturnAdd(RequestOrderReturn files,HttpServletRequest request) throws Exception{
-		String phone = request.getParameter("phone");
-		String oid=request.getParameter("oid");
-		OrderReturn model=new OrderReturn();
-		model.setOid(oid);;
-		model.setPhone(phone);
-		ResponseObject<String> resp=orderReturnServiceImpl.add(model);
-		return JSON.toJSONString(resp);
-	}
+//	@ResponseBody
+//	@RequestMapping("orderReturnAdd")
+//	public String orderReturnAdd(RequestOrderReturn files,HttpServletRequest request) throws Exception{
+//		String phone = request.getParameter("phone");
+//		String oid=request.getParameter("oid");
+//		OrderReturn model=new OrderReturn();
+//		model.setOid(oid);;
+//		model.setPhone(phone);
+//		ResponseObject<String> resp=orderReturnServiceImpl.add(model);
+//		return JSON.toJSONString(resp);
+//	}
 
 
 }
