@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -156,17 +157,17 @@ public class PersonalCenterController {
 		return JSON.toJSONString(resp);
 	}
 	
-//	@ResponseBody
-//	@RequestMapping("orderReturnAdd")
-//	public String orderReturnAdd(RequestOrderReturn files,HttpServletRequest request) throws Exception{
-//		String phone = request.getParameter("phone");
-//		String oid=request.getParameter("oid");
-//		OrderReturn model=new OrderReturn();
-//		model.setOid(oid);;
-//		model.setPhone(phone);
-//		ResponseObject<String> resp=orderReturnServiceImpl.add(model);
-//		return JSON.toJSONString(resp);
-//	}
+	@ResponseBody
+	@RequestMapping(value="orderReturnAdd",method = RequestMethod.POST)
+	public String orderReturnAdd(@ModelAttribute("multiFileUploadForm")RequestOrderReturn files,HttpServletRequest request) throws Exception{
+		String phone = request.getParameter("phone");
+		String oid=request.getParameter("oid");
+		OrderReturn model=new OrderReturn();
+		model.setOid(oid);;
+		model.setPhone(phone);
+		ResponseObject<String> resp=orderReturnServiceImpl.add(model);
+		return JSON.toJSONString(resp);
+	}
 
 
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String path = request.getContextPath();
@@ -40,7 +41,7 @@
 </div>
 <!--=================================
  preloader -->
-<form id="form1" action="<%=basePath%>orderReturnAdd" method="post" enctype="multipart/form-data">
+<form id="form1" action="<%=basePath%>orderReturnAdd" modelAttribute="multiFileUploadForm" method="post" enctype="multipart/form-data">
 <input type="hidden" id="oid" name="oid" valisate value='<%=request.getParameter("oid")%>'/>
   <div class="weui-cells weui-cells_form m-t-0">
   <div class="weui-cell">
