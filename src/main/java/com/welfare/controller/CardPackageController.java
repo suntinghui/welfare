@@ -173,8 +173,9 @@ public class CardPackageController {
 		DataUtil.saveSessionData(Constants.kOPENID, receiveOpenId);
 		
 		ResponseObject<String> resp = memberCardServiceImpl.receiveCard(id);
-		model.addAttribute("result", resp.getRespCode());
-		return "result";
+		model.addAttribute("respCode", resp.getRespCode());
+		model.addAttribute("respMsg", resp.getRespMsg());
+		return "result2";
 	}
 	
 	

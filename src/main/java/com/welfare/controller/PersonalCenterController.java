@@ -110,13 +110,14 @@ public class PersonalCenterController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value="getVerifyCode",method = RequestMethod.POST)
+	@RequestMapping(value="getVerifyCode")
 	public String getVerifyCode(HttpServletRequest request, HttpServletResponse response) {
 		String phone = request.getParameter("phoneNumbers");
 		logger.info("phone: {}", phone);
 		ResponseObject<String> resp = memberServiceImpl.getVerifyCode(phone);
 		return resp.getRespCode();
 	}
+	
 	/*
 	 * 修改密码
 	 */

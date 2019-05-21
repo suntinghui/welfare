@@ -145,17 +145,18 @@
 					$.toast("手机号长度必须 是11位");
 					return;
 				}
-
+				
 				$.ajax({
-					type : "POST",
+					type : "get",
 					url : "getVerifyCode",
+					headers : {
+						"token" : "${sessionScope.kOPENID}"
+					},
 					data : {
-						token : "oaPc35wLEs7uj_NtmbDf0gLn8UpY",
 						"phoneNumbers" : phoneNum
 					},
 					dataType : "json",
 					success : function(data) {
-						//alert(data)
 						if (data.respCode == "00") {
 							$("#hidVcode").val(data.respCode);
 							$("#okBtn").removeClass("weui-btn_disabled");
@@ -165,6 +166,7 @@
 					},
 					error : function(XMLHttpRequest, textStatus, errorThrown) {
 						$("#okBtn").removeClass("weui-btn_disabled");
+
 					}
 
 				});
