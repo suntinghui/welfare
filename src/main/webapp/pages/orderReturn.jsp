@@ -159,6 +159,7 @@
 <script src="<%=basePath%>/dist/lib/fastclick.js"></script>
 <script src="<%=basePath%>/dist/js/jquery-weui.js"></script>
 <script src="<%=basePath%>/pages/js/util.js" type="text/javascript"></script>
+
 <script>
     $(function () {
         FastClick.attach(document.body);
@@ -167,6 +168,9 @@
         //LOADING
         $("#pre-loader").fadeOut();
         $('#pre-loader').delay(0).fadeOut('slow');
+        
+        
+        
     });
 	function submitAction() {
 		var pars=DoValidate();
