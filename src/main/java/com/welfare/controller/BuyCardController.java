@@ -64,9 +64,8 @@ public class BuyCardController {
 		paramMap.put("typeBuy", typeBuy);
 		paramMap.put("priceSale", priceSale);
 		paramMap.put("idGoods", idGoods);
-		ResponseObject<PayResp> obj = orderServiceImpl.add(paramMap);
-		model.addAttribute("respCode", obj.getRespCode());
-		model.addAttribute("respMsg", obj.getRespMsg());
+		ResponseObject<PayResp> resp = orderServiceImpl.add(paramMap);
+		model.addAttribute("resp", resp);
 		return "result2";
 	}
 	

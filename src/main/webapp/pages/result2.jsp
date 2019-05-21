@@ -35,12 +35,12 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
 <!--=================================
  preloader -->
  
-<c:if test="${respCode=='00' }">
+<c:if test="${resp.respCode=='00' }">
 
 	<div class="weui-msg">
   <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
   <div class="weui-msg__text-area">
-    <h2 class="weui-msg__title">${respMsg }</h2>
+    <h2 class="weui-msg__title">${resp.respMsg }</h2>
     <p class="weui-msg__desc"></p>
   </div>
   
@@ -48,11 +48,11 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
 
 </c:if>
 
-<c:if test="${respCode != '00'  }">
+<c:if test="${resp.respCode != '00'  }">
 <div class="weui-msg">
   <div class="weui-msg__icon-area"><i class="weui-icon-warn weui-icon_msg"></i></div>
   <div class="weui-msg__text-area">
-    <h2 class="weui-msg__title">${respMsg }</h2>
+    <h2 class="weui-msg__title">${resp.respMsg }</h2>
     <p class="weui-msg__desc"></p>
   </div>
   

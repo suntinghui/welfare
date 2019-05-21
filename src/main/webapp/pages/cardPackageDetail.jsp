@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
 </div>
 <div class="p-l-15 p-r-15 p-b-30">
   <c:if test="${detail.statusActive == 1 }">
-  	<a href="payCode?cardNo=${detail.cardNo }" class="weui-btn weui-btn_plain-primary">立即使用</a>
+  	<a href="<%=basePath %>pages/payCode.jsp?cardNo=${detail.cardNo }" class="weui-btn weui-btn_plain-primary">立即使用</a>
   </c:if>
   
   <c:if test="${detail.statusActive == 2 }">
