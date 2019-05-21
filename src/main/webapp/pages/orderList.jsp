@@ -135,10 +135,10 @@ body {
 	                 var status= $(this).attr("status");
 	                 var btn_invoice=$(this).find("[dataFiled=btn_invoice]");
 					 var btn_orderReturn=$(this).find("[dataFiled=btn_orderReturn]");
-	                 //if(isInvoice=='0'&&status=='2'){
+	                 if(isInvoice=='0'&&status=='2'){
 	                	 btn_invoice.removeClass("weui-btn_disabled");
 	                	 btn_orderReturn.removeClass("weui-btn_disabled");
-	                 //}
+	                 }
 	                  
 	             }
 	            );
