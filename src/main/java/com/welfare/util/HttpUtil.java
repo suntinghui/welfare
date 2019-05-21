@@ -3,6 +3,7 @@ package com.welfare.util;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
@@ -149,6 +150,7 @@ public class HttpUtil {
 	 */
 	public static String post(String url, String param, Charset charset) {
 		logger.info("HTTP Post URL: - {}", url);
+		
 		logger.info("HTTP Post param: {}", param);
 
 		PrintWriter out = null;
@@ -156,17 +158,22 @@ public class HttpUtil {
 		String result = "";
 		try {
 			URL realUrl = new URL(url);
-			URLConnection conn = realUrl.openConnection();
-
+			//URLConnection conn = realUrl.openConnection();
+			HttpURLConnection conn = (HttpURLConnection)realUrl.openConnection();
 			// 设置通用的请求属性
+			conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 			conn.setRequestProperty("accept", "*/*");
 			conn.setRequestProperty("connection", "Keep-Alive");
+			conn.setRequestProperty("Charset", "UTF-8");
 			conn.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)");
-			conn.setRequestProperty("token", DataUtil.getSessionData(Constants.kOPENID));
-
-			// 发送POST请求必须设置如下两行
+			String token=DataUtil.getSessionData(Constants.kOPENID);
+			logger.info("HTTP Post Token-{}", token);
+			conn.setRequestProperty("token", token);
+  
+			// 发送POST请求必须设置如下 
 			conn.setDoOutput(true);
 			conn.setDoInput(true);
+			conn.setRequestMethod("POST");      //设置POST方式连接
 			out = new PrintWriter(conn.getOutputStream());
 			out.print(param);
 			out.flush();
