@@ -29,7 +29,7 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
 
 
 <div class="account-info">
-  <img src="${wxuser.headimgurl }" class="account-avatar"/>
+  <img src="${wxuser.headimgurl }" class="account-avatar m-b-10"/>
   <h3>${wxuser.nickname }</h3>
   <p>用户ID:${user.id}</p>
 </div>

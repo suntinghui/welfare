@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
   </c:if>
   
   <c:if test="${detail.statusActive == 2 }">
-  	<a href="cardActive?id=${detail.id }" class="weui-btn weui-btn_plain-primary">立即激活</a>
+  	<a href="javascript:void(0);" onclick="activeAction();" class="weui-btn weui-btn_plain-primary">立即激活</a>
   </c:if>
 </div>
 <div class="weui-cells m-t-0">
@@ -112,6 +112,37 @@ function hasPwd() {
 			if (resp.respCode!='00') {
 				$("#giftTip").html("需先设置密码");
 			} 
+			
+		},
+		error : function(XMLHttpRequest, textStatus, errorThrown) {
+			
+		}
+
+	});
+}
+
+</script>
+
+<script type="text/javascript">
+function activeAction() {
+	$.ajax({
+		type : "get",
+		url : "<%=basePath%>cardActive?id=${detail.id}",
+		header:{
+			"token" : "${sessionScope.kOPENID}",
+		},
+		data : {
+		},
+		dataType : "json",
+		success : function(resp) {
+			if (resp.respCode=='00') {
+				window.location.reload();
+			} else {
+				$.toast("激活失败");
+				window.location.reload();
+			}
+			
+			
 			
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {

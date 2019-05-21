@@ -83,11 +83,12 @@ public class CardPackageController {
 	/**
 	 * 激活
 	 */
+	@ResponseBody
 	@RequestMapping("cardActive")
-	public String cardActive(@RequestParam("id") int id, Model model) {
+	public String cardActive(HttpServletRequest request, HttpServletResponse response) {
+		int id = Integer.parseInt(request.getParameter("id"));
 		ResponseObject<String> resp = memberCardServiceImpl.getCardActive(id);
-		model.addAttribute("resp", resp);
-		return "result2";
+		return JSON.toJSONString(resp);
 	}
 	
 	/**
@@ -113,9 +114,9 @@ public class CardPackageController {
 		// 首先判断用户是否设置了密码
 		ResponseObject<String> pwdResp = memberServiceImpl.checkForCardPwd();
 		// 65:没有设置 00：已设置
-//		if (!pwdResp.getRespCode().equals("00")) {
-//			return "editPassword";
-//		}
+		if (!pwdResp.getRespCode().equals("00")) {
+			return "editPassword";
+		}
 		
 		
 		logger.info(request.getRequestURL().toString());
