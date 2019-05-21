@@ -78,6 +78,10 @@ body {
 								class="weui-form-preview__value">${order.timeAdd }</span>
 						</div>
 						<div class="weui-form-preview__item">
+							<label class="weui-form-preview__label">支付时间</label> <span
+								class="weui-form-preview__value">${order.timePay }</span>
+						</div>
+						<div class="weui-form-preview__item">
 							<label class="weui-form-preview__label">订单状态</label> <span
 								class="weui-form-preview__value">${order.statusDesc }</span>
 						</div>
@@ -87,10 +91,10 @@ body {
 						</div>
 					</div>
 					<div class="weui-form-preview__ft">
-						<a dataFiled="btn_invoice"  onclick="invoice(this,'${order.oid}')"  class="weui-form-preview__btn weui-form-preview__btn_default weui-btn_disabled"
+						<a dataFiled="btn_invoice" style="display:none;" onclick="invoice(this,'${order.oid}')"  class="weui-form-preview__btn weui-form-preview__btn_default"
 							>开票</a> 
-						<a dataFiled="btn_orderReturn" disabled
-							class="weui-form-preview__btn weui-form-preview__btn_default weui-btn_disabled"
+						<a dataFiled="btn_orderReturn"  style="display:none;"
+							class="weui-form-preview__btn weui-form-preview__btn_default"
 							onclick="orderReturn(this,'${order.oid}')" >退卡</a>
 					</div>
 				</div>
@@ -135,11 +139,15 @@ body {
 	                 var status= $(this).attr("status");
 	                 var btn_invoice=$(this).find("[dataFiled=btn_invoice]");
 					 var btn_orderReturn=$(this).find("[dataFiled=btn_orderReturn]");
-	                 if(isInvoice=='0'&&status=='2'){
-	                	 btn_invoice.removeClass("weui-btn_disabled");
-	                	 btn_orderReturn.removeClass("weui-btn_disabled");
-	                 }
-	                  
+					 btn_invoice.show();
+	                  if(status=='2'){
+	                	  btn_orderReturn.removeClass("weui-btn_disabled");
+	                	  btn_orderReturn.show();
+	                	  if(isInvoice=='0'){
+	 	                	 btn_invoice.show();
+	 	                	 btn_invoice.removeClass("weui-btn_disabled");
+	 	                  }
+	                  }
 	             }
 	            );
 			 };
