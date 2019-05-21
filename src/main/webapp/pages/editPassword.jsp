@@ -134,7 +134,22 @@
 				}
 
 			});
+			var timer = 60;
+			var intervalId = 0;
+			var timerCount = function() {
+				timer = timer - 1;
+				if (timer == 0) {
+					timer = 60;
+					$("#getVerifyBtn").html("获取验证码");
+					$("#getVerifyBtn").removeAttr("disabled");
+					window.clearInterval(intervalId);
+				}else{
+					$("#getVerifyBtn").html(timer + "秒后重新获取");
+				}
 
+				
+			}
+			
 			$("#getVerifyBtn").click(function() {
 				var phoneNum = $("#phoneInput").val();
 				if (isEmpty(phoneNum)) {
@@ -146,6 +161,7 @@
 					$.toast("手机号长度必须 是11位");
 					return;
 				}
+				
 				
 				$.ajax({
 					type : "POST",
@@ -159,6 +175,11 @@
 						if (data.respCode == "00") {
 							$("#hidVcode").val(data.respCode);
 							$("#okBtn").removeClass("weui-btn_disabled");
+							$("#getVerifyBtn").attr("disabled","disabled");
+							window.clearInterval(intervalId);
+							
+							intervalId = setInterval(timerCount, 1000);
+							
 						} else {
 							$.toast(data.respMsg);
 						}
