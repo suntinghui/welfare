@@ -139,17 +139,22 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
 
     $(".btn-card-gift").click(function(){
         $.modal({
-            title: '温馨提示',
+            title: '验证密码',
             text: '<input id="pwdInput" class="input-pay-number" pattern="[0-9]*" placeholder="请输入卡包密码" type="password">',
             empty: false, // 是否允许为空
+            autoClose: false,
             buttons: [
                 { text: "修改密码", onClick: function(){
+                	$.closeModal();
                         window.location.href="<%=basePath %>pages/editPassword.jsp";
                     } },
                 { text: "确定", onClick: function(){
                 	checkInputPwd();
                     } },
-                { text: "取消", className: "default", onClick: function(){ console.log("取消")} },
+                { text: "取消", className: "default", onClick: function(){ 
+                	$.closeModal();
+                	},
+                }
             ]
         });
 
@@ -174,10 +179,13 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
 			dataType : "json",
 			success : function(resp) {
 				if (resp.respCode=='00') {
+					$.closeModal();
+					
 					$("#share-gift").popup();
 					shareAction();
+					
 				} else {
-					$.toast(resp.respMsg);
+					alert(resp.respMsg)
 				}
 				
 			},
