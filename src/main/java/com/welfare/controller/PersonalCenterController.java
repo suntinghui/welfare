@@ -24,6 +24,7 @@ import com.welfare.model.City;
 import com.welfare.model.Invoice;
 import com.welfare.model.OrderInfo;
 import com.welfare.model.OrderReturn;
+import com.welfare.model.RequestOrderReturn;
 import com.welfare.model.ResponseObject;
 import com.welfare.model.Trans;
 import com.welfare.model.UserInfo;
