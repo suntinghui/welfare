@@ -122,12 +122,16 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
     	        imgUrl: "https://gss3.bdstatic.com/-Po3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=20ce9be6a81ea8d38a227302af315773/42166d224f4a20a45517109a9e529822720ed065.jpg",
     	        success: function () {
     	        	//alert("分享成功");
-    	        	window.location.href="<%=basePath%>pages/result.jsp?respCode=00&respMsg=分享成功";
+    	        	// 调用转赠接口
+    	        	window.location.href="cardGift?cardNo=${cardNo }&mssage="+shareTitle;
     	        },
     	        cancel: function () {
     				// alert("分享失败");
     	        	window.location.href="<%=basePath%>pages/result.jsp?respCode=01&respMsg=分享失败";
-    	        }    	
+    	        },
+    	        fail: function (res) {
+    	        	window.location.href="<%=basePath%>pages/result.jsp?respCode=01&respMsg=分享失败";
+                 }
     	    });
     	});
     }
@@ -139,7 +143,7 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
             empty: false, // 是否允许为空
             buttons: [
                 { text: "设置密码", onClick: function(){
-                        window.location.href="edit-password.html";
+                        window.location.href="<%=basePath %>pages/editPassword.jsp";
                     } },
                 { text: "确定", onClick: function(){
                         $("#share-gift").popup();

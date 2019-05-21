@@ -44,14 +44,14 @@ public class MemberCardServiceImpl implements MemberCardService {
 	 * 转赠
 	 */
 	@Override
-	public CardGiftRsp cardGift(String cardNo, String message) {
+	public ResponseObject<CardGiftRsp> cardGift(String cardNo, String message) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("cardNo", cardNo);
 		map.put("mssage", message);
 		String result = HttpUtil.post(Constants.SERVER_HOST + "/card/cardGift/", map);
 		logger.debug(result);
 		ResponseObject<CardGiftRsp> obj = (ResponseObject<CardGiftRsp>)JSON.parseObject(result, new TypeReference<ResponseObject<CardGiftRsp>>() {});;
-		return obj.getData();
+		return obj;
 	}
 	
 	@Override

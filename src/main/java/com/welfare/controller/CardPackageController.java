@@ -34,29 +34,31 @@ import com.welfare.util.StringUtil;
 import com.welfare.util.WXUtil;
 
 /**
- *  卡包
+ * 卡包
+ * 
  * @author SunTH
  *
  */
 @Controller
 public class CardPackageController {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(CardPackageController.class);
-	
+
 	@Resource
 	private MemberService memberServiceImpl;
 	@Resource
 	private MemberCardService memberCardServiceImpl;
-	
+
 	/**
 	 * 查询卡包列表
+	 * 
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping("cardPackageList")
 	public String cardPackageList(HttpServletRequest request, Model model) {
 		WXUtil.saveLocalOpenID(request.getParameter("code"));
-		
+
 		List<CardListResp> list = memberServiceImpl.getMemberCardListByOpenId();
 		model.addAttribute("list", list);
 		return "cardPackageList";
@@ -75,9 +77,9 @@ public class CardPackageController {
 			model.addAttribute("resp", resp);
 			return "result2";
 		}
-		
+
 	}
-	
+
 	/**
 	 * 激活
 	 */
@@ -87,56 +89,56 @@ public class CardPackageController {
 		model.addAttribute("resp", resp);
 		return "result2";
 	}
-	
+
 	/**
 	 * 进入转赠
+	 * 
 	 * @param cardNo
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping("startCardGift")
-	public String startCardGift(HttpServletRequest request,@RequestParam("id") int id , Model model) {
+	public String startCardGift(HttpServletRequest request, @RequestParam("id") int id, @RequestParam("cardNo") String cardNo, Model model) {
 		logger.info(request.getRequestURL().toString());
-		// 注意：携带参数！！！  否则会签名失败！！！
-		String url = request.getRequestURL().toString()+"?id="+id;
+		// 注意：携带参数！！！ 否则会签名失败！！！
+		String url = request.getRequestURL().toString() + "?id=" + id + "&cardNo=" + cardNo;
 		logger.info("==============={}", url);
-		
-		logger.info("_+_+_+{}",request.getParameter("code"));
-		
+
 		Map<String, String> map = WXUtil.getConfig(url);
 		WXShare share = new WXShare();
 		share.setAppId(Constants.APPID);
 		share.setNonceStr(map.get("nonceStr"));
 		share.setTimestamp(map.get("timestamp"));
 		share.setSignature(map.get("signature"));
-		
+
 		System.out.println(share.toString());
-		
+
 		model.addAttribute("share", share);
 		model.addAttribute("id", id);
-		
+		model.addAttribute("cardNo", cardNo);
+
 		// 分享的链接，用户点开后会触发selectMemberCardById请求。
 		// 加一个发送人的openid，一是知道是谁发送的，二是进入页面时使用该OPENID进行请求数据。
-		model.addAttribute("link", Constants.WEIXIN_HOST+"selectMemberCardById?id="+id+"&sendOpenId="+DataUtil.getSessionData(Constants.kOPENID));
-		
+		model.addAttribute("link", Constants.WEIXIN_HOST + "selectMemberCardById?id=" + id + "&sendOpenId=" + DataUtil.getSessionData(Constants.kOPENID));
+
 		return "cardGift";
 	}
-	
-	
+
 	/**
-	 * 转赠
+	 * 分享成功后调用转赠接口
+	 * 
 	 * @param cardNo
 	 * @param mssage
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping("cardGift")
-	public String cardGift(@RequestParam("cardNo ") String cardNo, @RequestParam("mssage") String mssage, Model model) {
-		CardGiftRsp gift = memberCardServiceImpl.cardGift(cardNo, mssage);
-		model.addAttribute("gift", gift);
-		return "cardGift";
+	public String cardGift(@RequestParam("cardNo") String cardNo, @RequestParam("mssage") String mssage, Model model) {
+		ResponseObject<CardGiftRsp> resp = memberCardServiceImpl.cardGift(cardNo, mssage);
+		model.addAttribute("resp", resp);
+		return "result2";
 	}
-	
+
 	/**
 	 * 生成付款码
 	 */
@@ -147,27 +149,28 @@ public class CardPackageController {
 		ResponseObject<PayCodeRsp> resp = memberCardServiceImpl.getCardPayCode(cardNo);
 		return JSON.toJSONString(resp);
 	}
-	
+
 	/**
-	 *  分享后，由领取人点开触发的接口，然后打开领取页面
+	 * 分享后，由领取人点开触发的接口，然后打开领取页面
 	 */
 	@RequestMapping("selectMemberCardById")
-	public String selectMemberCardById(@RequestParam("id") String id, @RequestParam("sendOpenId") String sendOpenId , Model model) {
+	public String selectMemberCardById(@RequestParam("id") String id, @RequestParam("sendOpenId") String sendOpenId, Model model) {
 		// 此处首先保存一个OPENID用于调接口。领取时要更换记录的OPENID。
 		logger.info("发送人的OpenId - {}", sendOpenId);
 		DataUtil.saveSessionData(Constants.kOPENID, sendOpenId);
-		
+
 		LinkDetailRsp detail = memberCardServiceImpl.selectMemberCardById(id);
 		model.addAttribute("detail", detail);
-		
+
 		// 将领取卡做成可以获得微信CODE的链接
-		String getCodeUrl = WXUtil.formatURLGetCode(Constants.WEIXIN_HOST+"receiveCard?id="+id);
+		String getCodeUrl = WXUtil.formatURLGetCode(Constants.WEIXIN_HOST + "receiveCard?id=" + id);
 		model.addAttribute("link", getCodeUrl);
 		return "receiveCard";
 	}
-	
+
 	/**
 	 * 领取卡
+	 * 
 	 * @return
 	 */
 	@RequestMapping("receiveCard")
@@ -177,13 +180,10 @@ public class CardPackageController {
 		String receiveOpenId = WXUtil.getOpenID(code);
 		logger.info("领取人的OPENID - {}", receiveOpenId);
 		DataUtil.saveSessionData(Constants.kOPENID, receiveOpenId);
-		
+
 		ResponseObject<String> resp = memberCardServiceImpl.receiveCard(id);
 		model.addAttribute("resp", resp);
 		return "result2";
 	}
-	
-	
-	
-}
 
+}

@@ -29,7 +29,7 @@ public interface MemberCardService {
 	 * @param message
 	 * @return
 	 */
-	public CardGiftRsp cardGift(String card, String message);
+	public ResponseObject<CardGiftRsp> cardGift(String card, String message);
 
 	/**
 	 *  取消转赠接口
