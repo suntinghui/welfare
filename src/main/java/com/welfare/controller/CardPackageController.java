@@ -131,7 +131,7 @@ public class CardPackageController {
 		share.setTimestamp(map.get("timestamp"));
 		share.setSignature(map.get("signature"));
 
-		System.out.println(share.toString());
+		logger.info(share.toString());
 
 		model.addAttribute("share", share);
 		model.addAttribute("id", id);

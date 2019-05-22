@@ -117,13 +117,13 @@
 					intervalId = setInterval(timerCount, 1000);
 					
 				} else {
-					window.location.href="<%=basePath%>pages/result.jsp?respCode=01&respMsg="+resp.respMsg;
+					window.location.href="pages/result.jsp?respCode=01&respMsg="+resp.respMsg;
 					window.clearInterval(intervalId);
 				}
 				
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown) {
-				window.location.href="<%=basePath%>pages/result.jsp?respCode=01&respMsg=获取付款码失败，请重试";
+				window.location.href="pages/result.jsp?respCode=01&respMsg=获取付款码失败，请重试";
 			}
 
 		});

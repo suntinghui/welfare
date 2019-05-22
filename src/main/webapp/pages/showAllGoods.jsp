@@ -30,8 +30,17 @@
 <body ontouchstart>
 
 	<div class="p-15">
-
-		<c:forEach var="goods" items="${list }">
+	
+		<c:if test="${empty list }">
+			<div class="no-data text-center">
+				<img src="<%=basePath%>/pages/images/no-data.png" />
+				<p>数据查询成功，暂无可用数据</p>
+			</div>
+		</c:if>
+		
+		
+		<c:if test="${not empty list }">
+			<c:forEach var="goods" items="${list }">
 			<div class="card-list-item  m-b-20">
 				<a href="querySKU?idGoods=${goods.id }" class="text-white"> <img
 					src="${goods.urlPic }" width="100%" class="img-card-item" />
@@ -41,6 +50,7 @@
 				</a>
 			</div>
 		</c:forEach>
+		</c:if>
 
 	</div>
 

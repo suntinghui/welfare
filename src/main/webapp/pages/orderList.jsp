@@ -36,7 +36,7 @@ body {
 	<div class="p-15">
 
 		<c:if test="${empty list }">
-			<div class="no-data">
+			<div class="no-data text-center">
 				<img src="<%=basePath%>/pages/images/no-data.png" />
 				<p>数据查询成功，暂无可用数据</p>
 			</div>
@@ -101,12 +101,12 @@ body {
 	    function invoice(obj,oid){
 	    	if($(obj).hasClass('weui-btn_disabled'))
 	    		return;
-	    	window.location.href ="<%=basePath%>/pages/invoice.jsp?oid="+oid;
+	    	window.location.href ="pages/invoice.jsp?oid="+oid;
 	    }
 	    function orderReturn(obj,oid){
 	    	if($(obj).hasClass('weui-btn_disabled'))
 	    		return;
-	    	window.location.href ="<%=basePath%>/pages/orderReturn.jsp?oid="+oid;
+	    	window.location.href ="pages/orderReturn.jsp?oid="+oid;
 	    }
 		$(function() {
 			FastClick.attach(document.body);
