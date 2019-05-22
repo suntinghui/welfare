@@ -96,11 +96,11 @@
 		</div>
 	</div>
 	<div class="weui-agree p-t-20 p-b-20" for="weuiAgree">
-		<input class="weui-agree__checkbox" id="weuiAgree" type="checkbox">
-		<span class="weui-agree__text"> 阅读并同意<a
-			href="javascript:void(0);" class="open-popup"
-			data-target="#agreement">《相关条款》</a>
+		<input class="weui-agree__checkbox" id="weuiAgree" type="checkbox"  >
+		<span class="weui-agree__text" style="cursor:pointer;" onclick="argee();"> 阅读并同意
 		</span>
+		<a href="javascript:void(0);" class="open-popup"
+			data-target="#agreement">《相关条款》</a>
 	</div>
 
 	<div class="p-l-15 p-r-15">
@@ -273,6 +273,17 @@
 	<script type="text/javascript" src="<%=basePath%>/pages/js/util.js"></script>
 
 	<script type="text/javascript">
+	
+	    function argee(){
+	    	if($("#weuiAgree").prop("checked")){
+	    		$("#weuiAgree").prop("checked", false);
+	    	}else{
+	    		$("#weuiAgree").prop("checked", true);
+	    	}
+	    	
+	    }
+	
+	
 		var idSku = ""; // 选择的sku
 		var price = ""; // 选择的单价，全局变量，冗余字段，用于判断
 		
