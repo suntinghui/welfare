@@ -79,9 +79,9 @@ body {
 						</div>
 					</div>
 					<div class="weui-form-preview__ft">
-						<a dataFiled="btn_invoice"  onclick="invoice(this,'${order.oid}')"  class="weui-form-preview__btn ">开票</a> 
+						<a dataFiled="btn_invoice"  onclick="invoice(this,'${order.oid}')"  class="weui-form-preview__btn weui-form-preview__btn_defaul weui-form-preview__btn_disable">开票</a> 
 						<a dataFiled="btn_orderReturn"  
-							class="weui-form-preview__btn weui-btn_disabled"
+							class="weui-form-preview__btn weui-form-preview__btn_defaul weui-form-preview__btn_disable"
 							onclick="orderReturn(this,'${order.oid}')" >退卡</a>
 					</div>
 				</div>
@@ -99,12 +99,12 @@ body {
 
 	<script>
 	    function invoice(obj,oid){
-	    	if($(obj).hasClass('weui-btn_disabled'))
+	    	if($(obj).hasClass('weui-form-preview__btn_disable'))
 	    		return;
 	    	window.location.href ="pages/invoice.jsp?oid="+oid;
 	    }
 	    function orderReturn(obj,oid){
-	    	if($(obj).hasClass('weui-btn_disabled'))
+	    	if($(obj).hasClass('weui-form-preview__btn_disable'))
 	    		return;
 	    	window.location.href ="pages/orderReturn.jsp?oid="+oid;
 	    }
@@ -125,12 +125,13 @@ body {
 	                 var btn_invoice=$(this).find("[dataFiled=btn_invoice]");
 					 var btn_orderReturn=$(this).find("[dataFiled=btn_orderReturn]");
 					 //btn_invoice.show();
+					   
 	                  if(status=='2'){
-	                	  btn_orderReturn.removeClass("weui-btn_disabled");
+	                	  btn_orderReturn.removeClass("weui-form-preview__btn_disable");
 	                	  //btn_orderReturn.show();
 	                	  if(isInvoice=='0'){
 	 	                	// btn_invoice.show();
-	 	                	 btn_invoice.removeClass("weui-btn_disabled");
+	 	                	 btn_invoice.removeClass("weui-form-preview__btn_disable");
 	 	                  }
 	                  }
 	             }
