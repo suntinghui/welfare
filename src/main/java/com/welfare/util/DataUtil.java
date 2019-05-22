@@ -22,9 +22,10 @@ public class DataUtil {
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 		HttpSession session = request.getSession();
 		String value = (String)session.getAttribute(key);
-//		if (value==null || value.equals("")) {
-//			value="oaPc35wLEs7uj_NtmbDf0gLn8UpY";
-//		}
+		/*
+		 * if (value==null || value.equals("")) { value="oaPc35wLEs7uj_NtmbDf0gLn8UpY";
+		 * }
+		 */
 		return value;
 	}
 	
