@@ -51,7 +51,7 @@ public class RegFilter implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		logger.info("进入服务过滤器");
+		//logger.info("进入服务过滤器");
 		
 		HttpServletRequest hreq = (HttpServletRequest) request;
 
@@ -72,7 +72,7 @@ public class RegFilter implements Filter {
 		// 配置options的请求返回
 
 		if (hreq.getMethod().equals("OPTIONS")) {
-			logger.info("跨域包含OPTIONS");
+			//logger.info("跨域包含OPTIONS");
 			hresp.setStatus(HttpStatus.SC_OK);
 
 			// hresp.setContentLength(0);
@@ -82,7 +82,7 @@ public class RegFilter implements Filter {
 			return;
 
 		} else {
-			logger.info("请求不包含OPTIONS");
+			//logger.info("请求不包含OPTIONS");
 		}
 
 		

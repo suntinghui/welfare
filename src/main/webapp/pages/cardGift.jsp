@@ -118,10 +118,10 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
     	        },
     	        cancel: function () {
     				// alert("分享失败");
-    	        	window.location.href="pages/result.jsp?respCode=01&respMsg=分享失败";
+    	        	window.location.href="<%=basePath%>pages/result.jsp?respCode=01&respMsg=分享失败";
     	        },
     	        fail: function (res) {
-    	        	window.location.href="pages/result.jsp?respCode=01&respMsg=分享失败";
+    	        	window.location.href="<%=basePath%>pages/result.jsp?respCode=01&respMsg=分享失败";
                  }
     	    });
     	});
@@ -136,7 +136,7 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
             buttons: [
                 { text: "修改密码", onClick: function(){
                 	$.closeModal();
-                        window.location.href="pages/editPassword.jsp";
+                        window.location.href="<%=basePath%>pages/editPassword.jsp";
                     } },
                 { text: "确定", onClick: function(){
                 	checkInputPwd();
@@ -165,6 +165,7 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
 				"token" : "${sessionScope.kOPENID}",
 			},
 			data : {
+				"token" : "${sessionScope.kOPENID}"
 			},
 			dataType : "json",
 			success : function(resp) {

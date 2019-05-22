@@ -167,6 +167,9 @@
 				$.ajax({
 					type : "POST",
 					url : "<%=basePath%>getVerifyCode",
+					header:{
+						"token" : "${sessionScope.kOPENID}"
+					},
 					data : {
 						"token" : "${sessionScope.kOPENID}",
 						"phoneNumbers" : phoneNum

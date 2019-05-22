@@ -107,6 +107,7 @@ public class HttpUtil {
 		}
 		
 		logger.info("URL: - {}", url);
+		logger.info("openID取用检查：{}", DataUtil.getSessionData(Constants.kOPENID));
 
 		try {
 			URL realUrl = new URL(url);
@@ -115,7 +116,7 @@ public class HttpUtil {
 			conn.setRequestProperty("accept", "*/*");
 			conn.setRequestProperty("connection", "Keep-Alive");
 			conn.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)");
-			conn.setRequestProperty("token", "oaPc35_YfvsDhYpWSUOL6C61lY3k");
+			conn.setRequestProperty("token", DataUtil.getSessionData(Constants.kOPENID));
 			conn.connect();
 			in = conn.getInputStream();
 			result = IOUtils.toString(in, charset);
@@ -168,6 +169,7 @@ public class HttpUtil {
 	public static String post(String url, String param, Charset charset) {
 		logger.info("HTTP Post URL: - {}", url);
 		logger.info("HTTP Post param: {}", param);
+		logger.info("openID取用检查：{}", DataUtil.getSessionData(Constants.kOPENID));
 
 		PrintWriter out = null;
 		InputStream in = null;

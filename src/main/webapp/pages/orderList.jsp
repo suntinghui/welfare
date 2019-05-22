@@ -101,12 +101,12 @@ body {
 	    function invoice(obj,oid){
 	    	if($(obj).hasClass('weui-form-preview__btn_disable'))
 	    		return;
-	    	window.location.href ="pages/invoice.jsp?oid="+oid;
+	    	window.location.href ="<%=basePath%>pages/invoice.jsp?oid="+oid;
 	    }
 	    function orderReturn(obj,oid){
 	    	if($(obj).hasClass('weui-form-preview__btn_disable'))
 	    		return;
-	    	window.location.href ="pages/orderReturn.jsp?oid="+oid;
+	    	window.location.href ="<%=basePath%>pages/orderReturn.jsp?oid="+oid;
 	    }
 		$(function() {
 			FastClick.attach(document.body);

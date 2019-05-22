@@ -34,7 +34,7 @@ String basePath = request.getScheme()+"://" +request.getServerName()+":" +reques
   <p>用户ID:${user.id}</p>
 </div>
 <div class="weui-cells m-t-0">
-  <a class="weui-cell weui-cell_access" href="pages/editPassword.jsp">
+  <a class="weui-cell weui-cell_access" href="<%=basePath%>pages/editPassword.jsp">
     <div class="weui-cell__bd">
       <p>卡包密码</p>
     </div>
