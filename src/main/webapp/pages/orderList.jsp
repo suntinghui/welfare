@@ -125,7 +125,7 @@ body {
 	                 var btn_invoice=$(this).find("[dataFiled=btn_invoice]");
 					 var btn_orderReturn=$(this).find("[dataFiled=btn_orderReturn]");
 					 //btn_invoice.show();
-					   
+					   btn_orderReturn.removeClass("weui-form-preview__btn_disable");
 	                  if(status=='2'){
 	                	  btn_orderReturn.removeClass("weui-form-preview__btn_disable");
 	                	  //btn_orderReturn.show();

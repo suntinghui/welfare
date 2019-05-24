@@ -49,13 +49,13 @@
       <div class="weui-uploader">
         <div class="weui-uploader__hd">
           <p class="weui-uploader__title">身份证正面</p>
-          <div class="weui-uploader__info"></div>
+<!--           <div class="weui-uploader__info"></div> -->
         </div>
         <div class="weui-uploader__bd">
-          <ul class="weui-uploader__files" id="uploaderFiles">
+          <ul class="weui-uploader__files">
 
           </ul>
-          <div class="weui-uploader__input-box">
+          <div class="weui-uploader__input-box" style="background-size: auto 100%;">
             <input   class="weui-uploader__input" id="CardFront" name="multiUploadFiles[0]" valisate="req" placeholder="请选择身份证正面" type="file" accept="image/*" multiple=""/>
           </div>
         </div>
@@ -70,11 +70,11 @@
           <div class="weui-uploader__info"></div>
         </div>
         <div class="weui-uploader__bd">
-          <ul class="weui-uploader__files" id="uploaderFiles">
+          <ul class="weui-uploader__files">
 
           </ul>
           <div class="weui-uploader__input-box">
-            <input  class="weui-uploader__input" id="CardBack" name="multiUploadFiles[1]"   type="file" accept="image/*" multiple="" />
+            <input  class="weui-uploader__input js_file" id="CardBack" name="multiUploadFiles[1]"   type="file" accept="image/*" multiple="" />
           </div>
         </div>
       </div>
@@ -88,7 +88,7 @@
           <div class="weui-uploader__info"></div>
         </div>
         <div class="weui-uploader__bd">
-          <ul class="weui-uploader__files" id="uploaderFiles">
+          <ul class="weui-uploader__files">
 
           </ul>
           <div class="weui-uploader__input-box">
@@ -159,6 +159,101 @@
         FastClick.attach(document.body);
         
         
+     // 允许上传的图片类型
+        var allowTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
+        // 1024KB，也就是 1MB
+        var maxSize = 1024 * 1024;
+        // 图片最大宽度
+        var maxWidth = 300;
+        // 最大上传图片数量
+        var maxCount = 1;
+        $('.weui-uploader__input').on('change', function (event) {
+        	var input=$(this);
+            var files = event.target.files;
+     
+            // 如果没有选中文件，直接返回
+            if (files.length === 0) {
+                return;
+            }
+     
+            for (var i = 0, len = files.length; i < len; i++) {
+                var file = files[i];
+                var reader = new FileReader();
+     
+                // 如果类型不在允许的类型范围内
+                if (allowTypes.indexOf(file.type) === -1) {
+                    $.weui.alert({text: '该类型不允许上传'});
+                    continue;
+                }
+     
+                if (file.size > maxSize) {
+                    $.weui.alert({text: '图片太大，不允许上传'});
+                    continue;
+                }
+     
+                if (input.parents('.weui-uploader').find('.weui_uploader_file').length >= maxCount) {
+                    $.weui.alert({text: '最多只能上传' + maxCount + '张图片'});
+                    return;
+                }
+     
+                reader.onloadend = function (e) {
+                    var img = new Image();
+                    img.onload = function () {
+                        // 不要超出最大宽度
+                        var w = Math.min(maxWidth, img.width);
+                        // 高度按比例计算
+                        var h = img.height * (w / img.width);
+                        var canvas = document.createElement('canvas');
+                        var ctx = canvas.getContext('2d');
+                        // 设置 canvas 的宽度和高度
+                        canvas.width = w;
+                        canvas.height = h;
+                        ctx.drawImage(img, 0, 0, w, h);
+                        var base64 = canvas.toDataURL('image/png');
+                        
+                        //weui-uploader__input-box
+                        input.parents('.weui-uploader').find('.weui-uploader__input-box').css({"background-image":"url("+base64+")","background-repeat":"no-repeat","background-size":"100% 100%"});
+                       // background-repeat:repeat-x;no-repeat
+                        // 插入到预览区
+                       // var $preview = $('<li class="weui_uploader_file weui_uploader_status" style="background-image:url(' + base64 + ')"><div class="weui_uploader_status_content">0%</div></li>');
+                        //var $preview = $('<li class="weui_uploader_file weui_uploader_status"  ><img  src="' + base64 + '" width="96%" height="150">  </li>');
+                       
+                        //input.parents('.weui-uploader').find('.weui-uploader__files').append($preview);
+                       // var num = input.parents('.weui-uploader').find('.weui_uploader_file').length;
+                        //$('.js_counter').text(num + '/' + maxCount);
+     
+                        // 然后假装在上传，可以post base64格式，也可以构造blob对象上传，也可以用微信JSSDK上传
+     
+                       /*  var progress = 0;
+                        function uploading() {
+                            $preview.find('.weui_uploader_status_content').text(++progress + '%');
+                            if (progress < 100) {
+                                setTimeout(uploading, 30);
+                            }
+                            else {
+                                // 如果是失败，塞一个失败图标
+                                //$preview.find('.weui_uploader_status_content').html('<i class="weui_icon_warn"></i>');
+                                $preview.removeClass('weui_uploader_status').find('.weui_uploader_status_content').remove();
+                            }
+                        }
+                        setTimeout(uploading, 30); */
+                    };
+     
+                    img.src = e.target.result;
+     
+                  /*   $.post("/wap/uploader.php", { img: e.target.result},function(res){
+                        if(res.img!=''){
+                            alert('upload success');
+                            $('#showimg').html('<img src="' + res.img + '">');
+                        }else{
+                            alert('upload fail');
+                        }
+                    },'json'); */
+                };
+                reader.readAsDataURL(file);
+     
+            }
+        });
     });
 	function submitAction() {
 		var pars=DoValidate();
